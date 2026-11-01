@@ -1250,15 +1250,14 @@ const ROOMS_DATA = [
               <span class="web-url">kaushalboii.github.io</span>
             </div>
             <div class="web-preview">
-              <span class="wp-title">Hi, I\'m Kaushal.</span>
+              <span class="wp-title">Hi, I'm Kaushal.</span>
               <div class="wp-cal-pill">Mobile Developer</div>
               <div class="wp-doors-mini">
                 <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
               </div>
             </div>
-            `}
-          </div >
-  `
+          </div>
+        `
       },
       {
         icon: '💬',
@@ -1274,7 +1273,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/anonymous-chat',
         screenBg: 'radial-gradient(circle at 50% 20%, #1e2c3b 0%, #0c141d 80%)',
         mockupContent: `
-  < div class="mockup-anon" >
+  <div class="mockup-anon" >
             <div class="anon-header">
               <span class="anon-room">Room #8192 · Ephemeral</span>
               <span class="anon-dot"></span>
@@ -1291,7 +1290,7 @@ const ROOMS_DATA = [
               <span>Type a message...</span>
               <button class="anon-send">Send ↑</button>
             </div>
-          </div >
+          </div>
   `
       }
     ]
@@ -1318,7 +1317,7 @@ const ROOMS_DATA = [
         note: 'AI Governance Engine · Open Source',
         screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
         mockupContent: `
-  < div class="mockup-ai-gov" >
+  <div class="mockup-ai-gov" >
             <div class="ai-gov-header">
               <b>OpenAI GPT-4 Semantic Parser</b>
               <span class="ai-gov-pill">Real-time</span>
@@ -1335,7 +1334,7 @@ const ROOMS_DATA = [
               <span class="step-num">03</span>
               <div class="step-desc">Risk scoring &amp; executive briefing</div>
             </div>
-          </div >
+          </div>
   `
       },
       {
@@ -1352,7 +1351,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/machine-learning',
         screenBg: 'radial-gradient(circle at 50% 20%, #29341f 0%, #10160b 80%)',
         mockupContent: `
-  < div class="mockup-ml" >
+  <div class="mockup-ml" >
             <div class="ml-header">
               <b>Scikit-Learn Predictive Suite</b>
               <span class="ml-acc">98.4% Accuracy</span>
@@ -1363,7 +1362,7 @@ const ROOMS_DATA = [
               <div class="ml-item"><span>Clustering</span><b>EM Algorithm</b></div>
             </div>
             <div class="ml-bar"><div class="ml-fill" style="width:88%"></div></div>
-          </div >
+          </div>
   `
       },
       {
@@ -1380,7 +1379,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/COMPUTER-VISION',
         screenBg: 'radial-gradient(circle at 50% 20%, #2e1d2e 0%, #120a12 80%)',
         mockupContent: `
-  < div class="mockup-cv" >
+  <div class="mockup-cv" >
             <div class="cv-header">
               <b>OpenCV Vision Pipeline</b>
               <span class="cv-tag">40+ Labs</span>
@@ -1390,7 +1389,7 @@ const ROOMS_DATA = [
               <div class="cv-box"><span>Sobel Filter</span><div class="cv-sobel"></div></div>
               <div class="cv-box"><span>Morphology</span><div class="cv-morph"></div></div>
             </div>
-          </div >
+          </div>
   `
       }
     ]
@@ -1480,7 +1479,7 @@ const ROOMS_DATA = [
     if (!dinfo || !INFO[i]) return;
     dinfo.querySelector('.dinfo__h').textContent = INFO[i][0];
     dinfo.querySelector('.dinfo__t').textContent = INFO[i][1];
-    dinfo.querySelector('.dinfo__p').innerHTML = INFO[i][2].map(s => `< li > ${ s }</li > `).join('');
+    dinfo.querySelector('.dinfo__p').innerHTML = INFO[i][2].map(s => `<li> ${ s }</li> `).join('');
   };
 
   // Cursor Badge Tracking
@@ -1515,8 +1514,8 @@ const ROOMS_DATA = [
     const wr = wallEl.getBoundingClientRect(), r = units[i].getBoundingClientRect();
     const rightSide = vi >= Math.ceil(visible.length / 2);
     const left = rightSide ? r.left - wr.left - 290 : r.right - wr.left + 36;
-    dinfo.style.left = `${ Math.max(16, left) } px`;
-    dinfo.style.top = `${ r.top - wr.top + 20 } px`;
+    dinfo.style.left = `${ Math.max(16, left) }px`;
+    dinfo.style.top = `${ r.top - wr.top + 20 }px`;
     dinfo.style.textAlign = rightSide ? 'right' : 'left';
     setInfo(i);
     dinfo.classList.add('on');
@@ -1725,7 +1724,7 @@ const ROOMS_DATA = [
       $('.hdr')?.classList.add('away');
 
       const sr = sec.getBoundingClientRect();
-      sec.style.transformOrigin = `${ cx - sr.left }px ${ cy - sr.top } px`;
+      sec.style.transformOrigin = `${ cx - sr.left }px ${ cy - sr.top }px`;
       sec.classList.add('through');
 
       const t0 = performance.now(), D = reduced ? 1 : 1100;
@@ -1984,7 +1983,7 @@ const ROOMS_DATA = [
             `}
       </div>
     </div>
-      </article >
+      </article>
   `).join('');
 
     initVideoReels(roomvStack);
@@ -2073,7 +2072,7 @@ const ROOMS_DATA = [
     digits.forEach((d, k) => {
       if (cols[k]) {
         cols[k].style.setProperty('--d', d);
-        cols[k].style.transform = `translateY(-${ Number(d) * 10} %)`;
+        cols[k].style.transform = `translateY(-${ Number(d) * 10}%)`;
       }
     });
   };
@@ -2262,7 +2261,7 @@ const ROOMS_DATA = [
     const project = $('#f-project')?.value || '';
     const subject = encodeURIComponent(`Project Inquiry from ${ name } `);
     const body = encodeURIComponent(`Hi Kaushal, \n\nName: ${ name } \nEmail: ${ email } \n\nProject Details: \n${ project } `);
-    window.location.href = `mailto:kaushalmaranm @gmail.com?subject = ${ subject }& body=${ body } `;
+    window.location.href = `mailto:kaushalmaranm@gmail.com?subject= ${ subject }&body=${ body } `;
     closeModal();
   });
 })();
@@ -2273,15 +2272,15 @@ const ROOMS_DATA = [
     const wordEl = document.querySelector('.sf__word');
     const spanEl = document.querySelector('.sf__word .full');
     if (!wordEl || !spanEl) return;
-    const availWidth = Math.max(300, window.innerWidth - 24);
+    const availWidth = Math.max(300, window.innerWidth - 48);
     wordEl.style.fontSize = '100px';
     const textWidth = spanEl.offsetWidth || 1;
     if (textWidth > 0) {
-      const scale = (availWidth * 0.96) / textWidth;
+      const scale = (availWidth * 0.90) / textWidth;
       const targetPx = Math.floor(100 * scale);
-      const clampedPx = Math.max(24, Math.min(160, targetPx));
-      wordEl.style.fontSize = `${ clampedPx } px`;
-      wordEl.style.setProperty('--wf', `${ clampedPx } px`);
+      const clampedPx = Math.max(18, Math.min(130, targetPx));
+      wordEl.style.fontSize = `${ clampedPx }px`;
+      wordEl.style.setProperty('--wf', `${ clampedPx }px`);
     }
   }
 

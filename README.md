@@ -22,16 +22,19 @@ An architectural, editorial portfolio for **M Kaushal Maran**, Mobile App Develo
 ### 3. Skill Exhibition Rooms (`#roomv`)
 - **Stacked Project Cards**: Sticky elevation cards with smooth scroll stacking and alternating layouts.
 - **3D Angled Phone Mockups**: High-fidelity titanium iPhone bodies turned in 3D perspective with dynamic islands, status bars, glass sheen reflections, and live UI previews.
-- **Verified Mobile Applications**:
+- **Verified Applications & Open Source Ecosystem**:
   - 🧘 **ZenLife** — Sound-Based Stress Relief App (*Live on Apple App Store*)
   - 📡 **Viana 360** — Real-Time Telemetry & Systems Monitoring (*Live on Apple App Store*)
   - 🛍️ **Viana Buy** — Everyday Essentials & Commerce (*Live on Apple App Store*)
-  - 📢 **Vellore Ads** — Commercial Business Directory (*Live on Google Play Store*)
-  - ⚖️ **Indian Law Reference Suite** — Statutory reference in 11 Indian languages (*Offline FTS5*)
-  - 🗳️ **Election 2026** — Public Information Architecture
-  - 🤖 **Automatic Comic Generator** — Deep GAN architecture for narrative panels
-  - 🧠 **AI-Driven Personalized Learning Paths** — Knowledge graph NLP engine
-  - 🗄️ **High-Concurrency MySQL & PHP REST APIs** — Sub-5ms indexed query latency
+  - ⌨️ **CleanYourMacKeyboard** — macOS Menu Bar Keyboard Shield (*Free & Open Source*)
+  - 📢 **Vellore Ads Platform** — Commercial Listing Directory (*Live on Google Play Store*)
+  - 📜 **Constitution of India (REF)** — Bilingual Bare Act & FTS5 Search (*Live on Google Play Store*)
+  - ⚖️ **BNS & BNSS 2023 Pocket Reference** — Criminal Law Reform Suite (*Live on Google Play Store*)
+  - 🏛️ **CPC Act - Pocket Reference App** — Code of Civil Procedure 1908 (*Live on Google Play Store*)
+  - 🗳️ **ClearVote DAO Governance Assistant** — AI-Powered Web3 Governance (*Open Source on GitHub*)
+  - 💬 **Anonymous Chat Platform** — Real-Time Ephemeral WebSocket Messenger (*Open Source on GitHub*)
+  - 🧠 **Machine Learning Suite** — Scikit-Learn Predictive Algorithms (*Open Source on GitHub*)
+  - 👁️ **Computer Vision Labs** — 40+ OpenCV Image Processing Pipelines (*Open Source on GitHub*)
 
 ### 4. Astronomical Time Tunnel Clock Canvas (`#about.story`)
 - **3D Clock Dials Tunnel**: Dynamic HTML5 canvas (`story__bg`) rendering 16 concentric perspective rings, hour ticks, rotating clock hands, and drifting cosmic dust, winding backwards as you scroll through history.

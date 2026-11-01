@@ -1,3 +1,4 @@
+
 /* ══════════════════════════════════════════════════════════════
    KAUSHAL MARAN PORTFOLIO — COMPLETE ENGINE
    Exact Replication & Motion Physics from therishithakor.com
@@ -72,7 +73,7 @@ function scrollToId(id) {
   upd();
 }
 
-function tickClock(){
+function tickClock() {
   const now = new Date();
   try {
     const timeFmt = new Intl.DateTimeFormat('en-US', {
@@ -106,9 +107,9 @@ function tickClock(){
     document.querySelectorAll('[data-navtime]').forEach(e => e.textContent = ' — ' + time);
     document.querySelectorAll('[data-ftime]').forEach(e => e.textContent = time);
     document.querySelectorAll('[data-fyear]').forEach(e => e.textContent = year);
-  } catch(e) {
+  } catch (e) {
     const h = now.getHours();
-    const time = `${h % 12 || 12}:${String(now.getMinutes()).padStart(2,'0')}${h < 12 ? 'am' : 'pm'}`;
+    const time = `${h % 12 || 12}:${String(now.getMinutes()).padStart(2, '0')}${h < 12 ? 'am' : 'pm'}`;
     document.querySelectorAll('[data-time]').forEach(el => el.textContent = time);
     document.querySelectorAll('[data-ftime]').forEach(el => el.textContent = time);
   }
@@ -119,23 +120,23 @@ setInterval(tickClock, 1000);
 // ─── MODE (LIGHT / DARK) & PULL CORD VERLET SIMULATION ───
 const MODE_KEY = 'kaushal-mode';
 const themeMeta = document.querySelector('meta[name="theme-color"]');
-function getMode(){ return root.dataset.mode === 'dark' ? 'dark' : 'light'; }
-function setMode(m, animate = true){
-  if (animate && !reduced && document.startViewTransition){
+function getMode() { return root.dataset.mode === 'dark' ? 'dark' : 'light'; }
+function setMode(m, animate = true) {
+  if (animate && !reduced && document.startViewTransition) {
     document.startViewTransition(() => setMode(m, false));
     return;
   }
   if (m === 'dark') root.dataset.mode = 'dark'; else delete root.dataset.mode;
   themeMeta?.setAttribute('content', m === 'dark' ? '#1A1818' : '#EEEAE6');
   $('#cordHit')?.setAttribute('aria-checked', String(m === 'dark'));
-  try { localStorage.setItem(MODE_KEY, m); } catch (e) {}
+  try { localStorage.setItem(MODE_KEY, m); } catch (e) { }
 }
-const savedMode = (() => { try { return localStorage.getItem(MODE_KEY); } catch(e){ return null; } })();
+const savedMode = (() => { try { return localStorage.getItem(MODE_KEY); } catch (e) { return null; } })();
 if (savedMode) setMode(savedMode, false);
 else setMode(getMode(), false);
 const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
 
-(function pullCord(){
+(function pullCord() {
   const wrap = $('#cord'); if (!wrap) return;
   const cv = $('.cord__cv', wrap), hit = $('#cordHit');
   if (!cv || !hit) return;
@@ -148,17 +149,17 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   let L = 220, EXT_MAX = 46, HIDDEN = 70, seg = 10, ax = 200, thick = 3.2, knobS = 1;
   let pts = [];                         // {x,y,px,py,w}
   let ext = 0, extV = 0, armed = true;
-  let grab = -1, grabOff = { x:0, y:0 }, target = null, ptr = null, ptrPrev = null;
+  let grab = -1, grabOff = { x: 0, y: 0 }, target = null, ptr = null, ptrPrev = null;
   let downAt = 0, downPos = null, moved = 0;
   let acc = 0, lastT = 0, t = 0;
   let dropped = false, live = false;
 
-  function layout(){
+  function layout() {
     const rem = parseFloat(getComputedStyle(root).fontSize) || 16;
     const vw = innerWidth, vh = innerHeight;
     let offset;
-    if (vw >= 1024){ offset = 4.25 * rem; L = Math.min(270, Math.max(190, vh * .3)); EXT_MAX = 72; thick = 3.7; knobS = 1.3; }
-    else if (vw >= 640){ offset = 5.9 * rem; L = Math.min(220, Math.max(160, vh * .2)); EXT_MAX = 62; thick = 3.4; knobS = 1.2; }
+    if (vw >= 1024) { offset = 4.25 * rem; L = Math.min(270, Math.max(190, vh * .3)); EXT_MAX = 72; thick = 3.7; knobS = 1.3; }
+    else if (vw >= 640) { offset = 5.9 * rem; L = Math.min(220, Math.max(160, vh * .2)); EXT_MAX = 62; thick = 3.4; knobS = 1.2; }
     else { offset = 5.7 * rem; L = 70; EXT_MAX = 54; thick = 3.1; knobS = 1.1; }
     HIDDEN = EXT_MAX + 18;
     W = Math.min(vw, 340);
@@ -167,33 +168,33 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     dpr = Math.min(devicePixelRatio || 1, 2);
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     const ck = document.querySelector('.hdr .clock');
-    if (ck && ck.offsetWidth){
+    if (ck && ck.offsetWidth) {
       offset = vw >= 1200 ? Math.max(1.2 * rem, vw - ck.getBoundingClientRect().right - 1.4 * rem) : 2.4 * rem;
     }
     const newAx = W - offset;
     const total = L + HIDDEN;
     seg = total / N;
-    if (!pts.length){
-      for (let i = 0; i <= N; i++){
+    if (!pts.length) {
+      for (let i = 0; i <= N; i++) {
         const x = newAx, y = -HIDDEN + i * seg;
         pts.push({ x, y, px: x, py: y, w: i === 0 ? 0 : i === N ? .28 : 1 });
       }
     } else {
       const dx = newAx - ax;
-      for (const p of pts){ p.x += dx; p.px += dx; }
+      for (const p of pts) { p.x += dx; p.px += dx; }
     }
     ax = newAx;
   }
 
-  function step(dt){
+  function step(dt) {
     if (!dropped) return;
     t += dt;
-    if (grab < 0){
+    if (grab < 0) {
       const K = 760, C = 21;
       extV += (-K * ext - C * extV) * dt;
       ext += extV * dt;
     }
-    if (ext > EXT_MAX * .8 && armed && live){
+    if (ext > EXT_MAX * .8 && armed && live) {
       armed = false;
       toggleMode();
       try {
@@ -205,8 +206,8 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
         gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.08);
         osc.connect(gain); gain.connect(actx.destination);
         osc.start(); osc.stop(actx.currentTime + 0.08);
-      } catch (e) {}
-      try { navigator.vibrate?.(12); } catch (e) {}
+      } catch (e) { }
+      try { navigator.vibrate?.(12); } catch (e) { }
     }
     if (ext < EXT_MAX * .22) armed = true;
 
@@ -215,7 +216,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
 
     const wind = reduced ? 0 : (Math.sin(t * .63) * 16 + Math.sin(t * 1.71 + 1.3) * 7);
     const damp = grab >= 0 ? .992 : .9875;
-    for (let i = 1; i <= N; i++){
+    for (let i = 1; i <= N; i++) {
       if (i === grab) continue;
       const p = pts[i];
       const vx = (p.x - p.px) * damp, vy = (p.y - p.py) * damp;
@@ -223,13 +224,13 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
       p.x += vx + wind * dt * dt * (i / N);
       p.y += vy + G * dt * dt;
     }
-    if (grab >= 0 && target){
+    if (grab >= 0 && target) {
       const g = pts[grab];
       g.px = g.x; g.py = g.y;
       g.x = target.x; g.y = target.y;
     }
-    for (let k = 0; k < ITER; k++){
-      for (let i = 0; i < N; i++){
+    for (let k = 0; k < ITER; k++) {
+      for (let i = 0; i < N; i++) {
         const p1 = pts[i], p2 = pts[i + 1];
         const w1 = (i === grab) ? 0 : p1.w, w2 = (i + 1 === grab) ? 0 : p2.w;
         const sw = w1 + w2; if (!sw) continue;
@@ -240,21 +241,21 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
         p2.x -= dx * diff * w2; p2.y -= dy * diff * w2;
       }
     }
-    for (let i = 1; i <= N; i++){
+    for (let i = 1; i <= N; i++) {
       const p = pts[i];
-      if (p.x < 14){ p.x = 14; } else if (p.x > W - 14){ p.x = W - 14; }
-      if (p.y > H - 46){ p.y = H - 46; }
+      if (p.x < 14) { p.x = 14; } else if (p.x > W - 14) { p.x = W - 14; }
+      if (p.y > H - 46) { p.y = H - 46; }
     }
   }
 
-  function updateDrag(){
+  function updateDrag() {
     if (grab < 0 || !ptr) return;
     let tx = ptr.x - grabOff.x, ty = ptr.y - grabOff.y;
     const bx = ax, by = -HIDDEN;
     const reach = grab * seg;
     let dx = tx - bx, dy = ty - by, d = Math.hypot(dx, dy) || 1e-6;
     let need = d - reach;
-    if (need > EXT_MAX){
+    if (need > EXT_MAX) {
       const over = need - EXT_MAX;
       const allowed = reach + EXT_MAX + over * .14 / (1 + over / 160);
       tx = bx + dx / d * allowed; ty = by + dy / d * allowed;
@@ -268,8 +269,8 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   }
 
   const local = e => { const r = wrap.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
-  function startDrag(e_, i_){ wake(); return startDrag_(e_, i_); }
-  function startDrag_(e, idx){
+  function startDrag(e_, i_) { wake(); return startDrag_(e_, i_); }
+  function startDrag_(e, idx) {
     grab = idx;
     const p = local(e), g = pts[idx];
     grabOff = { x: p.x - g.x, y: p.y - g.y };
@@ -280,16 +281,16 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     addEventListener('pointerup', endDrag);
     addEventListener('pointercancel', endDrag);
   }
-  function onMove(e){
+  function onMove(e) {
     if (grab < 0) return;
     e.preventDefault();
     ptrPrev = ptr; ptr = local(e);
     moved = Math.max(moved, Math.hypot(ptr.x - downPos.x, ptr.y - downPos.y));
   }
-  function endDrag(){
+  function endDrag() {
     if (grab < 0) return;
     const g = pts[grab];
-    if (ptr && ptrPrev){
+    if (ptr && ptrPrev) {
       const vx = (ptr.x - ptrPrev.x), vy = (ptr.y - ptrPrev.y);
       g.px = g.x - vx * .5; g.py = g.y - vy * .5;
     }
@@ -301,15 +302,15 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     removeEventListener('pointercancel', endDrag);
     if (tap) tug();
   }
-  function tug(){ wake(); extV = EXT_MAX * 44; pts[N].px = pts[N].x + 1.5; }
+  function tug() { wake(); extV = EXT_MAX * 44; pts[N].px = pts[N].x + 1.5; }
 
   hit.addEventListener('pointerdown', e => {
     if (!dropped) return;
     e.preventDefault();
-    try { hit.setPointerCapture(e.pointerId); } catch (_) {}
+    try { hit.setPointerCapture(e.pointerId); } catch (_) { }
     startDrag(e, N);
   });
-  hit.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); tug(); } });
+  hit.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tug(); } });
   hit.addEventListener('click', e => e.preventDefault());
 
   document.addEventListener('pointerdown', e => {
@@ -317,52 +318,52 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     const p = local(e);
     if (p.x < 0 || p.y < 0 || p.x > W || p.y > H) return;
     let best = -1, bd = 11;
-    for (let i = 2; i <= N; i++){
+    for (let i = 2; i <= N; i++) {
       if (pts[i].y < 0) continue;
       const d = Math.hypot(pts[i].x - p.x, pts[i].y - p.y);
-      if (d < bd){ bd = d; best = i; }
+      if (d < bd) { bd = d; best = i; }
     }
-    if (best > 0){ e.preventDefault(); startDrag(e, best); }
+    if (best > 0) { e.preventDefault(); startDrag(e, best); }
   });
 
   addEventListener('pointermove', e => {
     if (grab >= 0 || e.pointerType !== 'mouse') return;
     const p = local(e);
-    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20){ brush.last = null; return; }
-    if (brush.last){
+    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20) { brush.last = null; return; }
+    if (brush.last) {
       wake();
       const vx = p.x - brush.last.x, vy = p.y - brush.last.y;
-      for (let i = 2; i <= N; i++){
+      for (let i = 2; i <= N; i++) {
         const q = pts[i], d = Math.hypot(q.x - p.x, q.y - p.y);
-        if (d < 16){ const f = (1 - d / 16) * .35; q.x += vx * f; q.y += vy * f * .5; }
+        if (d < 16) { const f = (1 - d / 16) * .35; q.x += vx * f; q.y += vy * f * .5; }
       }
     }
     brush.last = p;
   }, { passive: true });
   const brush = { last: null };
 
-  function pathThrough(c, ps){
+  function pathThrough(c, ps) {
     c.beginPath();
     c.moveTo(ps[0].x, ps[0].y);
-    for (let i = 1; i < ps.length - 1; i++){
+    for (let i = 1; i < ps.length - 1; i++) {
       const mx = (ps[i].x + ps[i + 1].x) / 2, my = (ps[i].y + ps[i + 1].y) / 2;
       c.quadraticCurveTo(ps[i].x, ps[i].y, mx, my);
     }
     const l = ps[ps.length - 1]; c.lineTo(l.x, l.y);
   }
-  function samples(ps, spacing){
+  function samples(ps, spacing) {
     const out = [];
     let carry = 0;
-    for (let i = 0; i < ps.length - 1; i++){
+    for (let i = 0; i < ps.length - 1; i++) {
       const a = ps[i], b = ps[i + 1];
       const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1e-6;
       let s = carry;
-      while (s < len){ out.push({ x: a.x + dx * s / len, y: a.y + dy * s / len, tx: dx / len, ty: dy / len }); s += spacing; }
+      while (s < len) { out.push({ x: a.x + dx * s / len, y: a.y + dy * s / len, tx: dx / len, ty: dy / len }); s += spacing; }
       carry = s - len;
     }
     return out;
   }
-  function knobPath(c){
+  function knobPath(c) {
     c.beginPath();
     c.moveTo(-3.1, 6.2);
     c.bezierCurveTo(-3.6, 10.5, -9.6, 13.5, -9.6, 22.5);
@@ -371,10 +372,10 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     c.bezierCurveTo(9.6, 13.5, 3.6, 10.5, 3.1, 6.2);
     c.closePath();
   }
-  function drawKnob(c, x, y, ang, shadowOnly){
+  function drawKnob(c, x, y, ang, shadowOnly) {
     c.save();
     c.translate(x, y); c.rotate(ang - Math.PI / 2); c.scale(knobS, knobS);
-    if (shadowOnly){
+    if (shadowOnly) {
       knobPath(c); c.fill();
       c.fillRect(-3.4, -.5, 6.8, 7.5);
       c.restore(); return;
@@ -391,7 +392,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     c.fillStyle = bg; c.fill();
     c.save(); knobPath(c); c.clip();
     c.strokeStyle = 'rgba(30,14,6,.28)'; c.lineWidth = .55;
-    for (let k = -3; k <= 3; k++){
+    for (let k = -3; k <= 3; k++) {
       c.beginPath(); c.moveTo(k * 2.4 - .6, 8); c.bezierCurveTo(k * 2.9 + 1, 16, k * 2.2 - 1, 26, k * 1.6, 35); c.stroke();
     }
     const hl = c.createRadialGradient(-3.6, 17, .5, -3.6, 17, 9);
@@ -405,7 +406,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     c.beginPath(); c.ellipse(-4.4, 20.5, 1.1, 5.2, -.08, 0, Math.PI * 2); c.fill();
     c.restore();
   }
-  function draw(){
+  function draw() {
     const c = ctx;
     c.setTransform(dpr, 0, 0, dpr, 0, 0);
     c.clearRect(0, 0, W, H);
@@ -431,7 +432,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     c.lineWidth = Math.max(.6, thick * .24);
     c.strokeStyle = 'rgba(96,82,64,.55)';
     c.beginPath();
-    for (const q of sm){
+    for (const q of sm) {
       if (q.y < -2) continue;
       const nx = -q.ty, ny = q.tx, h = thick * .5;
       c.moveTo(q.x - nx * h - q.tx * h * .7, q.y - ny * h - q.ty * h * .7);
@@ -452,19 +453,19 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
 
   let sleeping = false, still = 0;
   let touchedAt = 0;
-  function wake(){ still = 0; touchedAt = performance.now(); if (!sleeping) return; sleeping = false; lastT = 0; acc = 0; requestAnimationFrame(loop); }
+  function wake() { still = 0; touchedAt = performance.now(); if (!sleeping) return; sleeping = false; lastT = 0; acc = 0; requestAnimationFrame(loop); }
   window.__cordWake = wake;
-  function loop(now){
+  function loop(now) {
     if (!lastT) lastT = now;
     let dt = Math.min((now - lastT) / 1000, 1 / 20); lastT = now;
     updateDrag();
     acc += dt;
-    while (acc >= STEP){ step(STEP); acc -= STEP; }
-    if (dropped && live && grab < 0 && now - touchedAt > 2500) for (const q of pts){ q.px += (q.x - q.px) * .06; q.py += (q.y - q.py) * .06; }
+    while (acc >= STEP) { step(STEP); acc -= STEP; }
+    if (dropped && live && grab < 0 && now - touchedAt > 2500) for (const q of pts) { q.px += (q.x - q.px) * .06; q.py += (q.y - q.py) * .06; }
     draw();
     let motion = Math.abs(extV) + Math.abs(ext);
     for (const q of pts) motion = Math.max(motion, Math.abs(q.x - q.px) + Math.abs(q.y - q.py));
-    if (dropped && live && grab < 0 && motion < .06){ if (++still > 30){ for (const q of pts){ q.px = q.x; q.py = q.y; } sleeping = true; return; } } else still = 0;
+    if (dropped && live && grab < 0 && motion < .06) { if (++still > 30) { for (const q of pts) { q.px = q.x; q.py = q.y; } sleeping = true; return; } } else still = 0;
     requestAnimationFrame(loop);
   }
 
@@ -472,7 +473,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   pts.forEach((p, i) => { p.y = p.py = -HIDDEN - i * seg * .98; p.x = p.px = ax + Math.sin(i * .5) * 1.5; });
   const drop = () => {
     dropped = true;
-    for (const p of pts){ p.px = p.x - .45; }
+    for (const p of pts) { p.px = p.x - .45; }
     setTimeout(() => { live = true; }, 900);
   };
   if (document.body.classList.contains('ready')) drop();
@@ -924,8 +925,8 @@ const ROOMS_DATA = [
         category: 'iOS App · Health & Sound',
         title: 'ZENLIFE',
         sub: 'Sound-Based Stress Relief App · Apple App Store',
-        desc: 'Delivers calming, mood-tailored acoustic soundscapes and frequency sessions (432 Hz Solfeggio). Features real-time mood logging, psychometric analytics, and offline-first CoreData persistence with fluid SwiftUI micro-interactions.',
-        tags: ['SwiftUI', 'AVAudioEngine', 'CoreData', 'Biometrics', 'Combine', 'Haptics'],
+        desc: 'Delivers calming, mood-tailored acoustic soundscapes and frequency sessions (432 Hz Solfeggio). Features real-time mood logging, psychometric analytics, local CoreData persistence, and secure PHP/MySQL cloud sync.',
+        tags: ['SwiftUI', 'AVAudioEngine', 'CoreData', 'Biometrics', 'PHP REST', 'MySQL'],
         liveLink: 'https://apps.apple.com/in/app/zenlife-stress-sound-relief/id6753105286',
         liveText: 'View on App Store ↗',
         gitLink: 'https://github.com/kaushalboii/Zenlife-Stress-relief-app-using-sound-and-music',
@@ -1081,9 +1082,7 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/velloreads-screen-1.jpg',
           'assets/apps/velloreads-screen-2.jpg',
-          'assets/apps/velloreads-screen-3.jpg',
-          'assets/apps/velloreads-screen-4.jpg',
-          'assets/apps/velloreads-screen-5.jpg'
+          'assets/apps/velloreads-screen-4.jpg'
         ],
         iconBg: '#341E2B',
         num: '01 / 04',
@@ -1091,7 +1090,7 @@ const ROOMS_DATA = [
         title: 'Vellore Ads Platform',
         sub: 'Commercial Listing Platform · Google Play Store',
         desc: 'Commercial listing and advertising directory. Features instant location filters, high-density listing catalogues, verified merchant profiles, and region-specific classified ad management.',
-        tags: ['Kotlin', 'Jetpack Compose', 'Coroutines', 'Material 3', 'Google Play'],
+        tags: ['Kotlin', 'Jetpack Compose', 'MySQL', 'PHP REST APIs', 'Material 3'],
         liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en',
         liveText: 'View on Google Play ↗',
         note: 'Live on Google Play Store',
@@ -1105,9 +1104,7 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/constitution-screen-1.jpg',
           'assets/apps/constitution-screen-2.jpg',
-          'assets/apps/constitution-screen-3.jpg',
-          'assets/apps/constitution-screen-4.jpg',
-          'assets/apps/constitution-screen-5.jpg'
+          'assets/apps/constitution-screen-4.jpg'
         ],
         iconBg: '#212B23',
         num: '02 / 04',
@@ -1129,9 +1126,7 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/bns-screen-1.jpg',
           'assets/apps/bns-screen-2.jpg',
-          'assets/apps/bns-screen-3.jpg',
-          'assets/apps/bns-screen-4.jpg',
-          'assets/apps/bns-screen-5.jpg'
+          'assets/apps/bns-screen-4.jpg'
         ],
         iconBg: '#2D231E',
         num: '03 / 04',
@@ -1157,10 +1152,9 @@ const ROOMS_DATA = [
         storeType: 'play',
         screenshots: [
           'assets/apps/cpc-screen-1.jpg',
+          'assets/apps/cpc-screen-2.jpg',
           'assets/apps/posh-screen-1.jpg',
-          'assets/apps/police-screen-1.jpg',
-          'assets/apps/bsa-screen-1.jpg',
-          'assets/apps/election-screen-1.jpg'
+          'assets/apps/police-screen-1.jpg'
         ],
         iconBg: '#1F2936',
         num: '04 / 04',
@@ -1186,8 +1180,94 @@ const ROOMS_DATA = [
     ]
   },
   {
+    id: 'ai',
+    doorName: 'Door 03 · AI & Machine Learning',
+    title: 'AI & Deep Learning Systems',
+    desc: 'Deep learning architectures, generative adversarial networks (GANs), audio digital signal processing (DSP), and natural language embeddings.',
+    count: '03 Featured Projects',
+    accent: '#3A4B56',
+    projects: [
+      {
+        icon: '🎨',
+        iconImg: 'assets/apps/comicgan-icon.jpg',
+        screenshots: ['assets/apps/comicgan-screen-1.jpg'],
+        iconBg: '#2C1F33',
+        num: '01 / 03',
+        category: 'Deep Learning · Computer Vision',
+        title: 'Automatic Comic GAN',
+        sub: 'Deep Learning Storyboard Generator · Free on GitHub',
+        desc: 'Generative Adversarial Network pipeline built with PyTorch to automatically synthesize sequential comic panels and visual narrative storyboards from written textual prompts.',
+        tags: ['PyTorch', 'DCGAN', 'Computer Vision', 'Neural Networks', 'Python'],
+        gitLink: 'https://github.com/kaushalboii/Automatic-Comic-Generation-using-GAN',
+        gitText: 'Free on GitHub ↗',
+        note: '100% Free / Open Source Repository',
+        screenBg: 'radial-gradient(circle at 50% 20%, #301f38 0%, #140b19 80%)'
+      },
+      {
+        icon: '🧬',
+        iconBg: '#1B2E33',
+        num: '02 / 03',
+        category: 'Audio DSP · Neural Synthesis',
+        title: 'ZenLife Audio Synthesis Backend',
+        sub: 'Binaural DSP & Audio Synthesis Engine · Free on GitHub',
+        desc: 'Backend algorithmic audio engine that dynamically generates harmonic acoustic waves, binaural beats, and pink noise soundscapes tailored to user heart rate and mood input.',
+        tags: ['Python', 'FastAPI', 'DSP', 'NumPy', 'Binaural Audio', 'Free & Open Source'],
+        gitLink: 'https://github.com/kaushalboii/zenlife-backend',
+        gitText: 'Free on GitHub ↗',
+        note: '100% Free / Open Source Repository',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
+        mockupContent: `
+          <div class="mockup-dsp">
+            <div class="dsp-header">
+              <b>Harmonic Audio DSP Engine</b>
+              <span class="dsp-pill">48 kHz · 24-bit</span>
+            </div>
+            <div class="dsp-spectrogram">
+              <div class="spec-bar s1"></div><div class="spec-bar s2"></div><div class="spec-bar s3"></div><div class="spec-bar s4"></div><div class="spec-bar s5"></div>
+            </div>
+            <div class="dsp-controls">
+              <span>Binaural Beat: 8.0 Hz (Theta)</span>
+              <div class="dsp-slider"><div class="dsp-fill" style="width:72%"></div></div>
+            </div>
+          </div>
+        `
+      },
+      {
+        icon: '🧠',
+        iconBg: '#272F1F',
+        num: '03 / 03',
+        category: 'NLP · Educational Tech',
+        title: 'Personalized Learning Paths',
+        sub: 'Adaptive Educational Path Recommendation System',
+        desc: 'Natural language processing model that assesses student knowledge gaps and constructs dynamic, non-linear study curricula with optimal spaced repetition intervals.',
+        tags: ['Python', 'NLP', 'Embeddings', 'Cosine Similarity', 'SIMATS Research'],
+        gitLink: 'https://github.com/kaushalboii',
+        gitText: 'View on GitHub ↗',
+        note: 'SIMATS IT Research Project',
+        screenBg: 'radial-gradient(circle at 50% 20%, #28331e 0%, #10160b 80%)',
+        mockupContent: `
+          <div class="mockup-nlp">
+            <div class="nlp-target">
+              <b>Curriculum Knowledge Graph</b>
+              <span>Mastery: 88.5%</span>
+            </div>
+            <div class="nlp-nodes">
+              <span class="node-done">Algorithms ✓</span>
+              <span class="node-curr">System Design ●</span>
+              <span class="node-next">Distributed DBs ◌</span>
+            </div>
+            <div class="nlp-card">
+              <span>Next Recommended Session:</span>
+              <b>High-Throughput Message Queues</b>
+            </div>
+          </div>
+        `
+      }
+    ]
+  },
+  {
     id: 'ui',
-    doorName: 'Door 03 · UI/UX & Web Design',
+    doorName: 'Door 04 · UI/UX & Web Design',
     title: 'Interactive Web & Design Systems',
     desc: 'Award-caliber digital interfaces, design tokens, micro-interactions, liquid canvas physics, and 3D WebGL scenes engineered for high engagement.',
     count: '03 Featured Projects',
@@ -1205,7 +1285,22 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
         gitText: 'Free on GitHub ↗',
         note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #253120 0%, #0e160b 80%)'
+        screenBg: 'radial-gradient(circle at 50% 20%, #253120 0%, #0e160b 80%)',
+        mockupContent: `
+          <div class="mockup-web">
+            <div class="web-bar">
+              <span class="web-dots"><i></i><i></i><i></i></span>
+              <span class="web-url">kaushalboii.github.io</span>
+            </div>
+            <div class="web-preview">
+              <span class="wp-title">Hi, I'm Kaushal.</span>
+              <div class="wp-cal-pill">iOS Developer</div>
+              <div class="wp-doors-mini">
+                <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
+              </div>
+            </div>
+          </div>
+        `
       },
       {
         icon: '📐',
@@ -1235,61 +1330,102 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii',
         gitText: 'View on GitHub ↗',
         note: 'Design Systems Architecture',
-        screenBg: 'radial-gradient(circle at 50% 20%, #202436 0%, #0d0f19 80%)'
+        screenBg: 'radial-gradient(circle at 50% 20%, #202436 0%, #0d0f19 80%)',
+        mockupContent: `
+          <div class="mockup-tokens">
+            <div class="token-row">
+              <span class="swatch s-bg"></span><b>--bg: #1A1818</b>
+            </div>
+            <div class="token-row">
+              <span class="swatch s-card"></span><b>--card: #232020</b>
+            </div>
+            <div class="token-row">
+              <span class="swatch s-acc"></span><b>--accent: #D9C6C6</b>
+            </div>
+            <div class="token-check"><span>WCAG Contrast: 11.4:1 AAA</span></div>
+          </div>
+        `
       }
     ]
   },
   {
-    id: 'ai',
-    doorName: 'Door 04 · AI & Machine Learning',
-    title: 'AI & Deep Learning Systems',
-    desc: 'Deep learning architectures, generative adversarial networks (GANs), audio digital signal processing (DSP), and natural language embeddings.',
+    id: 'backend',
+    doorName: 'Door 05 · Backend Systems (Secret)',
+    title: 'Backend Systems Architecture',
+    desc: 'High-concurrency relational databases, secure RESTful APIs, token-based authentication, and resilient cloud synchronization engines.',
     count: '03 Featured Projects',
-    accent: '#3A4B56',
+    accent: '#5B4A3A',
     projects: [
       {
-        icon: '🎨',
-        iconImg: 'assets/apps/comicgan-icon.jpg',
-        screenshots: ['assets/apps/comicgan-screen-1.jpg'],
-        iconBg: '#2C1F33',
+        icon: '⚡',
+        iconImg: 'assets/apps/cloudsync-icon.jpg',
+        screenshots: ['assets/apps/cloudsync-screen-1.jpg'],
+        iconBg: '#30261C',
         num: '01 / 03',
-        category: 'Deep Learning · Computer Vision',
-        title: 'Automatic Comic GAN',
-        sub: 'Deep Learning Storyboard Generator · Free on GitHub',
-        desc: 'Generative Adversarial Network pipeline built with PyTorch to automatically synthesize sequential comic panels and visual narrative storyboards from written textual prompts.',
-        tags: ['PyTorch', 'DCGAN', 'Computer Vision', 'Neural Networks', 'Python'],
-        gitLink: 'https://github.com/kaushalboii/Automatic-Comic-Generation-using-GAN',
+        category: 'Distributed Systems · Cloud Sync',
+        title: 'ZenLife Cloud Sync & Delta Engine',
+        sub: 'High-Performance PHP REST & MySQL Sync Engine',
+        desc: 'Low-latency sync engine delivering sub-50ms mood session syncing between iOS CoreData and cloud MySQL databases with conflict resolution and cryptographic payload hashing.',
+        tags: ['PHP 8', 'MySQL', 'RESTful APIs', 'JWT Auth', 'ETag Caching'],
+        gitLink: 'https://github.com/kaushalboii/zenlife-backend',
         gitText: 'Free on GitHub ↗',
         note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #301f38 0%, #140b19 80%)'
+        screenBg: 'radial-gradient(circle at 50% 20%, #33271c 0%, #150f09 80%)'
       },
       {
-        icon: '🧬',
-        iconBg: '#1B2E33',
+        icon: '🗄️',
+        iconBg: '#1D2D2A',
         num: '02 / 03',
-        category: 'Audio DSP · Neural Synthesis',
-        title: 'ZenLife Acoustic Signal Engine',
-        sub: 'Binaural DSP & 432 Hz Solfeggio Audio Engine',
-        desc: 'Algorithmic digital signal processing engine that dynamically synthesizes harmonic acoustic waveforms, binaural beats, and pink noise soundscapes tailored to user mood states.',
-        tags: ['Python', 'DSP', 'NumPy', 'Binaural Audio', 'Acoustic Synthesis'],
+        category: 'Database Optimization · Spatial Query',
+        title: 'Vellore Ads Regional Query Optimization',
+        sub: 'High-Density Relational Database Architecture',
+        desc: 'Specialized indexing and spatial query partitioning allowing 100,000+ regional advertisements to be filtered by coordinates and categories in under 12 milliseconds.',
+        tags: ['MySQL', 'Spatial Indexing', 'Query Profiling', 'Database Normalization'],
         gitLink: 'https://github.com/kaushalboii',
         gitText: 'View on GitHub ↗',
-        note: 'Audio Signal Processing Architecture',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)'
+        note: 'Production MySQL Indexing Case Study',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1e312d 0%, #0c1614 80%)',
+        mockupContent: `
+          <div class="mockup-sql">
+            <div class="sql-box">
+              <code>EXPLAIN SELECT * FROM ads WHERE MBRContains(geom, POINT(?))</code>
+              <span class="sql-time">Query Execution: 8.4 ms</span>
+            </div>
+            <div class="sql-idx">
+              <span>Spatial R-Tree Index Scan</span>
+              <b>Rows examined: 12 / 104,280</b>
+            </div>
+          </div>
+        `
       },
       {
-        icon: '🧠',
-        iconBg: '#272F1F',
+        icon: '🔒',
+        iconBg: '#2D1F1F',
         num: '03 / 03',
-        category: 'NLP · Educational Tech',
-        title: 'Personalized Learning Paths',
-        sub: 'Adaptive Educational Path Recommendation System',
-        desc: 'Natural language processing model that assesses student knowledge gaps and constructs dynamic, non-linear study curricula with optimal spaced repetition intervals.',
-        tags: ['Python', 'NLP', 'Embeddings', 'Cosine Similarity', 'SIMATS Research'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'SIMATS IT Research Project',
-        screenBg: 'radial-gradient(circle at 50% 20%, #28331e 0%, #10160b 80%)'
+        category: 'Cryptography · Security',
+        title: 'Cryptographic Microservice for ClearVote',
+        sub: 'Immutable Election Audit Trail Engine',
+        desc: 'Zero-knowledge verification and SHA-256 chained ledger ensuring voter anonymity while providing verifiable end-to-end election audit proofs.',
+        tags: ['Node.js', 'SHA-256 Chaining', 'Cryptography', 'Security Audit'],
+        gitLink: 'https://github.com/kaushalboii/ClearVote',
+        gitText: 'Free on GitHub ↗',
+        note: '100% Free / Open Source Repository',
+        screenBg: 'radial-gradient(circle at 50% 20%, #301f1f 0%, #140b0b 80%)',
+        mockupContent: `
+          <div class="mockup-crypto">
+            <div class="crypto-card">
+              <span class="crypto-shield">🔐</span>
+              <b>Zero-Knowledge Audit Trail</b>
+            </div>
+            <div class="crypto-blocks">
+              <div class="cblock">Block #4829</div>
+              <div class="cblock">Block #4830</div>
+            </div>
+            <div class="crypto-hash">
+              <span>Merkle Root: e3b0c44298fc1c149afb...</span>
+            </div>
+          </div>
+        `
       }
     ]
   }
@@ -1346,8 +1482,9 @@ const ROOMS_DATA = [
   const INFO = [
     ['iOS Development', 'Swift, SwiftUI & Apple Ecosystem', ['ZenLife — Sound-Based Stress Relief (App Store)', 'Viana 360 — Real-Time Systems Telemetry (App Store)', 'Viana Buy — Everyday Essentials & Commerce (App Store)', 'CleanYourMacKeyboard — Free macOS Utility (Open Source)', 'CoreData, Audio Engine & Liquid Micro-interactions']],
     ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', ['Vellore Ads — Commercial Listing Platform (Google Play)', 'Constitution of India — Complete Bare Act (Google Play)', 'BNS, BNSS & BSA — Criminal Law Suite 2023 (Google Play)', 'Statutory Reference Suite: CPC, POSH, Police Act (Google Play)', 'Coroutines, FTS5 Offline SQLite & Material 3']],
+    ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic AI & Binaural DSP Engine (Python)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']],
     ['UI/UX Design', 'Ergonomics, Micro-interactions & Design Tokens', ['Crafted Interactive Portfolio with 3D Motion', 'Figma Component Libraries & Design Tokens', 'SIMATS Academic Portal Ergonomic Redesign', 'High-contrast Dark Mode & Glassmorphism Tokens', 'Fluid Canvas Shader Physics & WCAG AAA Standards']],
-    ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic Signal Engine (DSP)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']]
+    ['Backend & Systems', 'Scalable APIs, Databases & Cloud Sync', ['ZenLife Cloud Sync & Delta Engine (PHP 8 / MySQL)', 'Vellore Ads Regional Query Spatial Optimization', 'Cryptographic Ledger Microservice for ClearVote', 'Token Authentication & Conflict Resolution', 'Automated Production Build & Continuous Delivery']]
   ];
 
   const setInfo = i => {
@@ -1633,93 +1770,93 @@ const ROOMS_DATA = [
     roomvCount.textContent = data.count;
 
 
-// ─── CONTINUOUS CINEMATIC VIDEO-LIKE APP REEL ENGINE ───
-function initVideoReels(container = document) {
-  const reels = container.querySelectorAll('.video-reel');
-  reels.forEach(reel => {
-    if (reel.__initialized) return;
-    reel.__initialized = true;
+    // ─── CONTINUOUS CINEMATIC VIDEO-LIKE APP REEL ENGINE ───
+    function initVideoReels(container = document) {
+      const reels = container.querySelectorAll('.video-reel');
+      reels.forEach(reel => {
+        if (reel.__initialized) return;
+        reel.__initialized = true;
 
-    const slides = reel.querySelectorAll('.video-reel__slide');
-    const bar = reel.querySelector('.video-reel__bar i');
-    const curEl = reel.querySelector('.reel-cur');
-    const timeEl = reel.querySelector('[data-reel-time]');
-    const statusEl = reel.querySelector('.video-reel__status-text');
-    const playIcon = reel.querySelector('.video-reel__play-icon');
-    const prevBtn = reel.querySelector('.reel-nav--prev');
-    const nextBtn = reel.querySelector('.reel-nav--next');
-    const N = slides.length;
-    if (N <= 1) return;
+        const slides = reel.querySelectorAll('.video-reel__slide');
+        const bar = reel.querySelector('.video-reel__bar i');
+        const curEl = reel.querySelector('.reel-cur');
+        const timeEl = reel.querySelector('[data-reel-time]');
+        const statusEl = reel.querySelector('.video-reel__status-text');
+        const playIcon = reel.querySelector('.video-reel__play-icon');
+        const prevBtn = reel.querySelector('.reel-nav--prev');
+        const nextBtn = reel.querySelector('.reel-nav--next');
+        const N = slides.length;
+        if (N <= 1) return;
 
-    let cur = 0;
-    let playing = true;
-    let progress = 0;
-    let seconds = 1;
-    const SLIDE_DURATION = 3200; // 3.2s per slide
-    let lastTime = performance.now();
-    let rafId = null;
+        let cur = 0;
+        let playing = true;
+        let progress = 0;
+        let seconds = 1;
+        const SLIDE_DURATION = 3200; // 3.2s per slide
+        let lastTime = performance.now();
+        let rafId = null;
 
-    function setSlide(nextIdx) {
-      slides[cur].classList.remove('active');
-      cur = (nextIdx + N) % N;
-      slides[cur].classList.add('active');
-      if (curEl) curEl.textContent = String(cur + 1).padStart(2, '0');
-      progress = 0;
-      if (bar) bar.style.width = '0%';
-    }
-
-    function tick(now) {
-      const dt = now - lastTime;
-      lastTime = now;
-
-      if (playing) {
-        progress += dt / SLIDE_DURATION;
-        if (bar) bar.style.width = `${Math.min(100, progress * 100).toFixed(1)}%`;
-
-        if (progress >= 1) {
-          setSlide(cur + 1);
-          seconds = (seconds % 99) + 1;
-          if (timeEl) timeEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+        function setSlide(nextIdx) {
+          slides[cur].classList.remove('active');
+          cur = (nextIdx + N) % N;
+          slides[cur].classList.add('active');
+          if (curEl) curEl.textContent = String(cur + 1).padStart(2, '0');
+          progress = 0;
+          if (bar) bar.style.width = '0%';
         }
-      }
 
-      rafId = requestAnimationFrame(tick);
+        function tick(now) {
+          const dt = now - lastTime;
+          lastTime = now;
+
+          if (playing) {
+            progress += dt / SLIDE_DURATION;
+            if (bar) bar.style.width = `${Math.min(100, progress * 100).toFixed(1)}%`;
+
+            if (progress >= 1) {
+              setSlide(cur + 1);
+              seconds = (seconds % 99) + 1;
+              if (timeEl) timeEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+            }
+          }
+
+          rafId = requestAnimationFrame(tick);
+        }
+
+        rafId = requestAnimationFrame(tick);
+
+        // Hover / touch slows down & pauses
+        function pause() {
+          playing = false;
+          if (statusEl) statusEl.textContent = 'Paused · Tap to inspect';
+          if (playIcon) playIcon.textContent = '⏸';
+          reel.classList.add('is-paused');
+        }
+        function resume() {
+          playing = true;
+          lastTime = performance.now();
+          if (statusEl) statusEl.textContent = 'Playing App Demo';
+          if (playIcon) playIcon.textContent = '▶';
+          reel.classList.remove('is-paused');
+        }
+
+        reel.addEventListener('mouseenter', pause);
+        reel.addEventListener('mouseleave', resume);
+        reel.addEventListener('touchstart', pause, { passive: true });
+        reel.addEventListener('touchend', () => setTimeout(resume, 2500), { passive: true });
+
+        prevBtn?.addEventListener('click', e => {
+          e.stopPropagation();
+          setSlide(cur - 1);
+          pause();
+        });
+        nextBtn?.addEventListener('click', e => {
+          e.stopPropagation();
+          setSlide(cur + 1);
+          pause();
+        });
+      });
     }
-
-    rafId = requestAnimationFrame(tick);
-
-    // Hover / touch slows down & pauses
-    function pause() {
-      playing = false;
-      if (statusEl) statusEl.textContent = 'Paused · Tap to inspect';
-      if (playIcon) playIcon.textContent = '⏸';
-      reel.classList.add('is-paused');
-    }
-    function resume() {
-      playing = true;
-      lastTime = performance.now();
-      if (statusEl) statusEl.textContent = 'Playing App Demo';
-      if (playIcon) playIcon.textContent = '▶';
-      reel.classList.remove('is-paused');
-    }
-
-    reel.addEventListener('mouseenter', pause);
-    reel.addEventListener('mouseleave', resume);
-    reel.addEventListener('touchstart', pause, { passive: true });
-    reel.addEventListener('touchend', () => setTimeout(resume, 2500), { passive: true });
-
-    prevBtn?.addEventListener('click', e => {
-      e.stopPropagation();
-      setSlide(cur - 1);
-      pause();
-    });
-    nextBtn?.addEventListener('click', e => {
-      e.stopPropagation();
-      setSlide(cur + 1);
-      pause();
-    });
-  });
-}
 
     roomvStack.innerHTML = data.projects.map((p, idx) => `
       <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
@@ -1732,13 +1869,13 @@ function initVideoReels(container = document) {
               <p class="card__meta">
                 <span class="no">${p.num}</span><i></i><span>${p.category}</span>
                 ${p.isStoreApp ? (
-                  p.storeType === 'play' ? `
+        p.storeType === 'play' ? `
                     <span class="play-store-pill">
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186c-.328-.31-.52-.756-.52-1.286V3.1c0-.53.192-.976.519-1.286zm11.238 9.131l2.368-2.368-11.45-6.52c-.443-.252-.888-.242-1.205-.07l10.287 8.958zm0 2.11l-10.287 8.958c.317.172.762.182 1.205-.07l11.45-6.52-2.368-2.368zm1.055-1.055l3.208 1.828c.954.543.954 1.428 0 1.971l-3.208 1.828-2.072-2.072 2.072-2.072z"/></svg>
                       Google Play
                     </span>
                   ` : (
-                    p.storeType === 'macos' ? `
+          p.storeType === 'macos' ? `
                       <span class="app-store-pill app-store-pill--macos">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
                         macOS App
@@ -1749,8 +1886,8 @@ function initVideoReels(container = document) {
                         App Store
                       </span>
                     `
-                  )
-                ) : ''}
+        )
+      ) : ''}
               </p>
             </div>
             <h2 id="p${i}_${idx}">${p.title}</h2>
@@ -1966,7 +2103,7 @@ function initVideoReels(container = document) {
     s: .6 + Math.random() * 1.4
   }));
 
-  function tunnel(p, t){
+  function tunnel(p, t) {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, W, H);
     const cx = W * .5, cy = H * .55, k = Math.min(W, H) / 900;
@@ -1975,7 +2112,7 @@ function initVideoReels(container = document) {
     const len = RINGS * GAP;
     ctx.lineCap = 'round';
 
-    for (let i = 0; i < RINGS; i++){
+    for (let i = 0; i < RINGS; i++) {
       let z = ((i * GAP - camZ) % len + len) % len + 60;
       const s = FOCAL / z * k, fog = Math.min(1, Math.max(0, (z - 260) / 1100)) * Math.max(0, 1 - z / len);
       if (fog <= .01) continue;
@@ -1988,10 +2125,10 @@ function initVideoReels(container = document) {
       ctx.stroke();
 
       const T = W < 768 ? 36 : TICKS, every = T / 12;
-      for (const hour of [false, true]){
+      for (const hour of [false, true]) {
         const l = (hour ? 46 : 18) * s;
         ctx.beginPath();
-        for (let j = 0; j < T; j++){
+        for (let j = 0; j < T; j++) {
           if ((j % every === 0) !== hour) continue;
           const a = rot + j / T * Math.PI * 2, c = Math.cos(a), d = Math.sin(a);
           ctx.moveTo(cx + c * (rr - l), cy + d * (rr - l));
@@ -2005,7 +2142,7 @@ function initVideoReels(container = document) {
       const ha = rot * 3 + i;
       ctx.strokeStyle = `rgba(${rgb},${(fog * .16).toFixed(3)})`;
       ctx.lineWidth = Math.max(.5, 2 * s);
-      if (rr < Math.min(W, H) * .45){
+      if (rr < Math.min(W, H) * .45) {
         ctx.beginPath();
         ctx.moveTo(cx, cy);
         ctx.lineTo(cx + Math.cos(ha) * rr * .55, cy + Math.sin(ha) * rr * .55);
@@ -2013,7 +2150,7 @@ function initVideoReels(container = document) {
       }
     }
 
-    for (const q of dust){
+    for (const q of dust) {
       const z = ((q.z - camZ * 1.1) % len + len) % len + 40, s = FOCAL / z * k, fog = Math.min(1, Math.max(0, (z - 300) / 900)) * Math.max(0, 1 - z / len);
       const a = q.a + spin * .3;
       ctx.fillStyle = `rgba(${rgb},${(fog * .35).toFixed(3)})`;
@@ -2031,7 +2168,7 @@ function initVideoReels(container = document) {
     lastY = mark(chs[N - 1]);
     const last = chs[N - 1];
     endY = list.offsetTop + last.offsetTop + last.offsetHeight - parseFloat(getComputedStyle(last).paddingBottom);
-    for (const el of [rail, sec.querySelector('.story__dtrack'), sec.querySelector('.story__ttrack')]){
+    for (const el of [rail, sec.querySelector('.story__dtrack'), sec.querySelector('.story__ttrack')]) {
       if (el) {
         el.style.setProperty('--r0', firstY + 'px');
         el.style.setProperty('--rh', (endY - firstY) + 'px');
@@ -2041,7 +2178,7 @@ function initVideoReels(container = document) {
   };
 
   let raf = 0, p = 0, lastT = 0;
-  function update(){
+  function update() {
     raf = 0;
     if (!line) return;
     const lr = line.getBoundingClientRect(), mid = innerHeight * .5;
@@ -2071,7 +2208,7 @@ function initVideoReels(container = document) {
   window.addEventListener('load', () => { measure(); q(); });
 
   let driftT = 0;
-  function drift(now){
+  function drift(now) {
     const dt = Math.min(64, now - (lastT || now));
     lastT = now;
     driftT += dt / 1000;
@@ -2169,7 +2306,7 @@ onReady(() => {
     setTimeout(() => {
       loader.classList.add('out');
       setTimeout(() => {
-        try { loader.remove(); } catch(e){}
+        try { loader.remove(); } catch (e) { }
       }, 850);
       document.body.classList.add('ready');
       window.dispatchEvent(new CustomEvent('intro:ready'));
@@ -2185,10 +2322,10 @@ onReady(() => {
   const GA_ID = 'G-7J3EE7B9EE';
   const K = 'kaushal-analytics';
   let v = null;
-  try { v = localStorage.getItem(K); } catch (e) {}
+  try { v = localStorage.getItem(K); } catch (e) { }
   const load = () => {
     window.dataLayer = window.dataLayer || [];
-    window.gtag = function(){ dataLayer.push(arguments); };
+    window.gtag = function () { dataLayer.push(arguments); };
     gtag('js', new Date());
     gtag('config', GA_ID);
     const s = document.createElement('script');
@@ -2204,7 +2341,7 @@ onReady(() => {
   b.addEventListener('click', e => {
     const c = e.target.closest('[data-ck]');
     if (!c) return;
-    try { localStorage.setItem(K, c.dataset.ck); } catch (err) {}
+    try { localStorage.setItem(K, c.dataset.ck); } catch (err) { }
     b.hidden = true;
     if (c.dataset.ck === 'yes') load();
   });

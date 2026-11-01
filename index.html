@@ -1,554 +1,483 @@
 <!DOCTYPE html>
-<html lang="en" data-mode="light">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>M Kaushal Maran — Mobile App Developer &amp; UI/UX Designer</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M Kaushal Maran — Mobile App Developer &amp; UI/UX Designer</title>
 
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description"
-    content="Portfolio of M Kaushal Maran — Mobile App Developer specializing in iOS (Swift, SwiftUI) and Android (Kotlin) development. Creator of ZenLife, Viana 360, Viana Buy, and more.">
-  <meta name="theme-color" content="#1A1818">
-  <meta property="og:title" content="M Kaushal Maran — Mobile App Developer &amp; UI/UX Designer">
-  <meta property="og:description"
-    content="Crafting scalable, high-performance iOS and Android mobile applications with modern UI/UX design.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kaushalboii.github.io/Kaushal-s-Portfolio/">
-  <meta property="og:image" content="assets/kaushal-opt.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="M Kaushal Maran — Mobile App Developer">
-  <meta name="twitter:description" content="Crafting scalable, high-performance iOS and Android mobile applications.">
-  <meta name="twitter:image" content="assets/kaushal-opt.png">
+<!-- Fonts & Preload -->
+<link rel="preload" href="fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <!-- Typography: Onest + Space Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap"
-    rel="stylesheet">
-
-  <link rel="icon" type="image/png" href="assets/kaushal-opt.png">
-  <link rel="stylesheet" href="css/style.css">
+<meta name="description" content="Portfolio of M Kaushal Maran — Mobile App Developer building native iOS (Swift, SwiftUI) and Android (Kotlin) applications. Creator of ZenLife, Viana 360, Viana Buy, and more." />
+<meta name="theme-color" content="#1A1818" />
+<meta property="og:title" content="M Kaushal Maran — Mobile App Developer &amp; UI/UX Designer">
+<meta property="og:description" content="Crafting scalable, high-performance iOS and Android mobile applications with modern UI/UX design.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kaushalboii.github.io/Kaushal-s-Portfolio/">
+<meta property="og:image" content="assets/kaushal-opt.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="M Kaushal Maran — Mobile App Developer">
+<meta name="twitter:description" content="Crafting scalable, high-performance iOS and Android mobile applications.">
+<meta name="twitter:image" content="assets/kaushal-opt.png">
+<link rel="icon" type="image/png" href="assets/kaushal-opt.png">
+<link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <!-- ════════════════ STACKING DISCIPLINE LOADER ════════════════ -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <div class="ld__bg"></div>
-    <div class="ld__stack">
-      <div class="ld__pill" style="--k:0;--c:#1F1C1C;--t:#E8E4E0;--dir:1">
-        <span>M Kaushal Maran</span>
-      </div>
-      <div class="ld__pill" style="--k:1;--c:#1f2d48;--t:#E8E4E0;--dir:-1">
-        <span>iOS Development (Swift / SwiftUI)</span>
-      </div>
-      <div class="ld__pill" style="--k:2;--c:#203a2e;--t:#E8E4E0;--dir:1">
-        <span>Android Native (Kotlin / Compose)</span>
-      </div>
-      <div class="ld__pill" style="--k:3;--c:#4a2c3a;--t:#F3EEEC;--dir:-1">
-        <span>UI/UX &amp; Mobile Design</span>
-      </div>
-      <div class="ld__pill" style="--k:4;--c:#7c4828;--t:#F3EEEC;--dir:1">
-        <span>AI &amp; Emerging Tech</span>
-      </div>
-      <div class="ld__pill" style="--k:5;--c:#C4B0B0;--t:#1A1818;--dir:-1">
-        <span>Backend &amp; Database Systems</span>
-      </div>
-    </div>
-    <div class="ld__hud">
-      <div class="ld__top">
-        <span><b>M Kaushal Maran</b> · Portfolio</span>
-        <span>iOS · Android · UI/UX · AI</span>
-      </div>
-      <div class="ld__bot">
-        <p class="ld__num">
-          <small>Unlocking the doors</small>
-          <span id="ldCount">000</span>
-        </p>
-        <div class="ld__bar">
-          <i id="ldBarProgress"></i>
-        </div>
-      </div>
+<!-- ============ Skip link ============ -->
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ Stacking Loader ============ -->
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld__bg"></div>
+  <div class="ld__stack">
+    <div class="ld__pill" style="--k:0;--c:#1F1C1C;--t:#E8E4E0;--dir:1"><span>M Kaushal Maran</span></div>
+    <div class="ld__pill" style="--k:1;--c:#22304a;--t:#E8E4E0;--dir:-1"><span>iOS development</span></div>
+    <div class="ld__pill" style="--k:2;--c:#4a3540;--t:#E8E4E0;--dir:1"><span>Android native</span></div>
+    <div class="ld__pill" style="--k:3;--c:#7a8670;--t:#F3EEEC;--dir:-1"><span>UI/UX design</span></div>
+    <div class="ld__pill" style="--k:4;--c:#a4552c;--t:#F3EEEC;--dir:1"><span>AI &amp; Neural models</span></div>
+    <div class="ld__pill" style="--k:5;--c:#C4B0B0;--t:#1A1818;--dir:-1"><span>Backend systems</span></div>
+  </div>
+  <div class="ld__hud">
+    <div class="ld__top"><span><b>M Kaushal Maran</b> · Portfolio</span><span>iOS · Android · UI/UX · AI</span></div>
+    <div class="ld__bot">
+      <p class="ld__num"><small>Opening up the work</small><span id="ldCount">000</span></p>
+      <div class="ld__bar"><i></i></div>
     </div>
   </div>
+</div>
 
-  <!-- ════════════════ PULL CORD: THEME SWITCHER ════════════════ -->
-  <div class="cord" id="cord">
-    <canvas class="cord__cv" id="cordCanvas" aria-hidden="true"></canvas>
-    <button class="cord__hit" id="cordHit" role="switch" aria-label="Toggle light / dark mode (pull the cord)"></button>
+<!-- ============ Header ============ -->
+<header class="hdr rv">
+  <div class="shell hdr__in">
+    <nav aria-label="Primary">
+      <ul class="nav">
+        <li><button data-go="home" aria-current="page"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">Home</span></button></li>
+        <li><button data-door="0"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">iOS Development</span></button></li>
+        <li><button data-door="1"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">Android Apps</span></button></li>
+        <li><button data-door="2"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">UI/UX Design</span></button></li>
+        <li><button data-door="3"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">AI &amp; ML</span></button></li>
+        <li><button data-go="about"><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">My story</span></button></li>
+        <li><button data-contact><span data-h="y 0 -2|o .8 1" data-hs="320 22" data-ht="button">Contact</span></button></li>
+      </ul>
+    </nav>
+    <div class="hdr__right">
+      <div class="chip clock" aria-label="Local time in Vellore">
+        <span class="clock__lbl">Vellore, IN</span>
+        <span class="clock__time tnum" data-time>--:--</span>
+        <span class="clock__sep" aria-hidden="true">•</span>
+        <span class="clock__date" data-date>-- ---</span><span class="clock__ds" data-dshort>-- ---</span>
+      </div>
+      <button class="chip menu-btn" id="menuBtn" style="min-height:44px;min-width:44px" aria-haspopup="dialog" aria-controls="navm" aria-label="Menu">
+        <span data-h="s 1 1.05" data-hs="320 18" data-ht=".menu-btn"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="word">Menu</span></span>
+      </button>
+    </div>
   </div>
+</header>
 
-  <!-- ════════════════ HEADER ════════════════ -->
-  <header class="hdr">
-    <div class="shell hdr__in">
-      <a href="#home" class="hdr__brand">
-        <svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
-          <path
-            d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z" />
-        </svg>
-        <span>KAUSHAL</span>
-      </a>
+<!-- ============ Pull cord: light / dark switch ============ -->
+<div class="cord" id="cord">
+  <canvas class="cord__cv" aria-hidden="true"></canvas>
+  <button class="cord__hit" id="cordHit" role="switch" aria-checked="false" aria-label="Dark mode (pull the cord)"></button>
+</div>
 
-      <nav aria-label="Primary Navigation">
-        <ul class="nav">
-          <li><button data-go="home">Home</button></li>
-          <li><button data-go="works">The Doors</button></li>
-          <li><button data-go="about">My Story</button></li>
-          <li><button data-contact>Contact</button></li>
-        </ul>
-      </nav>
+<main id="main">
+  <!-- ============ Hero ============ -->
+  <section id="home" class="hero" aria-label="Introduction">
+    <div class="hero__vig" aria-hidden="true"></div>
 
-      <div class="hdr__right">
-        <div class="chip clock" aria-label="Local time in Vellore">
-          <span class="clock__lbl">Vellore, IN</span>
-          <span class="clock__time tnum" data-time>--:--</span>
-          <span class="clock__sep">•</span>
-          <span class="clock__date" data-date>-- ---</span>
-        </div>
-        <button class="menu-btn" id="menuBtn" aria-label="Open Navigation Menu">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round">
-            <path d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <span>Menu</span>
-        </button>
+    <div class="hero__stage">
+      <div class="fig" id="fig">
+        <span class="fig__wm" aria-hidden="true">KAUSHAL</span>
+        <img id="figBase" src="assets/kaushal-bw.png" alt="M Kaushal Maran" decoding="async" fetchpriority="high" aria-hidden="true">
+        <canvas id="figCanvas" aria-hidden="true"></canvas>
+        <button class="fig__card" id="holoOpen" aria-haspopup="dialog" aria-controls="holo">My ability card</button>
       </div>
     </div>
-  </header>
 
-  <main id="main">
-    <!-- ════════════════ HERO SECTION ════════════════ -->
-    <section id="home" class="hero" aria-label="Introduction">
-      <div class="shell">
-        <div class="hero__stage">
-
-          <!-- Left Column -->
-          <div class="hero__left">
-            <div class="hero__eyebrow">Mobile App Developer &nbsp;·&nbsp; SIMATS Engineering</div>
-
-            <h1 class="h1">
-              Hi, I'm Kaushal.<br>
-              <span class="soft">I build</span>
-              <span class="cal-line">
-                <!-- 3D DESK FLIP CALENDAR -->
-                <span class="cal" id="cal">
-                  <span class="cal__body">
-                    <span class="cal__stack">
-                      <span class="cal__page" data-under>
-                        <span class="cal__holes"></span>
-                        <span class="cal__word">Android Apps</span>
-                        <span class="cal__no">02 / 05</span>
-                      </span>
-                      <span class="cal__leaf">
-                        <span class="cal__face">
-                          <span class="cal__holes"></span>
-                          <span class="cal__word">iOS Apps</span>
-                          <span class="cal__no">01 / 05</span>
-                        </span>
-                        <span class="cal__rear"></span>
-                      </span>
+    <div class="shell hero__content">
+      <div class="hero__left">
+        <p class="eyebrow rv" style="--d:200ms">Mobile App Developer · SIMATS IT '26</p>
+        <h1 class="h1">
+          <span class="sr-only">Hi, I'm Kaushal. I am an iOS developer, Android developer, UI/UX designer and systems engineer.</span>
+          <span aria-hidden="true">
+            <span class="line"><span style="--d:250ms">Hi, I'm Kaushal.</span></span>
+            <span class="line"><span class="soft" style="--d:370ms">I am a</span></span>
+            <span class="cal-line">
+              <span class="cal rv" id="cal" style="--d:520ms">
+                <span class="cal__body">
+                  <span class="cal__stand"></span>
+                  <span class="cal__stack">
+                    <span class="cal__back"><span class="cal__holes"></span></span>
+                    <span class="cal__page" data-under><span class="cal__holes"></span><span class="cal__word"></span><span class="cal__no"></span><span class="cal__shade"></span></span>
+                    <span class="cal__leaf">
+                      <span class="cal__face"><span class="cal__holes"></span><span class="cal__word"></span><span class="cal__no"></span><span class="cal__shade"></span></span>
+                      <span class="cal__rear"><span class="cal__holes"></span></span>
                     </span>
-                    <span class="cal__rings"></span>
                   </span>
-                  <span class="cal__measure"></span>
+                  <span class="cal__rings"></span>
                 </span>
+                <span class="cal__measure"></span>
               </span>
-            </h1>
-
-            <p style="font-size: 1.15rem; line-height: 1.6; color: var(--muted); max-width: 38rem;">
-              Crafting native iOS and Android experiences with clean architecture, intuitive human design, and robust
-              backends. Creator of <strong>ZenLife</strong>, <strong>Viana 360</strong>, <strong>Viana Buy</strong>, and
-              multilingual civic platforms.
-            </p>
-
-            <div class="ctas">
-              <button class="pill pill--dark pill--arrow" data-contact>
-                <span class="pill__in">
-                  Start a project
-                  <span class="pill__badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round">
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </span>
-                </span>
-              </button>
-              <button class="pill pill--outline" data-go="works">
-                <span class="pill__in">Explore the doors ↓</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Right Column: Photo Cutout Frame -->
-          <div class="hero__fig">
-            <div class="hero__photo-wrap">
-              <img src="assets/kaushal-opt.png" alt="M Kaushal Maran" class="hero__photo" loading="eager"
-                onerror="this.src='assets/kaushal.png'">
-              <div class="hero__photo-badge">
-                <span>SIMATS IT '26</span>
-                <span>Vellore, Tamil Nadu</span>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Status Hairline -->
-        <div class="hero__bar">
-          <span>Available for projects &amp; roles</span>
-          <span class="mid">10+ Apps Built · App Store &amp; Play Store</span>
-          <span>Scroll to explore the doors ↓</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════ DOORS SECTION ════════════════ -->
-    <section id="works" class="doors" aria-label="Work Showcase">
-      <div class="shell">
-        <div class="doors__head">
-          <p class="hero__eyebrow" style="justify-content: center; margin-bottom: .5rem;">Exhibition Hallway</p>
-          <h2 class="doors__title">Magic happens behind the doors.</h2>
-          <p class="doors__sub">Step through a door to explore live applications, source code, and design architecture.</p>
-        </div>
-
-        <div class="doors__row">
-
-          <!-- DOOR 01: iOS -->
-          <div class="unit" style="--door-color: #1f2d48;">
-            <button class="doorway" data-door="0" aria-label="Open iOS Apps door">
-              <div class="casing"></div>
-              <div class="opening">
-                <div class="spill"></div>
-                <div class="door">
-                  <div class="door__flute"></div>
-                  <div class="plate">iOS Apps</div>
-                  <div class="handle">
-                    <div class="handle__lever"></div>
-                    <div class="handle__lock"></div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            <div class="door__caption">
-              <h3 class="door__cap-title">iOS Ecosystem</h3>
-              <p class="door__cap-sub">SwiftUI · CoreData · REST APIs</p>
-              <span class="door__enter-btn">Open Door →</span>
-            </div>
-          </div>
-
-          <!-- DOOR 02: Android -->
-          <div class="unit" style="--door-color: #203a2e;">
-            <button class="doorway" data-door="1" aria-label="Open Android Native door">
-              <div class="casing"></div>
-              <div class="opening">
-                <div class="spill"></div>
-                <div class="door">
-                  <div class="door__flute"></div>
-                  <div class="plate">Android Apps</div>
-                  <div class="handle">
-                    <div class="handle__lever"></div>
-                    <div class="handle__lock"></div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            <div class="door__caption">
-              <h3 class="door__cap-title">Android Native</h3>
-              <p class="door__cap-sub">Kotlin · Compose · ROOM DB</p>
-              <span class="door__enter-btn">Open Door →</span>
-            </div>
-          </div>
-
-          <!-- DOOR 03: UI/UX -->
-          <div class="unit" style="--door-color: #4a2c3a;">
-            <button class="doorway" data-door="2" aria-label="Open UI/UX Design door">
-              <div class="casing"></div>
-              <div class="opening">
-                <div class="spill"></div>
-                <div class="door">
-                  <div class="door__flute"></div>
-                  <div class="plate">UI/UX Design</div>
-                  <div class="handle">
-                    <div class="handle__lever"></div>
-                    <div class="handle__lock"></div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            <div class="door__caption">
-              <h3 class="door__cap-title">UI/UX &amp; Hybrids</h3>
-              <p class="door__cap-sub">Figma · Tokens · WKWebView</p>
-              <span class="door__enter-btn">Open Door →</span>
-            </div>
-          </div>
-
-          <!-- DOOR 04: AI & Emerging Tech -->
-          <div class="unit" style="--door-color: #7c4828;">
-            <button class="doorway" data-door="3" aria-label="Open AI and Emerging Systems door">
-              <div class="casing"></div>
-              <div class="opening">
-                <div class="spill"></div>
-                <div class="door">
-                  <div class="door__flute"></div>
-                  <div class="plate">AI &amp; Backend</div>
-                  <div class="handle">
-                    <div class="handle__lever"></div>
-                    <div class="handle__lock"></div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            <div class="door__caption">
-              <h3 class="door__cap-title">AI &amp; Backend</h3>
-              <p class="door__cap-sub">Python · Neural Nets · MySQL</p>
-              <span class="door__enter-btn">Open Door →</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ════════════════ STORY / ABOUT SECTION ════════════════ -->
-    <section id="about" class="story" aria-label="About Kaushal">
-      <div class="shell">
-        <div class="story__head">
-          <p class="hero__eyebrow">02 — Career Journey</p>
-          <h2 class="story__title">Let's go back in time.</h2>
-        </div>
-
-        <div class="story__grid">
-          <div class="story__bio">
-            <p>
-              I'm <strong>M Kaushal Maran</strong> — a final-year B.Tech Information Technology student at SIMATS
-              Engineering College, Chennai, and an active <strong>Mobile App Developer</strong>.
-            </p>
-            <p>
-              My expertise spans the entire mobile engineering lifecycle: from native iOS development with <strong>Swift
-                and SwiftUI</strong> to modern Android engineering with <strong>Kotlin and Jetpack Compose</strong>,
-              complemented by <strong>MySQL, PHP backends, and CoreData</strong>.
-            </p>
-            <p>
-              Whether engineering wellness platforms like <strong>ZenLife</strong>, live commercial ecosystems like
-              <strong>Viana 360</strong> and <strong>Viana Buy</strong>, or high-traffic listing networks, my goal is
-              uncompromising: deliver fluid, intuitive, production-grade applications that solve genuine problems.
-            </p>
-
-            <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .75rem;">
-              <span class="tag-pill">CGPA: 8.1</span>
-              <span class="tag-pill">10+ Published Apps</span>
-              <span class="tag-pill">iOS &amp; Android Native</span>
-              <span class="tag-pill">11 Indian Languages</span>
-            </div>
-          </div>
-
-          <!-- Career Timeline -->
-          <div class="story__timeline">
-
-            <!-- 2026 -->
-            <div class="ch">
-              <div class="ch__date">Feb 2026 – Present</div>
-              <h3 class="ch__title">Mobile App Developer</h3>
-              <p class="ch__org">SIMATS Engineering College · Chennai</p>
-              <ul class="ch__bullets">
-                <li>Leading the architecture and release cycle of production mobile applications.</li>
-                <li>Collaborating with research and product teams to engineer scalable mobile solutions.</li>
-                <li>Auditing performance, memory profiling, and cross-platform UX consistency.</li>
-              </ul>
-            </div>
-
-            <!-- 2025 -->
-            <div class="ch">
-              <div class="ch__date">Nov 2025 – Dec 2025</div>
-              <h3 class="ch__title">Mobile App Development Intern</h3>
-              <p class="ch__org">Redback IT Solutions Private Ltd · Vellore</p>
-              <ul class="ch__bullets">
-                <li>Independently delivered multiple Android and iOS client platforms as sole developer.</li>
-                <li>Engineered native Android solutions with Kotlin and iOS apps with Swift &amp; WKWebView.</li>
-                <li>Handled APK/IPA signing, build automation, release testing, and backend integration.</li>
-              </ul>
-            </div>
-
-            <!-- 2022 - 2026 -->
-            <div class="ch">
-              <div class="ch__date">2022 – 2026 (Graduating)</div>
-              <h3 class="ch__title">B.Tech — Information Technology</h3>
-              <p class="ch__org">SIMATS Engineering College · CGPA: 8.1</p>
-              <ul class="ch__bullets">
-                <li>Core focus on mobile systems, distributed databases, and machine learning.</li>
-                <li>Shipped multiple production apps onto Apple App Store and Google Play Store while studying.</li>
-              </ul>
-            </div>
-
-            <!-- Schooling -->
-            <div class="ch">
-              <div class="ch__date">2021 – 2022</div>
-              <h3 class="ch__title">Higher Secondary Education</h3>
-              <p class="ch__org">Lakshmi Garden Matric Hr.Sec.School</p>
-              <ul class="ch__bullets">
-                <li>Graduated with high distinction in core sciences and mathematics foundations.</li>
-              </ul>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- ════════════════ EXHIBITION ROOM MODAL ════════════════ -->
-  <div class="room-modal" id="doorModal" role="dialog" aria-modal="true" aria-labelledby="roomTitle">
-    <div class="room-modal__card">
-      <button class="room-modal__close" id="roomClose" aria-label="Close Room">✕</button>
-      <div class="room-modal__header">
-        <span class="room-modal__tag" id="roomTag">Door 01</span>
-        <h3 class="room-modal__title" id="roomTitle">iOS Applications</h3>
-        <p class="room-modal__desc" id="roomDesc">Category description...</p>
-      </div>
-      <div class="proj-grid" id="roomProjects">
-        <!-- Injected via JavaScript -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ════════════════ GRAND STATEMENT FOOTER ════════════════ -->
-  <footer class="sf" id="contact-footer" aria-label="Footer and Contact">
-    <div class="shell sf__in">
-      <div>
-        <div class="sf__badge">Available for mobile projects &amp; collaborations</div>
-        <h2 class="sf__h">Got a project?<span>Let's build it together.</span></h2>
-        <p class="sf__p">
-          Open to mobile app development roles, freelance applications, and creative software partnerships. Let's turn
-          your vision into an App Store success.
-        </p>
-      </div>
-
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-        <button class="pill pill--dark pill--arrow" data-contact>
-          <span class="pill__in">
-            Start a project
-            <span class="pill__badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
             </span>
           </span>
-        </button>
-        <a href="tel:+918610851456" class="pill pill--outline">
-          <span class="pill__in">Call: +91 86108 51456</span>
-        </a>
-      </div>
+        </h1>
 
-      <div class="sf__cols">
-        <div>
-          <h4 class="sf__col-title">The Doors</h4>
-          <div class="sf__col-links">
-            <a href="#works">iOS Development</a>
-            <a href="#works">Android Native</a>
-            <a href="#works">UI/UX &amp; Hybrids</a>
-            <a href="#works">AI &amp; Backend Systems</a>
-          </div>
+        <div class="rating rv" style="--d:650ms">
+          <div class="stars">★★★★★</div>
+          <p>Mobile App Specialist · 10+ Published Apps · CGPA 8.1</p>
         </div>
 
-        <div>
-          <h4 class="sf__col-title">Navigation</h4>
-          <div class="sf__col-links">
-            <a href="#home">Home</a>
-            <a href="#works">Featured Work</a>
-            <a href="#about">My Story</a>
-            <a href="#contact" data-contact>Get In Touch</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="sf__col-title">Direct Connect</h4>
-          <div class="sf__col-links">
-            <a href="mailto:kaushalmaranm@gmail.com">kaushalmaranm@gmail.com</a>
-            <a href="tel:+918610851456">+91 86108 51456</a>
-            <a href="https://github.com/kaushalboii" target="_blank" rel="noopener">GitHub: kaushalboii</a>
-            <a href="https://linkedin.com/in/kaushal-maran-m" target="_blank" rel="noopener">LinkedIn Profile</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="sf__col-title">Status</h4>
-          <div class="sf__col-links">
-            <span>Location: Vellore, Tamil Nadu</span>
-            <span>Local Time: <span class="tnum" data-time>--:--</span></span>
-            <span>Response Time: &lt; 24 Hours</span>
-          </div>
+        <div class="ctas rv" style="--d:750ms">
+          <button class="pill pill--dark pill--arrow" data-contact>
+            <span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill">Start a project
+              <span class="pill__badge"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-h="x 0 3" data-hs="320 18" data-ht=".pill"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </span>
+          </button>
+          <button class="pill pill--outline" data-go="works">
+            <span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill">See my work</span>
+          </button>
         </div>
       </div>
 
-      <div class="sf__bot">
-        <span>© 2026 M Kaushal Maran. Built with passion &amp; craftsmanship.</span>
-        <button data-go="home" style="cursor: pointer; font-weight: 600;">Back to top ↑</button>
+      <div class="hero__right">
+        <!-- Interactive Hero Card -->
+        <div class="hcard rv" id="hcard" role="button" tabindex="0" aria-label="Open project showcase" style="--d:850ms">
+          <div class="hcard__row">
+            <div class="hcard__tile" aria-hidden="true">📱</div>
+            <div class="hcard__panel">
+              <div class="slot">
+                <div class="slide" data-i="0">
+                  <p class="slide__cap">iOS · Wellness</p>
+                  <p class="slide__ttl">ZenLife Stress &amp; Sound</p>
+                </div>
+                <div class="slide" data-i="1" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">iOS · Retail</p>
+                  <p class="slide__ttl">Viana Buy Essentials</p>
+                </div>
+                <div class="slide" data-i="2" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">iOS · Telemetry</p>
+                  <p class="slide__ttl">Viana 360 Systems</p>
+                </div>
+                <div class="slide" data-i="3" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Android · Commerce</p>
+                  <p class="slide__ttl">Vellore Ads Platform</p>
+                </div>
+                <div class="slide" data-i="4" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Android · Legal</p>
+                  <p class="slide__ttl">Indian Law Reference</p>
+                </div>
+              </div>
+              <div class="hcard__ctrl">
+                <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
+                <div class="arrows">
+                  <button class="rnd rnd--prev" id="hcardPrev" aria-label="Previous app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+                  <button class="rnd rnd--next" id="hcardNext" aria-label="Next app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tech Stack Chips -->
+        <div class="partners rv" style="--d:950ms">
+          <p class="partners__lbl">Engineering Stack</p>
+          <ul>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>SwiftUI</span></li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>Kotlin</span></li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>MySQL</span></li>
+            <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>REST APIs</span></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </footer>
 
-  <!-- ════════════════ NAVIGATION MENU DRAWER ════════════════ -->
-  <div class="navm" id="navm" role="dialog" aria-modal="true" aria-label="Menu Modal">
-    <div class="modal__panel" style="text-align: center; max-width: 28rem;">
-      <button class="x-btn" id="navClose" aria-label="Close Menu">✕</button>
-      <div style="margin-bottom: 2rem;">
-        <span class="hero__eyebrow" style="justify-content: center;">Menu Navigation</span>
-      </div>
-      <div class="navm__list">
-        <button data-go="home">Home</button>
-        <button data-go="works">The Doors</button>
-        <button data-go="about">My Story</button>
-        <button data-contact>Contact</button>
-      </div>
-      <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); font-size: .85rem; color: var(--muted);">
-        <span>Local Time: <span class="tnum" data-time>--:--</span></span>
+    <div class="shell hero__bar rv">
+      <span>Available for work</span>
+      <span class="mid">Remote-first, worldwide · SIMATS IT '26</span>
+      <span class="scroll">Scroll to explore <i aria-hidden="true">↓</i></span>
+    </div>
+  </section>
+
+  <!-- ============ Doors ============ -->
+  <section id="works" class="doors" aria-labelledby="doorsTitle">
+    <div class="doors__tex" aria-hidden="true"></div>
+    <div class="doors__pin">
+    <div class="shell doors__wall">
+      <h2 class="sr-only" id="doorsTitle">My work, one door per skill</h2>
+      <p class="paint" aria-hidden="true">Magic happens <br class="mbr">behind the doors</p>
+      <p class="doors__hint" aria-hidden="true">Swipe along the wall</p>
+      <div class="dinfo" id="dinfo" aria-live="polite"><h3 class="dinfo__h"></h3><p class="dinfo__t"></p><ul class="dinfo__p"></ul></div>
+      <p class="doors__dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></p>
+      <ul class="doors__row">
+        <!-- Door 0: iOS -->
+        <li class="unit" style="--i:0;--door:#22304a;--door-dk:#1c2840">
+          <button class="doorway" data-door="0" aria-label="Open the iOS Developer door">
+            <span class="casing"></span>
+            <span class="opening">
+              <span class="room"></span>
+              <span class="spill"></span>
+              <span class="door">
+                <span class="door__flute"></span>
+                <span class="plate">iOS Developer</span>
+                <span class="handle"><span class="handle__lever"></span><span class="handle__lock"></span></span>
+                <span class="door__shade"></span>
+                <span class="leak"></span>
+              </span>
+              <span class="sill"></span>
+            </span>
+            <span class="pool"></span>
+          </button>
+        </li>
+        <!-- Door 1: Android -->
+        <li class="unit" style="--i:1;--door:#4a3540;--door-dk:#3f2d37">
+          <button class="doorway" data-door="1" aria-label="Open the Android Developer door">
+            <span class="casing"></span>
+            <span class="opening">
+              <span class="room"></span>
+              <span class="spill"></span>
+              <span class="door">
+                <span class="door__flute"></span>
+                <span class="plate">Android Developer</span>
+                <span class="handle"><span class="handle__lever"></span><span class="handle__lock"></span></span>
+                <span class="door__shade"></span>
+                <span class="leak"></span>
+              </span>
+              <span class="sill"></span>
+            </span>
+            <span class="pool"></span>
+          </button>
+        </li>
+        <!-- Door 2: UI/UX -->
+        <li class="unit" style="--i:2;--door:#7a8670;--door-dk:#66705d">
+          <button class="doorway" data-door="2" aria-label="Open the UI/UX Designer door">
+            <span class="casing"></span>
+            <span class="opening">
+              <span class="room"></span>
+              <span class="spill"></span>
+              <span class="door">
+                <span class="door__flute"></span>
+                <span class="plate">UI/UX Designer</span>
+                <span class="handle"><span class="handle__lever"></span><span class="handle__lock"></span></span>
+                <span class="door__shade"></span>
+                <span class="leak"></span>
+              </span>
+              <span class="sill"></span>
+            </span>
+            <span class="pool"></span>
+          </button>
+        </li>
+        <!-- Door 3: AI & ML -->
+        <li class="unit" style="--i:3;--door:#a4552c;--door-dk:#8c4826">
+          <button class="doorway" data-door="3" aria-label="Open the AI &amp; ML Engineer door">
+            <span class="casing"></span>
+            <span class="opening">
+              <span class="room"></span>
+              <span class="spill"></span>
+              <span class="door">
+                <span class="door__flute"></span>
+                <span class="plate">AI &amp; Neural Nets</span>
+                <span class="handle"><span class="handle__lever"></span><span class="handle__lock"></span></span>
+                <span class="door__shade"></span>
+                <span class="leak"></span>
+              </span>
+              <span class="sill"></span>
+            </span>
+            <span class="pool"></span>
+          </button>
+        </li>
+        <!-- Door 4: Backend (Secret Door) -->
+        <li class="unit unit--secret" style="--i:4;--door:#262523;--door-dk:#201f1d" inert>
+          <button class="doorway" data-door="4" aria-label="Open the Backend Architect door">
+            <span class="casing"></span>
+            <span class="opening">
+              <span class="room"></span>
+              <span class="spill"></span>
+              <span class="door">
+                <span class="door__flute"></span>
+                <span class="plate">Backend Systems</span>
+                <span class="handle"><span class="handle__lever"></span><span class="handle__lock"></span></span>
+                <span class="door__shade"></span>
+                <span class="leak"></span>
+              </span>
+              <span class="sill"></span>
+            </span>
+            <span class="pool"></span>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <div class="doors__floor" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ============ About / Story ============ -->
+  <section id="about" class="story" aria-labelledby="storyTitle" style="--n:4">
+    <div class="story__amb" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="story__track">
+      <div class="story__pin">
+        <div class="shell story__stage">
+          <div class="story__clock">
+            <canvas class="story__bg" aria-hidden="true"></canvas>
+            <p class="eyebrow">My story</p>
+            <h2 class="story__h" id="storyTitle">Let's go back in time.</h2>
+            <div class="story__yr" aria-hidden="true"><span class="dg"><span class="dg__c"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="dg"><span class="dg__c"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="dg"><span class="dg__c"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span><span class="dg"><span class="dg__c"><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i></span></span></div>
+            <p class="story__when" aria-hidden="true">Feb 2026 — Present</p>
+            <div class="story__meter" aria-hidden="true">
+              <svg aria-hidden="true" focusable="false" class="story__rw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/><path d="M12 7v5l3 2"/></svg>
+              <span class="story__count">01</span><span class="story__of">/ 04</span>
+              <i class="story__bar"><b></b></i>
+            </div>
+          </div>
+          <div class="story__line">
+            <span class="story__rail" aria-hidden="true"></span><span class="story__ttrack" aria-hidden="true"><span class="story__tail"></span></span><span class="story__dtrack" aria-hidden="true"><span class="story__dot"></span></span>
+            <ol class="story__list">
+              <li class="ch ch--now" data-y="2026" data-when="Feb 2026 — Present">
+                <p class="ch__date">Feb 2026 — Present</p>
+                <h3 class="ch__t">Mobile App Developer</h3>
+                <p class="ch__org">SIMATS Engineering College · Chennai</p>
+                <ul class="ch__b">
+                  <li>Leading architecture and production delivery of scalable mobile platforms for research &amp; academic ecosystems.</li>
+                  <li>Designing high-performance iOS applications with SwiftUI and Android platforms with Jetpack Compose.</li>
+                </ul>
+              </li>
+              <li class="ch" data-y="2025" data-when="Nov 2025 — Dec 2025">
+                <p class="ch__date">Nov 2025 — Dec 2025</p>
+                <h3 class="ch__t">Mobile App Development Intern</h3>
+                <p class="ch__org">Redback IT Solutions Private Ltd · Vellore</p>
+                <ul class="ch__b">
+                  <li>Engineered multiple native Android applications in Kotlin and iOS applications using Swift &amp; WKWebView.</li>
+                  <li>Delivered client platforms end-to-end: UI implementation, secure WebView bridging, APK/IPA build signing, and testing.</li>
+                </ul>
+              </li>
+              <li class="ch" data-y="2022" data-when="2022 — 2026 (Graduating)">
+                <p class="ch__date">2022 — 2026</p>
+                <h3 class="ch__t">B.Tech, Information Technology</h3>
+                <p class="ch__org">SIMATS Engineering College · CGPA: 8.1</p>
+                <ul class="ch__b">
+                  <li>Four years of software engineering: mobile architecture, database optimization, and artificial intelligence.</li>
+                  <li>Published multiple live commercial applications on the Apple App Store and Google Play Store during study.</li>
+                </ul>
+              </li>
+              <li class="ch" data-y="2021" data-when="2021 — 2022">
+                <p class="ch__date">2021 — 2022</p>
+                <h3 class="ch__t">Higher Secondary Education</h3>
+                <p class="ch__org">Lakshmi Garden Matric Hr.Sec.School</p>
+                <ul class="ch__b">
+                  <li>Strong foundation in mathematics and computer science where the coding passion began.</li>
+                </ul>
+              </li>
+            </ol>
+          </div>
+        </div>
       </div>
     </div>
+  </section>
+</main>
+
+<!-- ============ Statement Footer ============ -->
+<div class="sfw">
+<footer class="sf" id="contact-footer" aria-labelledby="sfTitle">
+  <div class="sf__in">
+    <p class="sf__eye"><i></i>Available for new projects</p>
+    <h2 class="sf__h" id="sfTitle">Got a project?<span>Let's build it together.</span></h2>
+    <p class="sf__p">I take on mobile app development projects: native iOS apps, Android applications, and full-stack mobile products. Tell me what you're building and I'll reply within 24 hours.</p>
+    <div class="sf__cta">
+      <button class="sf__btn" data-contact>Start a project <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></b></button>
+      <button class="sf__ghost" data-go="works">See my work</button>
+    </div>
+    <div class="sf__cols">
+      <div><h3>Work</h3><ul class="work"><li><a href="#works" data-door="0">iOS Development</a></li><li><a href="#works" data-door="1">Android Apps</a></li><li><a href="#works" data-door="2">UI/UX Design</a></li><li><a href="#works" data-door="3">AI &amp; Neural Nets</a></li><li><a href="#works" data-door="4">Backend Systems</a></li></ul></div>
+      <div><h3>Navigate</h3><ul><li><a href="#home" data-go="home">Home</a></li><li><a href="#about" data-go="about">My story</a></li><li><button data-contact>Contact</button></li></ul></div>
+      <div><h3>Status</h3><ul><li class="st">Available for work</li><li class="st">Vellore &amp; Remote</li><li class="st">Local time <span data-ftime>—</span></li></ul></div>
+    </div>
+    <div class="sf__bot"><span>© <span data-fyear>2026</span> M Kaushal Maran. Built with craftsmanship.</span><span class="sf__legal"><a href="mailto:kaushalmaranm@gmail.com">kaushalmaranm@gmail.com</a></span><button data-go="home">Back to top ↑</button></div>
   </div>
+  <p class="sf__word" aria-hidden="true"><span class="full">M KAUSHAL MARAN</span><span class="short">KAUSHAL</span></p>
+</footer>
+</div>
 
-  <!-- ════════════════ CONTACT / PROJECT INQUIRY MODAL ════════════════ -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal__panel">
-      <button class="x-btn" id="mClose" aria-label="Close Modal">✕</button>
-      <div>
-        <span class="hero__eyebrow">Start a project</span>
-        <h3 id="modalTitle" style="font-size: 1.8rem; font-weight: 800; margin-top: .4rem;">Tell me what you're building.</h3>
-        <p style="font-size: .95rem; color: var(--muted); margin-top: .3rem;">I typically respond within one business day.</p>
-      </div>
+<!-- ============ Floating Back to Top Button ============ -->
+<button class="totop" data-go="home" aria-label="Back to top"><svg class="ring" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24"/></svg><svg class="ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg><span class="lbl">Back to top</span></button>
 
+<!-- ============ Door cursor + walk-through veil ============ -->
+<div class="door-cursor" id="doorCursor" aria-hidden="true">Click to enter</div>
+<div class="veil" id="veil" aria-hidden="true" hidden></div>
+<div class="shade" id="shade" aria-hidden="true" hidden></div>
+<div class="passage" id="passage" aria-hidden="true" hidden></div>
+
+<!-- ============ Skill Exhibition Room (Opens Through Doors) ============ -->
+<div class="roomv" id="roomv" role="dialog" aria-modal="true" hidden>
+  <div class="roomv__glow" id="roomvGlow" aria-hidden="true"></div>
+  <div class="shell roomv__in">
+    <div class="roomv__top">
+      <span class="roomv__door" id="roomvDoor">Door 01 · iOS Development</span>
+      <button class="pill pill--outline" id="roomvBack">Back to the doors ↑</button>
+    </div>
+    <div class="roomv__head">
+      <h2 class="roomv__title" id="roomvTitle">iOS Native Ecosystem</h2>
+      <p class="roomv__desc" id="roomvDesc">High-performance native iOS applications built with Swift, SwiftUI, Combine, and CoreData.</p>
+      <span class="count" id="roomvCount" style="margin-top:14px;font-family:ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-from)">03 Featured Projects</span>
+    </div>
+    <div class="roomv-stack" id="roomvStack"></div>
+  </div>
+</div>
+
+<!-- ============ Holographic Ability Card ============ -->
+<div class="holo" id="holo" role="dialog" aria-modal="true" aria-label="Kaushal's ability card" hidden>
+  <div class="holo__ld" id="holoLd" aria-hidden="true"><div class="cl" aria-hidden="true"><p class="cl__name">M Kaushal Maran</p><div class="cl__line"><i></i></div><p class="cl__row"><span>Loading the card</span><b id="holoPct">0%</b></p></div></div>
+  <div class="holo__lite" id="holoLite" hidden>
+    <button class="hc" id="hc" aria-label="Flip the card"><i class="hc__aura"></i><span class="hc__in"><span class="hc__face hc__front"><span class="hc__win"><img class="hc__bg" src="card/win_bg.webp" loading="lazy" alt="" decoding="async"><img class="hc__sub" src="card/win_sub.webp" loading="lazy" alt="" decoding="async"><i class="hc__wsh"></i></span><img class="hc__plate" src="card/plate.webp" loading="lazy" alt="Kaushal's ability card: iOS 95, Android 92, UI/UX 88, Backend 85." decoding="async"><i class="hc__foil"></i><i class="hc__sheen"></i><i class="hc__glare"></i><i class="hc__rim"></i></span><span class="hc__face hc__back"><img class="hc__backimg" src="card/back.webp" loading="lazy" alt="" decoding="async"><i class="hc__foil"></i><i class="hc__glare"></i><i class="hc__rim"></i></span></span></button>
+    <p class="hc__hint"><span class="hc__hm">Move across the card</span><span class="hc__ht">Tilt or drag it</span> · tap to flip</p>
+  </div>
+  <button class="holo__x" id="holoClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>Close</button>
+</div>
+
+<!-- ============ Nav Menu Drawer ============ -->
+<div class="navm" id="navm" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="shell navm__top">
+    <span class="brand"><svg aria-hidden="true" focusable="false" viewBox="0 0 48 48" fill="currentColor"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>Kaushal</span>
+    <button class="close-btn" id="navClose"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></svg>Close</button>
+  </div>
+  <nav class="shell navm__nav" aria-label="Menu"><ul id="navList"></ul></nav>
+  <div class="shell navm__bot">
+    <span>Local time<span data-navtime></span></span>
+    <button id="navStart" style="min-height:44px">Start a project →</button>
+  </div>
+</div>
+
+<!-- ============ Request / Contact Modal ============ -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle" hidden>
+  <div class="modal__panel" id="mPanel">
+    <button class="x-btn" id="mClose" aria-label="Close"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4l16 16M20 4 4 20"/></svg></button>
+    <div id="mForm">
+      <div class="mhead"><p>Start a project</p><h2 id="mTitle">Tell me what you're building.</h2></div>
       <form class="mform" id="reqForm">
-        <label for="f-name">
-          <span>Your Name</span>
-          <input id="f-name" type="text" required placeholder="Steve Jobs">
-        </label>
-        <label for="f-email">
-          <span>Email Address</span>
-          <input id="f-email" type="email" required placeholder="you@company.com">
-        </label>
-        <label for="f-project">
-          <span>Project Overview &amp; Timeline</span>
-          <textarea id="f-project" rows="4" required placeholder="Share a few details about your app idea, platform requirements, and target timeline..."></textarea>
-        </label>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; flex-wrap: wrap; gap: 1rem;">
-          <a href="mailto:kaushalmaranm@gmail.com" style="font-size: .85rem; color: var(--muted); text-decoration: underline;">
-            Or email directly
-          </a>
-          <button type="submit" class="pill pill--dark pill--arrow">
-            <span class="pill__in">
-              Send Message
-              <span class="pill__badge">→</span>
+        <label for="f-name"><span>Name</span><input id="f-name" name="name" type="text" required maxlength="80" placeholder="Your name" autocomplete="name"></label>
+        <label for="f-email"><span>Email</span><input id="f-email" name="email" type="email" required maxlength="120" placeholder="you@company.com" autocomplete="email"></label>
+        <label for="f-project"><span>Project</span><textarea id="f-project" name="project" rows="4" required maxlength="1500" placeholder="A few words about your mobile app project, platform, timeline, and goals."></textarea></label>
+        <div class="mform__bot">
+          <small>I reply within one business day.</small>
+          <button type="submit" class="pill pill--dark pill--arrow" id="mSend">
+            <span class="pill__in" data-h="s 1 1.04" data-hs="320 18" data-ht=".pill"><span id="mSendLbl">Send Email</span>
+              <span class="pill__badge"><svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-h="x 0 2|y 0 -2" data-hs="320 18" data-ht=".pill"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
             </span>
           </button>
         </div>
       </form>
     </div>
   </div>
+</div>
 
-  <!-- Main JavaScript Engine -->
-  <script src="js/main.js"></script>
+<!-- JavaScript Module -->
+<script type="importmap">
+{ "imports": { "lenis": "./vendor/lenis.min.mjs" } }
+</script>
+<script type="module" src="js/main.js"></script>
+
 </body>
-
 </html>

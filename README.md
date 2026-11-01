@@ -1,71 +1,97 @@
 # 🚪 M Kaushal Maran — Portfolio
 
-An architectural, editorial portfolio for **M Kaushal Maran**, Mobile App Developer and B.Tech Information Technology student at SIMATS Engineering College, inspired by the craftsmanship of [therishithakor.com](https://therishithakor.com/).
+An architectural, editorial portfolio for **M Kaushal Maran**, Mobile App Developer and final-year B.Tech Information Technology student at SIMATS Engineering College (CGPA 8.1), engineered with the craft, animations, and interaction design of [therishithakor.com](https://therishithakor.com/).
 
 🔗 **Live Preview**: [https://kaushalboii.github.io/Kaushal-s-Portfolio/](https://kaushalboii.github.io/Kaushal-s-Portfolio/)
 
 ---
 
-## ✨ Key Signature Features
+## ✨ Signature Architecture & Interactions
 
-- **Stacking Discipline Doors Loader**: Progressive counting HUD (`000` to `100%`) with animated discipline pills that slide and split outward on reveal.
-- **Interactive Verlet Physics Pull Cord**: A realistic canvas pull cord featuring a turned walnut acorn knob and brass ferrule that reacts to dragging, flicking, and tapping to toggle between warm **Travertine Light Mode** (`#E8E4E0`) and deep **Charcoal Dark Mode** (`#141212`).
-- **3D Desk Flip Calendar (`#cal`)**: Realistic 3D desk calendar with spiral rings, punched holes, and page flips cycling through mobile competencies (`iOS Apps`, `Android Apps`, `Modern UI/UX`, `Scalable APIs`, `AI Products`).
-- **The 3D Architectural Doors Gallery (`#works`)**: Custom 3D doors with brass nameplates, reeded fluted panels, brass lever handles, floor reflections, and light spill leaking under the door sill.
-- **Discipline Exhibition Room Modals**: Stepping through any door opens an immersive deep-dive suite showcasing live mobile applications (ZenLife, Viana 360, Viana Buy, Vellore Ads, Indian Law Suite, Election 2026), live App Store and Google Play Store links, and architecture tags.
-- **Chronological Career Journey (`#about`)**: A step-by-step timeline of Kaushal's engineering journey at SIMATS Engineering College and Redback IT Solutions.
-- **Live Local Time Clock**: Live Indian Standard Time (IST) ticking clock for Vellore, Tamil Nadu.
-- **Interactive Contact Modal**: Integrated project proposal modal with automatic mailto generation and quick-copy communication channels.
+### 1. Liquid Color Reveal Hero (`#fig`)
+- **Dual Layer Cut-Out Portrait**: Grayscale base portrait (`assets/kaushal-bw.png`) and full-color high-res cut-out (`assets/kaushal-opt.png`).
+- **Cursor-Tracked Fluid Trail**: Mouse sweeps across the portrait dynamically paint the color portrait with soft radial gradient masking and automatic smooth decay back to B&W.
+- **Hero Watermark & CTAs**: Crisp typographic headline with 3D Flip Desk Calendar cycling through Kaushal's core roles (`iOS Developer`, `Android Developer`, `UI/UX Designer`, `AI & ML Engineer`, `Systems Architect`).
+
+### 2. 3D Architectural Doors Gallery (`#works`)
+- **Physics-Damped Doors**: 4 primary discipline doors in an adaptive proportional grid, plus a secret 5th door (`Backend Systems`) revealed via `.doors.reveal`.
+- **Custom Floating Door Cursor**: `#doorCursor` magnetic pill badge ("Click to enter") tracks cursor over doorways, replacing the standard system pointer.
+- **Focus & Empty Space Positioning**: Hovering a door dims background doors down to 3% opacity (`opacity: .03; filter: saturate(.2)`), while `#dinfo` dynamically centers itself in the open space of the faded doors with animated checkmark bullets.
+- **Walk-Through Zoom Animation**: On door click, the brass lever handle depresses 32°, the door swings open (-80°), and the camera scales straight into the doorway gap before handing off to the exhibition room.
+
+### 3. Skill Exhibition Rooms (`#roomv`)
+- **Stacked Project Cards**: Sticky elevation cards with smooth scroll stacking and alternating layouts.
+- **3D Angled Phone Mockups**: High-fidelity titanium iPhone bodies turned in 3D perspective with dynamic islands, status bars, glass sheen reflections, and live UI previews.
+- **Verified Mobile Applications**:
+  - 🧘 **ZenLife** — Sound-Based Stress Relief App (*Live on Apple App Store*)
+  - 📡 **Viana 360** — Real-Time Telemetry & Systems Monitoring (*Live on Apple App Store*)
+  - 🛍️ **Viana Buy** — Everyday Essentials & Commerce (*Live on Apple App Store*)
+  - 📢 **Vellore Ads** — Commercial Business Directory (*Live on Google Play Store*)
+  - ⚖️ **Indian Law Reference Suite** — Statutory reference in 11 Indian languages (*Offline FTS5*)
+  - 🗳️ **Election 2026** — Public Information Architecture
+  - 🤖 **Automatic Comic Generator** — Deep GAN architecture for narrative panels
+  - 🧠 **AI-Driven Personalized Learning Paths** — Knowledge graph NLP engine
+  - 🗄️ **High-Concurrency MySQL & PHP REST APIs** — Sub-5ms indexed query latency
+
+### 4. Astronomical Time Tunnel Clock Canvas (`#about.story`)
+- **3D Clock Dials Tunnel**: Dynamic HTML5 canvas (`story__bg`) rendering 16 concentric perspective rings, hour ticks, rotating clock hands, and drifting cosmic dust, winding backwards as you scroll through history.
+- **Rolling Year Digits (`.story__yr`)**: Four-digit reels (`.dg__c`) spinning smoothly between career milestones (2026 → 2025 → 2024 → 2022).
+- **Scrubber Meter**: Circular SVG meter rotating with scroll progress (`calc(var(--p) * -720deg)`), counter HUD (`01 / 04`), and ambient color wash.
+
+### 5. Interactive 3D Holographic Ability Card (`#holo`)
+- **Realistic 3D Tilt & Gyro**: Follows mouse coordinates and touch drag with ambient idle sway.
+- **Holographic Shading**: Gilt sheen, rainbow foil, reflection glare, and embossed monogram card back.
+- **Interactive Flip**: Tap or click to flip the card 180° in 3D.
+
+### 6. Verlet Physics Pull Cord
+- **Numerical Verlet Integration**: Multi-segment rope simulation on HTML5 canvas with realistic gravity and momentum.
+- **Turned Walnut Knob**: Realistic 3D lighting, drag haptics, and spring recoil.
+- **Theme Engine**: Seamless toggle between warm Travertine Light Mode (`#E8E4E0`) and Charcoal Dark Mode (`#1A1818`).
+
+### 7. Fixed Header & Statement Footer
+- **Live Vellore IST Clock**: Real-time Indian Standard Time (IST, UTC+5:30) and formatted calendar date.
+- **Spring Hover Nav**: Magnetic translation on buttons.
+- **Giant Footer Watermark**: Full-bleed `M KAUSHAL MARAN` typography with live status and circular scroll progress tracker (`.totop`).
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Core**: Semantic HTML5, Vanilla JavaScript (ES6+), Modern CSS3
-- **Design Tokens**: Custom CSS variable architecture supporting smooth Light & Charcoal Dark Mode
-- **Physics**: Custom Canvas Verlet Integration & Spring Mechanics
-- **Typography**: Onest & Space Mono via Google Fonts
-- **Assets**: Optimized portrait photography and vector icons
+- **Core**: Semantic HTML5, Vanilla JavaScript (ES Modules), Modern CSS3 (Grid & Container Queries)
+- **Smooth Scroll**: Lenis v1.3.23
+- **Typography**: Local high-performance Onest (`onest-latin.woff2`, `onest-latin-ext.woff2`)
+- **Physics**: Canvas Verlet Rope Simulation & Damped Harmonic Spring Mechanics
 
 ---
 
-## 📂 Project Structure
+## 📂 Repository Layout
 
 ```text
 Kaushal-s-Portfolio/
-├── index.html        # Main semantic markup, SEO, and accessible dialogs
+├── index.html            # Semantic markup, hero stage, doors, and story
+├── README.md             # Architecture documentation
 ├── css/
-│   └── style.css     # Design system, light/dark themes, 3D doors, and responsive layouts
+│   └── style.css         # Complete design system, 3D doors, roomv, and themes
 ├── js/
-│   └── main.js       # Stacking loader, physics pull cord, flip calendar, and doors engine
-└── assets/
-    ├── kaushal-opt.png # Optimized high-resolution portrait
-    └── kaushal.png     # Original asset
+│   └── main.js           # Lenis, liquidReveal, doors walk-through, and story engine
+├── assets/
+│   ├── kaushal-opt.png   # Full-color high-res portrait cut-out
+│   ├── kaushal-bw.png    # Grayscale portrait base for liquid reveal
+│   └── kaushal.png       # Original portrait
+├── card/
+│   ├── plate.webp        # Holographic card front plate & stats
+│   ├── back.webp         # Embossed monogram card back
+│   ├── win_bg.webp       # Holographic illustration background
+│   ├── win_sub.webp      # Holographic window overlay
+│   ├── sheen.webp        # Specular gilt mask
+│   └── body.webp         # Holographic rainbow foil mask
+├── fonts/
+│   ├── onest-latin.woff2
+│   └── onest-latin-ext.woff2
+└── vendor/
+    └── lenis.min.mjs     # Lenis smooth scroll engine
 ```
 
 ---
 
-## 🚀 Running Locally
-
-Open `index.html` in any modern web browser or start a local HTTP server:
-
-```bash
-# Using Python
-python3 -m http.server 8000
-
-# Using Node.js
-npx serve .
-```
-
-Visit `http://localhost:8000` in your browser.
-
----
-
-## ✍️ Author
-
-**M Kaushal Maran**  
-Mobile App Developer & B.Tech IT student at SIMATS Engineering College  
-- **Email**: [kaushalmaranm@gmail.com](mailto:kaushalmaranm@gmail.com)  
-- **Phone**: [+91 86108 51456](tel:+918610851456)  
-- **GitHub**: [github.com/kaushalboii](https://github.com/kaushalboii)  
-- **LinkedIn**: [linkedin.com/in/kaushal-maran-m](https://linkedin.com/in/kaushal-maran-m)  
+© 2026 M Kaushal Maran. Designed and built with architectural craft.

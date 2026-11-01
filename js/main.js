@@ -423,6 +423,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
         clearInterval(iv);
         ld?.classList.add('out');
         lite.hidden = false;
+        requestAnimationFrame(() => lite.classList.add('in'));
         t0 = performance.now();
         loop = requestAnimationFrame(step);
       }
@@ -434,6 +435,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     isOpen = false;
     cancelAnimationFrame(loop);
     layer.classList.remove('on');
+    lite.classList.remove('in');
     setTimeout(() => {
       layer.hidden = true;
       lite.hidden = true;

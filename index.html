@@ -436,9 +436,140 @@
 
 <!-- ============ Holographic Ability Card ============ -->
 <div class="holo" id="holo" role="dialog" aria-modal="true" aria-label="Kaushal's ability card" hidden>
-  <div class="holo__ld" id="holoLd" aria-hidden="true"><div class="cl" aria-hidden="true"><p class="cl__name">M Kaushal Maran</p><div class="cl__line"><i></i></div><p class="cl__row"><span>Loading the card</span><b id="holoPct">0%</b></p></div></div>
+  <div class="holo__ld" id="holoLd" aria-hidden="true">
+    <div class="cl" aria-hidden="true">
+      <p class="cl__name">M Kaushal Maran</p>
+      <div class="cl__line"><i></i></div>
+      <p class="cl__row"><span>Synthesizing Card</span><b id="holoPct">0%</b></p>
+    </div>
+  </div>
   <div class="holo__lite" id="holoLite" hidden>
-    <button class="hc" id="hc" aria-label="Flip the card"><i class="hc__aura"></i><span class="hc__in"><span class="hc__face hc__front"><span class="hc__win"><img class="hc__bg" src="card/win_bg.webp" loading="lazy" alt="" decoding="async"><img class="hc__sub" src="card/win_sub.webp" loading="lazy" alt="" decoding="async"><i class="hc__wsh"></i></span><img class="hc__plate" src="card/plate.webp" loading="lazy" alt="Kaushal's ability card: iOS 95, Android 92, UI/UX 88, Backend 85." decoding="async"><i class="hc__foil"></i><i class="hc__sheen"></i><i class="hc__glare"></i><i class="hc__rim"></i></span><span class="hc__face hc__back"><img class="hc__backimg" src="card/back.webp" loading="lazy" alt="" decoding="async"><i class="hc__foil"></i><i class="hc__glare"></i><i class="hc__rim"></i></span></span></button>
+    <button class="hc" id="hc" aria-label="Flip the card">
+      <i class="hc__aura"></i>
+      <span class="hc__in">
+        <!-- FRONT OF CARD -->
+        <span class="hc__face hc__front km-card">
+          <i class="hc__foil"></i>
+          <i class="hc__sheen"></i>
+          <i class="hc__glare"></i>
+          <i class="hc__rim"></i>
+
+          <div class="km-card__inner">
+            <div class="km-card__head">
+              <div class="km-card__tier">
+                <span class="km-tier-badge">✦ MYTHIC CLASS ✦</span>
+                <span class="km-tier-id">SIMATS '26 · ID #001</span>
+              </div>
+              <h2 class="km-card__title">M KAUSHAL MARAN</h2>
+              <p class="km-card__role">MOBILE SYSTEMS ARCHITECT &amp; ML RESEARCHER</p>
+            </div>
+
+            <div class="km-card__visual">
+              <div class="km-card__portrait-frame">
+                <img src="assets/kaushal-opt.png" alt="M Kaushal Maran" class="km-card__avatar">
+                <div class="km-card__lvl-tag">LVL 99</div>
+              </div>
+              <div class="km-card__sig-wrap">
+                <span class="km-card__sig">Kaushal Maran</span>
+                <span class="km-card__sig-lbl">VERIFIED ARCHITECT ID</span>
+              </div>
+            </div>
+
+            <div class="km-card__stats">
+              <div class="km-stat">
+                <div class="km-stat__meta"><span>iOS Native (Swift / SwiftUI)</span><b>98%</b></div>
+                <div class="km-stat__bar"><i style="width:98%"></i></div>
+              </div>
+              <div class="km-stat">
+                <div class="km-stat__meta"><span>Android Systems (Kotlin / Compose)</span><b>95%</b></div>
+                <div class="km-stat__bar"><i style="width:95%"></i></div>
+              </div>
+              <div class="km-stat">
+                <div class="km-stat__meta"><span>Deep Learning &amp; Audio DSP</span><b>92%</b></div>
+                <div class="km-stat__bar"><i style="width:92%"></i></div>
+              </div>
+              <div class="km-stat">
+                <div class="km-stat__meta"><span>Distributed APIs &amp; MySQL</span><b>90%</b></div>
+                <div class="km-stat__bar"><i style="width:90%"></i></div>
+              </div>
+              <div class="km-stat">
+                <div class="km-stat__meta"><span>UI/UX &amp; 3D Creative Web</span><b>96%</b></div>
+                <div class="km-stat__bar"><i style="width:96%"></i></div>
+              </div>
+            </div>
+
+            <div class="km-card__perks">
+              <span class="km-perk">⚡ &lt;50ms Delta Sync</span>
+              <span class="km-perk">🎯 120 FPS Motion</span>
+              <span class="km-perk">🔒 Cryptographic Audit</span>
+            </div>
+
+            <div class="km-card__foot">
+              <div class="km-chip-gold">
+                <i></i><i></i><i></i><i></i>
+              </div>
+              <div class="km-nfc-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7-3 9-3 9"/><path d="M9 10a3 3 0 0 1 6 0c0 4-1.5 5.5-1.5 5.5"/><path d="M12 12v.01"/></svg>
+              </div>
+              <div class="km-card__serial">KM-2026-NATIVE-PRO</div>
+            </div>
+          </div>
+        </span>
+
+        <!-- BACK OF CARD -->
+        <span class="hc__face hc__back km-card km-card--back">
+          <i class="hc__foil"></i>
+          <i class="hc__glare"></i>
+          <i class="hc__rim"></i>
+
+          <div class="km-card__inner km-card__inner--back">
+            <div class="km-mag-stripe">
+              <span>M KAUSHAL MARAN · AUTHENTIC VERIFIED CREDENTIAL · SIMATS '26</span>
+            </div>
+
+            <div class="km-back-emblem">
+              <div class="km-monogram">KM</div>
+              <span class="km-emblem-lbl">ENGINEERING &amp; DESIGN</span>
+            </div>
+
+            <div class="km-cred-grid">
+              <div class="km-cred-item">
+                <label>DEVELOPER</label>
+                <b>M Kaushal Maran</b>
+              </div>
+              <div class="km-cred-item">
+                <label>INSTITUTION</label>
+                <b>SIMATS IT '26</b>
+              </div>
+              <div class="km-cred-item">
+                <label>LIVE DEPLOYMENTS</label>
+                <b>ZenLife · Viana 360 · Viana Buy · Vellore Ads</b>
+              </div>
+              <div class="km-cred-item">
+                <label>REPOSITORIES</label>
+                <b>37+ Open Source Projects</b>
+              </div>
+            </div>
+
+            <div class="km-sec-strip">
+              <div class="km-sig-box">
+                <span class="km-sig-text">Kaushal Maran</span>
+                <span class="km-sig-sub">AUTHORIZED SIGNATURE · NOT TRANSFERABLE</span>
+              </div>
+              <div class="km-holo-seal">
+                <span>SECURITY SEAL</span>
+                <b>VERIFIED 2026</b>
+              </div>
+            </div>
+
+            <div class="km-back-foot">
+              <span>github.com/kaushalboii</span>
+              <span class="km-tap-flip">Tap to flip ↺</span>
+            </div>
+          </div>
+        </span>
+      </span>
+    </button>
     <p class="hc__hint"><span class="hc__hm">Move across the card</span><span class="hc__ht">Tilt or drag it</span> · tap to flip</p>
   </div>
   <button class="holo__x" id="holoClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>Close</button>

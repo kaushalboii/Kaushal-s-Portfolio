@@ -1983,3 +1983,332 @@ html[data-mode="dark"] .roomv__stack .stage::after {
   color: rgba(var(--fg-rgb), .6);
   margin-bottom: 20px;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   KAUSHAL MARAN BESPOKE HOLOGRAPHIC ABILITY CARD
+   ══════════════════════════════════════════════════════════════ */
+.km-card {
+  background: radial-gradient(circle at 50% 20%, #241d1a 0%, #141110 50%, #080606 100%);
+  border: 2px solid rgba(214, 178, 110, 0.45);
+  box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.95), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.km-card--back {
+  background: radial-gradient(circle at 50% 50%, #1f1a18 0%, #0e0c0b 60%, #050404 100%);
+}
+.km-card__inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px 24px;
+  box-sizing: border-box;
+}
+.km-card__inner--back {
+  padding: 22px 24px 18px;
+}
+.km-card__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.km-card__tier {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.km-tier-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  background: linear-gradient(90deg, #d4af37, #fef08a, #aa771c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.km-tier-id {
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-size: 9px;
+  color: rgba(214, 178, 110, 0.7);
+  letter-spacing: 0.08em;
+}
+.km-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 6px 0 2px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  text-align: left;
+}
+.km-card__role {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+}
+.km-card__visual {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 12px 0 8px;
+}
+.km-card__portrait-frame {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 18px;
+  border: 2px solid rgba(214, 178, 110, 0.85);
+  overflow: hidden;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  flex-shrink: 0;
+  background: #000;
+}
+.km-card__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  display: block;
+}
+.km-card__lvl-tag {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  background: linear-gradient(90deg, #d4af37, #fef08a, #aa771c);
+  color: #0d0c0c;
+  font-size: 8.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 1px 0;
+}
+.km-card__sig-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.km-card__sig {
+  font-family: 'Brush Script MT', 'Dancing Script', 'Caveat', cursive, sans-serif;
+  font-size: 24px;
+  color: rgba(254, 240, 138, 0.95);
+  transform: rotate(-3deg);
+  line-height: 1.1;
+}
+.km-card__sig-lbl {
+  font-family: ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.45);
+}
+.km-card__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 6px 0;
+}
+.km-stat__meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9.5px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 2px;
+}
+.km-stat__meta b {
+  color: #fef08a;
+  font-family: ui-monospace, monospace;
+}
+.km-stat__bar {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.km-stat__bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #d4af37 0%, #f59e0b 60%, #38bdf8 100%);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+.km-card__perks {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 6px 0;
+}
+.km-perk {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.85);
+}
+.km-card__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+.km-chip-gold {
+  width: 32px;
+  height: 24px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #e6c875, #b8860b);
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  padding: 2px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.km-chip-gold i {
+  display: block;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: rgba(255, 255, 255, 0.15);
+}
+.km-nfc-icon {
+  color: rgba(255, 255, 255, 0.6);
+}
+.km-nfc-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.km-card__serial {
+  font-family: ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+  color: rgba(214, 178, 110, 0.85);
+}
+
+/* Back of Card */
+.km-mag-stripe {
+  height: 36px;
+  background: linear-gradient(90deg, #0a0909, #1a1716, #0a0909);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: -22px -24px 14px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  font-family: ui-monospace, monospace;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.35);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.km-back-emblem {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.km-monogram {
+  font-size: 44px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #d4af37 0%, #fff 50%, #aa771c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  line-height: 1;
+  filter: drop-shadow(0 4px 14px rgba(214, 178, 110, 0.45));
+}
+.km-emblem-lbl {
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.5);
+  display: block;
+  margin-top: 4px;
+}
+.km-cred-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+}
+.km-cred-item label {
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  color: rgba(214, 178, 110, 0.85);
+  display: block;
+}
+.km-cred-item b {
+  font-size: 11px;
+  color: #fff;
+  display: block;
+  margin-top: 2px;
+  line-height: 1.25;
+}
+.km-sec-strip {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fdfbf7;
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 10px 0;
+  color: #1a1818;
+}
+.km-sig-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.km-sig-text {
+  font-family: 'Brush Script MT', 'Dancing Script', cursive, sans-serif;
+  font-size: 20px;
+  color: #0b132b;
+  line-height: 1;
+}
+.km-sig-sub {
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.5);
+  margin-top: 2px;
+}
+.km-holo-seal {
+  border: 1px dashed rgba(0, 0, 0, 0.35);
+  padding: 3px 6px;
+  border-radius: 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.km-holo-seal span {
+  font-size: 6.5px;
+  color: rgba(0, 0, 0, 0.55);
+}
+.km-holo-seal b {
+  font-size: 8px;
+  font-weight: 800;
+  color: #0b132b;
+}
+.km-back-foot {
+  display: flex;
+  justify-content: space-between;
+  font-family: ui-monospace, monospace;
+  font-size: 9.5px;
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+}
+.km-tap-flip {
+  color: rgba(214, 178, 110, 0.8);
+}

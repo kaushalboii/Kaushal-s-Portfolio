@@ -1784,8 +1784,7 @@ html[data-mode="dark"] .roomv__stack .stage::after {
 .mockup-zen, .mockup-tel, .mockup-shop, .mockup-mac,
 .mockup-ads, .mockup-law, .mockup-vote,
 .mockup-gan, .mockup-dsp, .mockup-nlp,
-.mockup-web, .mockup-portal, .mockup-tokens,
-.mockup-sync, .mockup-sql, .mockup-crypto {
+.mockup-web, .mockup-portal, .mockup-tokens {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -1959,26 +1958,6 @@ html[data-mode="dark"] .roomv__stack .stage::after {
 .swatch.s-card { background: #232020; }
 .swatch.s-acc { background: #D9C6C6; }
 .token-check { border-top: 1px solid rgba(255,255,255,.1); padding-top: 8px; font-size: 10px; color: #4ade80; }
-
-/* Cloud Sync mockups */
-.sync-card { background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px; }
-.sync-card b { display: block; font-size: 12px; margin-top: 4px; }
-.sync-log { background: #000; border-radius: 8px; padding: 8px; font-family: monospace; font-size: 9px; color: #4ade80; margin: 10px 0; }
-.sync-log code { display: block; }
-.sync-stats { font-size: 10px; opacity: .75; }
-
-/* SQL mockups */
-.sql-box { background: #000; border-radius: 8px; padding: 8px; font-family: monospace; font-size: 9px; color: #38bdf8; }
-.sql-time { display: block; margin-top: 4px; color: #4ade80; }
-.sql-idx { background: rgba(255,255,255,.08); border-radius: 8px; padding: 8px; margin-top: 10px; font-size: 10px; }
-.sql-idx b { display: block; font-size: 11px; margin-top: 2px; }
-
-/* Crypto mockups */
-.crypto-card { background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px; text-align: center; }
-.crypto-shield { font-size: 24px; display: block; margin-bottom: 4px; }
-.crypto-blocks { display: flex; gap: 6px; justify-content: center; margin: 12px 0; }
-.cblock { padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,.12); font-family: monospace; font-size: 9px; }
-.crypto-hash { font-family: monospace; font-size: 8px; opacity: .6; word-break: break-all; }
 
 /* Outro in roomv */
 .roomv__outro {

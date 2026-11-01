@@ -925,8 +925,8 @@ const ROOMS_DATA = [
         category: 'iOS App · Health & Sound',
         title: 'ZENLIFE',
         sub: 'Sound-Based Stress Relief App · Apple App Store',
-        desc: 'Delivers calming, mood-tailored acoustic soundscapes and frequency sessions (432 Hz Solfeggio). Features real-time mood logging, psychometric analytics, local CoreData persistence, and secure PHP/MySQL cloud sync.',
-        tags: ['SwiftUI', 'AVAudioEngine', 'CoreData', 'Biometrics', 'PHP REST', 'MySQL'],
+        desc: 'Delivers calming, mood-tailored acoustic soundscapes and frequency sessions (432 Hz Solfeggio). Features real-time mood logging, psychometric analytics, on-device CoreData persistence, and fluid SwiftUI micro-interactions.',
+        tags: ['SwiftUI', 'AVAudioEngine', 'CoreData', 'Biometrics', 'Combine', 'App Store'],
         liveLink: 'https://apps.apple.com/in/app/zenlife-stress-sound-relief/id6753105286',
         liveText: 'View on App Store ↗',
         gitLink: 'https://github.com/kaushalboii/Zenlife-Stress-relief-app-using-sound-and-music',
@@ -1082,7 +1082,9 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/velloreads-screen-1.jpg',
           'assets/apps/velloreads-screen-2.jpg',
-          'assets/apps/velloreads-screen-4.jpg'
+          'assets/apps/velloreads-screen-3.jpg',
+          'assets/apps/velloreads-screen-4.jpg',
+          'assets/apps/velloreads-screen-5.jpg'
         ],
         iconBg: '#341E2B',
         num: '01 / 04',
@@ -1090,7 +1092,7 @@ const ROOMS_DATA = [
         title: 'Vellore Ads Platform',
         sub: 'Commercial Listing Platform · Google Play Store',
         desc: 'Commercial listing and advertising directory. Features instant location filters, high-density listing catalogues, verified merchant profiles, and region-specific classified ad management.',
-        tags: ['Kotlin', 'Jetpack Compose', 'MySQL', 'PHP REST APIs', 'Material 3'],
+        tags: ['Kotlin', 'Jetpack Compose', 'Coroutines', 'Material 3', 'Google Play'],
         liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en',
         liveText: 'View on Google Play ↗',
         note: 'Live on Google Play Store',
@@ -1104,7 +1106,9 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/constitution-screen-1.jpg',
           'assets/apps/constitution-screen-2.jpg',
-          'assets/apps/constitution-screen-4.jpg'
+          'assets/apps/constitution-screen-3.jpg',
+          'assets/apps/constitution-screen-4.jpg',
+          'assets/apps/constitution-screen-5.jpg'
         ],
         iconBg: '#212B23',
         num: '02 / 04',
@@ -1126,7 +1130,12 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/bns-screen-1.jpg',
           'assets/apps/bns-screen-2.jpg',
-          'assets/apps/bns-screen-4.jpg'
+          'assets/apps/bns-screen-3.jpg',
+          'assets/apps/bns-screen-4.jpg',
+          'assets/apps/bns-screen-5.jpg',
+          'assets/apps/bnss-screen-1.jpg',
+          'assets/apps/bnss-screen-2.jpg',
+          'assets/apps/bsa-screen-1.jpg'
         ],
         iconBg: '#2D231E',
         num: '03 / 04',
@@ -1153,8 +1162,12 @@ const ROOMS_DATA = [
         screenshots: [
           'assets/apps/cpc-screen-1.jpg',
           'assets/apps/cpc-screen-2.jpg',
+          'assets/apps/cpc-screen-3.jpg',
           'assets/apps/posh-screen-1.jpg',
-          'assets/apps/police-screen-1.jpg'
+          'assets/apps/posh-screen-2.jpg',
+          'assets/apps/police-screen-1.jpg',
+          'assets/apps/police-screen-2.jpg',
+          'assets/apps/election-screen-1.jpg'
         ],
         iconBg: '#1F2936',
         num: '04 / 04',
@@ -1180,41 +1193,123 @@ const ROOMS_DATA = [
     ]
   },
   {
+    id: 'ui',
+    doorName: 'Door 03 · UI/UX & Web Design',
+    title: 'Interactive Web & Design Systems',
+    desc: 'Award-caliber digital interfaces, design tokens, micro-interactions, liquid canvas physics, and 3D WebGL scenes engineered for high engagement.',
+    count: '03 Featured Projects',
+    accent: '#7A8670',
+    projects: [
+      {
+        icon: '🌐',
+        iconBg: '#262F21',
+        num: '01 / 03',
+        category: 'Creative Engineering · WebGL',
+        title: 'Crafted Interactive Portfolio',
+        sub: 'Exact Motion Recreation of therishithakor.com · Free on GitHub',
+        desc: 'High-precision creative engineering featuring real-time 3D desk calendar flip, liquid scratch canvas shader, Lenis smooth scrolling, and walk-through exhibition rooms.',
+        tags: ['Vanilla JS', 'CSS 3D', 'Lenis', 'Canvas API', 'Web Animations API'],
+        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio',
+        liveText: 'Official Website ↗',
+        gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
+        gitText: 'Free on GitHub ↗',
+        note: '100% Free / Open Source Repository',
+        screenBg: 'radial-gradient(circle at 50% 20%, #253120 0%, #0e160b 80%)',
+        mockupContent: `
+          <div class="mockup-web">
+            <div class="web-bar">
+              <span class="web-dots"><i></i><i></i><i></i></span>
+              <span class="web-url">kaushalboii.github.io</span>
+            </div>
+            <div class="web-preview">
+              <span class="wp-title">Hi, I\'m Kaushal.</span>
+              <div class="wp-cal-pill">iOS Developer</div>
+              <div class="wp-doors-mini">
+                <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
+              </div>
+            </div>
+          </div>
+        `
+      },
+      {
+        icon: '📐',
+        iconImg: 'assets/apps/simats-icon.jpg',
+        screenshots: ['assets/apps/simats-screen-1.jpg'],
+        iconBg: '#30261E',
+        num: '02 / 03',
+        category: 'Information Architecture · Figma',
+        title: 'SIMATS Academic Portal Ergonomic Redesign',
+        sub: 'Enterprise Academic Portal UX & Accessibility Case Study',
+        desc: 'Ground-up ergonomic redesign of the university student information portal. Streamlined grade tracking, fee payments, and timetable scheduling into a high-efficiency dashboard with 40% reduced cognitive load.',
+        tags: ['Figma', 'Design Tokens', 'WCAG AAA', 'Information Architecture'],
+        gitLink: 'https://github.com/kaushalboii',
+        gitText: 'View on GitHub ↗',
+        note: 'University UX System Case Study',
+        screenBg: 'radial-gradient(circle at 50% 20%, #32251a 0%, #150e09 80%)'
+      },
+      {
+        icon: '🎨',
+        iconBg: '#2E222D',
+        num: '03 / 03',
+        category: 'Design Systems · Design Tokens',
+        title: 'Dark Mode & Glassmorphic Token System',
+        sub: 'Modern Cross-Platform Token Architecture',
+        desc: 'Semantic, multi-tier design token architecture unified across iOS (SwiftUI), Android (Jetpack Compose), and web (CSS Custom Properties). Includes calibrated contrast curves and WCAG AAA compliance.',
+        tags: ['Design Tokens', 'CSS Custom Properties', 'Style Dictionary', 'Figma'],
+        gitLink: 'https://github.com/kaushalboii',
+        gitText: 'View on GitHub ↗',
+        note: 'Cross-Platform Design System',
+        screenBg: 'radial-gradient(circle at 50% 20%, #301f2f 0%, #140b13 80%)',
+        mockupContent: `
+          <div class="mockup-tokens">
+            <div class="token-row">
+              <span class="swatch s-bg"></span><b>--bg: #0D0E0E</b>
+            </div>
+            <div class="token-row">
+              <span class="swatch s-acc"></span><b>--accent: #D9C6C6</b>
+            </div>
+            <div class="token-check"><span>WCAG Contrast: 11.4:1 AAA</span></div>
+          </div>
+        `
+      }
+    ]
+  },
+  {
     id: 'ai',
-    doorName: 'Door 03 · AI & Machine Learning',
+    doorName: 'Door 04 · AI & Machine Learning',
     title: 'AI & Deep Learning Systems',
     desc: 'Deep learning architectures, generative adversarial networks (GANs), audio digital signal processing (DSP), and natural language embeddings.',
     count: '03 Featured Projects',
-    accent: '#3A4B56',
+    accent: '#A4552C',
     projects: [
       {
         icon: '🎨',
         iconImg: 'assets/apps/comicgan-icon.jpg',
         screenshots: ['assets/apps/comicgan-screen-1.jpg'],
-        iconBg: '#2C1F33',
+        iconBg: '#1E2A34',
         num: '01 / 03',
-        category: 'Deep Learning · Computer Vision',
+        category: 'Deep Learning · Generative AI',
         title: 'Automatic Comic GAN',
-        sub: 'Deep Learning Storyboard Generator · Free on GitHub',
-        desc: 'Generative Adversarial Network pipeline built with PyTorch to automatically synthesize sequential comic panels and visual narrative storyboards from written textual prompts.',
+        sub: 'PyTorch Deep Convolutional GAN · Research Project',
+        desc: 'Generative Adversarial Network that synthesizes stylistically consistent comic characters and narrative panels from noise vectors using deep convolutional generator-discriminator pairs.',
         tags: ['PyTorch', 'DCGAN', 'Computer Vision', 'Neural Networks', 'Python'],
-        gitLink: 'https://github.com/kaushalboii/Automatic-Comic-Generation-using-GAN',
+        gitLink: 'https://github.com/kaushalboii/automatic-comic-generator-using-gan',
         gitText: 'Free on GitHub ↗',
         note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #301f38 0%, #140b19 80%)'
+        screenBg: 'radial-gradient(circle at 50% 20%, #1c2b36 0%, #0b1319 80%)'
       },
       {
         icon: '🧬',
         iconBg: '#1B2E33',
         num: '02 / 03',
-        category: 'Audio DSP · Neural Synthesis',
-        title: 'ZenLife Audio Synthesis Backend',
-        sub: 'Binaural DSP & Audio Synthesis Engine · Free on GitHub',
-        desc: 'Backend algorithmic audio engine that dynamically generates harmonic acoustic waves, binaural beats, and pink noise soundscapes tailored to user heart rate and mood input.',
-        tags: ['Python', 'FastAPI', 'DSP', 'NumPy', 'Binaural Audio', 'Free & Open Source'],
-        gitLink: 'https://github.com/kaushalboii/zenlife-backend',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
+        category: 'Client DSP · Neural Harmonics',
+        title: 'ZenLife Acoustic Signal Engine',
+        sub: 'Binaural DSP & Soundscape Synthesis Engine',
+        desc: 'Client-side algorithmic digital signal processing (DSP) engine generating real-time harmonic acoustic waves, binaural beats, and 432 Hz Solfeggio soundscapes directly on-device using custom waveform synthesis algorithms.',
+        tags: ['DSP', 'AudioKit', 'NumPy', 'Binaural Harmonics', 'Swift', 'Client Synthesis'],
+        gitLink: 'https://github.com/kaushalboii',
+        gitText: 'View on GitHub ↗',
+        note: 'High-Fidelity 48 kHz Acoustic Signal Engine',
         screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
         mockupContent: `
           <div class="mockup-dsp">
@@ -1243,187 +1338,13 @@ const ROOMS_DATA = [
         tags: ['Python', 'NLP', 'Embeddings', 'Cosine Similarity', 'SIMATS Research'],
         gitLink: 'https://github.com/kaushalboii',
         gitText: 'View on GitHub ↗',
-        note: 'SIMATS IT Research Project',
-        screenBg: 'radial-gradient(circle at 50% 20%, #28331e 0%, #10160b 80%)',
+        note: 'SIMATS Research Paper & Implementation',
+        screenBg: 'radial-gradient(circle at 50% 20%, #29341f 0%, #10160b 80%)',
         mockupContent: `
           <div class="mockup-nlp">
-            <div class="nlp-target">
-              <b>Curriculum Knowledge Graph</b>
-              <span>Mastery: 88.5%</span>
-            </div>
-            <div class="nlp-nodes">
-              <span class="node-done">Algorithms ✓</span>
-              <span class="node-curr">System Design ●</span>
-              <span class="node-next">Distributed DBs ◌</span>
-            </div>
-            <div class="nlp-card">
-              <span>Next Recommended Session:</span>
-              <b>High-Throughput Message Queues</b>
-            </div>
-          </div>
-        `
-      }
-    ]
-  },
-  {
-    id: 'ui',
-    doorName: 'Door 04 · UI/UX & Web Design',
-    title: 'Interactive Web & Design Systems',
-    desc: 'Award-caliber digital interfaces, design tokens, micro-interactions, liquid canvas physics, and 3D WebGL scenes engineered for high engagement.',
-    count: '03 Featured Projects',
-    accent: '#7A8670',
-    projects: [
-      {
-        icon: '🌐',
-        iconBg: '#262F21',
-        num: '01 / 03',
-        category: 'Creative Engineering · WebGL',
-        title: 'Crafted Interactive Portfolio',
-        sub: 'Exact Motion Recreation of therishithakor.com · Free on GitHub',
-        desc: 'High-precision creative engineering featuring real-time 3D desk calendar flip, liquid scratch canvas shader, Lenis smooth scrolling, and walk-through exhibition rooms.',
-        tags: ['Vanilla JS', 'CSS 3D', 'Lenis', 'Canvas API', 'Web Animations API'],
-        gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #253120 0%, #0e160b 80%)',
-        mockupContent: `
-          <div class="mockup-web">
-            <div class="web-bar">
-              <span class="web-dots"><i></i><i></i><i></i></span>
-              <span class="web-url">kaushalboii.github.io</span>
-            </div>
-            <div class="web-preview">
-              <span class="wp-title">Hi, I'm Kaushal.</span>
-              <div class="wp-cal-pill">iOS Developer</div>
-              <div class="wp-doors-mini">
-                <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        icon: '📐',
-        iconImg: 'assets/apps/simats-icon.jpg',
-        screenshots: ['assets/apps/simats-screen-1.jpg'],
-        iconBg: '#30261E',
-        num: '02 / 03',
-        category: 'UX Audit · Design Tokens',
-        title: 'SIMATS Academic Portal Ergonomic Redesign',
-        sub: 'Enterprise Campus Interface System',
-        desc: 'Comprehensive UX audit and design overhaul for university student information systems, reducing grade lookup time by 64% with accessible thumb-zone navigation.',
-        tags: ['Figma', 'Design Tokens', 'WCAG AAA', 'Information Architecture'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'Enterprise Campus Case Study',
-        screenBg: 'radial-gradient(circle at 50% 20%, #33261c 0%, #160e0a 80%)'
-      },
-      {
-        icon: '🪟',
-        iconBg: '#212433',
-        num: '03 / 03',
-        category: 'Design Systems · Tokens',
-        title: 'Dark Mode & Glassmorphic Token System',
-        sub: 'Reusable Multi-Platform Token System',
-        desc: 'Cross-platform design tokens supporting native iOS, Android Material 3, and CSS variables for high-contrast dark mode with zero color bleed.',
-        tags: ['Design Tokens', 'CSS Custom Properties', 'Style Dictionary', 'Figma'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'Design Systems Architecture',
-        screenBg: 'radial-gradient(circle at 50% 20%, #202436 0%, #0d0f19 80%)',
-        mockupContent: `
-          <div class="mockup-tokens">
-            <div class="token-row">
-              <span class="swatch s-bg"></span><b>--bg: #1A1818</b>
-            </div>
-            <div class="token-row">
-              <span class="swatch s-card"></span><b>--card: #232020</b>
-            </div>
-            <div class="token-row">
-              <span class="swatch s-acc"></span><b>--accent: #D9C6C6</b>
-            </div>
-            <div class="token-check"><span>WCAG Contrast: 11.4:1 AAA</span></div>
-          </div>
-        `
-      }
-    ]
-  },
-  {
-    id: 'backend',
-    doorName: 'Door 05 · Backend Systems (Secret)',
-    title: 'Backend Systems Architecture',
-    desc: 'High-concurrency relational databases, secure RESTful APIs, token-based authentication, and resilient cloud synchronization engines.',
-    count: '03 Featured Projects',
-    accent: '#5B4A3A',
-    projects: [
-      {
-        icon: '⚡',
-        iconImg: 'assets/apps/cloudsync-icon.jpg',
-        screenshots: ['assets/apps/cloudsync-screen-1.jpg'],
-        iconBg: '#30261C',
-        num: '01 / 03',
-        category: 'Distributed Systems · Cloud Sync',
-        title: 'ZenLife Cloud Sync & Delta Engine',
-        sub: 'High-Performance PHP REST & MySQL Sync Engine',
-        desc: 'Low-latency sync engine delivering sub-50ms mood session syncing between iOS CoreData and cloud MySQL databases with conflict resolution and cryptographic payload hashing.',
-        tags: ['PHP 8', 'MySQL', 'RESTful APIs', 'JWT Auth', 'ETag Caching'],
-        gitLink: 'https://github.com/kaushalboii/zenlife-backend',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #33271c 0%, #150f09 80%)'
-      },
-      {
-        icon: '🗄️',
-        iconBg: '#1D2D2A',
-        num: '02 / 03',
-        category: 'Database Optimization · Spatial Query',
-        title: 'Vellore Ads Regional Query Optimization',
-        sub: 'High-Density Relational Database Architecture',
-        desc: 'Specialized indexing and spatial query partitioning allowing 100,000+ regional advertisements to be filtered by coordinates and categories in under 12 milliseconds.',
-        tags: ['MySQL', 'Spatial Indexing', 'Query Profiling', 'Database Normalization'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'Production MySQL Indexing Case Study',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1e312d 0%, #0c1614 80%)',
-        mockupContent: `
-          <div class="mockup-sql">
-            <div class="sql-box">
-              <code>EXPLAIN SELECT * FROM ads WHERE MBRContains(geom, POINT(?))</code>
-              <span class="sql-time">Query Execution: 8.4 ms</span>
-            </div>
-            <div class="sql-idx">
-              <span>Spatial R-Tree Index Scan</span>
-              <b>Rows examined: 12 / 104,280</b>
-            </div>
-          </div>
-        `
-      },
-      {
-        icon: '🔒',
-        iconBg: '#2D1F1F',
-        num: '03 / 03',
-        category: 'Cryptography · Security',
-        title: 'Cryptographic Microservice for ClearVote',
-        sub: 'Immutable Election Audit Trail Engine',
-        desc: 'Zero-knowledge verification and SHA-256 chained ledger ensuring voter anonymity while providing verifiable end-to-end election audit proofs.',
-        tags: ['Node.js', 'SHA-256 Chaining', 'Cryptography', 'Security Audit'],
-        gitLink: 'https://github.com/kaushalboii/ClearVote',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #301f1f 0%, #140b0b 80%)',
-        mockupContent: `
-          <div class="mockup-crypto">
-            <div class="crypto-card">
-              <span class="crypto-shield">🔐</span>
-              <b>Zero-Knowledge Audit Trail</b>
-            </div>
-            <div class="crypto-blocks">
-              <div class="cblock">Block #4829</div>
-              <div class="cblock">Block #4830</div>
-            </div>
-            <div class="crypto-hash">
-              <span>Merkle Root: e3b0c44298fc1c149afb...</span>
-            </div>
+            <div class="nlp-node n1"><span>Linear Algebra</span><b>Mastered (98%)</b></div>
+            <div class="nlp-arrow">↓ 0.89 cosine affinity</div>
+            <div class="nlp-node n2"><span>Vector Calculus</span><b>Next Recommended</b></div>
           </div>
         `
       }
@@ -1482,9 +1403,8 @@ const ROOMS_DATA = [
   const INFO = [
     ['iOS Development', 'Swift, SwiftUI & Apple Ecosystem', ['ZenLife — Sound-Based Stress Relief (App Store)', 'Viana 360 — Real-Time Systems Telemetry (App Store)', 'Viana Buy — Everyday Essentials & Commerce (App Store)', 'CleanYourMacKeyboard — Free macOS Utility (Open Source)', 'CoreData, Audio Engine & Liquid Micro-interactions']],
     ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', ['Vellore Ads — Commercial Listing Platform (Google Play)', 'Constitution of India — Complete Bare Act (Google Play)', 'BNS, BNSS & BSA — Criminal Law Suite 2023 (Google Play)', 'Statutory Reference Suite: CPC, POSH, Police Act (Google Play)', 'Coroutines, FTS5 Offline SQLite & Material 3']],
-    ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic AI & Binaural DSP Engine (Python)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']],
     ['UI/UX Design', 'Ergonomics, Micro-interactions & Design Tokens', ['Crafted Interactive Portfolio with 3D Motion', 'Figma Component Libraries & Design Tokens', 'SIMATS Academic Portal Ergonomic Redesign', 'High-contrast Dark Mode & Glassmorphism Tokens', 'Fluid Canvas Shader Physics & WCAG AAA Standards']],
-    ['Backend & Systems', 'Scalable APIs, Databases & Cloud Sync', ['ZenLife Cloud Sync & Delta Engine (PHP 8 / MySQL)', 'Vellore Ads Regional Query Spatial Optimization', 'Cryptographic Ledger Microservice for ClearVote', 'Token Authentication & Conflict Resolution', 'Automated Production Build & Continuous Delivery']]
+    ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic AI & Binaural DSP Engine (Python)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']]
   ];
 
   const setInfo = i => {

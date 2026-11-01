@@ -1049,12 +1049,12 @@ const ROOMS_DATA = [
         isStoreApp: true,
         storeType: 'macos',
         screenshots: [
-          'assets/apps/cleanmac-web-hero.jpg'
+          'assets/apps/cleanmac-keyboard-app.jpg'
         ],
         iconBg: '#1E252B',
         num: '04 / 04',
         category: 'macOS App · Utilities',
-        title: 'CleanYourMacKeyboard',
+        title: 'CleanYourMac Keyboard',
         sub: 'macOS Keyboard Lock Utility · Free & Open Source',
         desc: 'Native macOS Swift menu bar utility that safely locks all keyboard and touch bar input with a single click, allowing users to wipe down and sanitize their keyboard without triggering unwanted keypresses or terminal inputs.',
         tags: ['macOS', 'Swift', 'AppKit', 'Input Monitoring', 'Free & Open Source'],

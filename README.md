@@ -14,7 +14,7 @@ An architectural, editorial portfolio for **M Kaushal Maran**, Mobile App Develo
 - **Hero Watermark & CTAs**: Crisp typographic headline with 3D Flip Desk Calendar cycling through Kaushal's core roles (`iOS Developer`, `Android Developer`, `UI/UX Designer`, `AI & ML Engineer`, `Systems Architect`).
 
 ### 2. 3D Architectural Doors Gallery (`#works`)
-- **Physics-Damped Doors**: 4 primary discipline doors in an adaptive proportional grid, plus a secret 5th door (`Backend Systems`) revealed via `.doors.reveal`.
+- **Physics-Damped Doors**: 4 primary discipline doors in an adaptive proportional grid (iOS, Android, UI/UX, AI/ML) engineered with custom spring mechanics.
 - **Custom Floating Door Cursor**: `#doorCursor` magnetic pill badge ("Click to enter") tracks cursor over doorways, replacing the standard system pointer.
 - **Focus & Empty Space Positioning**: Hovering a door dims background doors down to 3% opacity (`opacity: .03; filter: saturate(.2)`), while `#dinfo` dynamically centers itself in the open space of the faded doors with animated checkmark bullets.
 - **Walk-Through Zoom Animation**: On door click, the brass lever handle depresses 32°, the door swings open (-80°), and the camera scales straight into the doorway gap before handing off to the exhibition room.

@@ -1960,7 +1960,7 @@ html[data-mode="dark"] .roomv__stack .stage::after {
 .swatch.s-acc { background: #D9C6C6; }
 .token-check { border-top: 1px solid rgba(255,255,255,.1); padding-top: 8px; font-size: 10px; color: #4ade80; }
 
-/* Backend Sync mockups */
+/* Cloud Sync mockups */
 .sync-card { background: rgba(255,255,255,.08); border-radius: 10px; padding: 10px; }
 .sync-card b { display: block; font-size: 12px; margin-top: 4px; }
 .sync-log { background: #000; border-radius: 8px; padding: 8px; font-family: monospace; font-size: 9px; color: #4ade80; margin: 10px 0; }

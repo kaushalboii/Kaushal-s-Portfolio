@@ -81,6 +81,8 @@ function tickClock(){
   document.querySelectorAll('[data-date]').forEach(e => e.textContent = date);
   document.querySelectorAll('[data-dshort]').forEach(e => e.textContent = `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)}`);
   document.querySelectorAll('[data-navtime]').forEach(e => e.textContent = ' — ' + time);
+  document.querySelectorAll('[data-ftime]').forEach(e => e.textContent = time);
+  document.querySelectorAll('[data-fyear]').forEach(e => e.textContent = String(d.getFullYear()));
 }
 tickClock();
 setInterval(tickClock, 1000);
@@ -1805,67 +1807,209 @@ const ROOMS_DATA = [
   });
 })();
 
-// ─── STORY TIMELINE & COUNTERS ───
+// ─── STORY TIMELINE, ROLLING YEAR COUNTER & 3D CLOCK TUNNEL ───
 (() => {
-  const nums = $$('[data-count]');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const target = parseFloat(el.dataset.count);
-        const suffix = el.dataset.suffix || '';
-        const dur = 1400;
-        const start = performance.now();
+  const sec = document.querySelector('.story'); if (!sec) return;
+  const line = sec.querySelector('.story__line'), list = sec.querySelector('.story__list');
+  const chs = [...list.querySelectorAll('.ch')], N = chs.length;
+  const cols = [...sec.querySelectorAll('.dg__c')], when = sec.querySelector('.story__when'), count = sec.querySelector('.story__count');
+  const dot = sec.querySelector('.story__dot'), rail = sec.querySelector('.story__rail'), cv = sec.querySelector('.story__bg');
+  if (!cv) return;
+  const ctx = cv.getContext('2d');
+  const root = document.documentElement;
+  let shownYear = '', shown = -1;
 
-        function tick(now) {
-          const p = Math.min(1, (now - start) / dur);
-          const ease = 1 - Math.pow(1 - p, 3);
-          const val = target * ease;
-          el.textContent = (target % 1 === 0 ? Math.round(val) : val.toFixed(1)) + suffix;
-          if (p < 1) requestAnimationFrame(tick);
-          else el.textContent = target + suffix;
+  const setYear = y => {
+    if (y === shownYear) return;
+    shownYear = y;
+    String(y).split('').forEach((d, k) => cols[k] && cols[k].style.setProperty('--d', d));
+  };
+
+  const show = i => {
+    if (i === shown) return;
+    shown = i;
+    chs.forEach((c, k) => c.classList.toggle('on', k === i));
+    setYear(chs[i].dataset.y);
+    if (when) when.textContent = chs[i].dataset.when;
+    if (count) count.textContent = String(i + 1).padStart(2, '0');
+    sec.classList.toggle('is-now', i === 0);
+    sec.dataset.ch = i;
+  };
+
+  // ---- the tunnel ----
+  let W = 0, H = 0, dpr = 1, rgb = '26,24,24';
+  const size = () => {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    W = cv.clientWidth;
+    H = cv.clientHeight;
+    cv.width = W * dpr;
+    cv.height = H * dpr;
+  };
+  const readRgb = () => {
+    rgb = (getComputedStyle(root).getPropertyValue('--fg-rgb') || '26,24,24').trim();
+  };
+  new MutationObserver(readRgb).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+
+  const RINGS = 16, GAP = 340, FOCAL = 520, R = 620, TICKS = 60;
+  const dust = Array.from({ length: 70 }, () => ({
+    a: Math.random() * Math.PI * 2,
+    r: 120 + Math.random() * 760,
+    z: Math.random() * RINGS * GAP,
+    s: .6 + Math.random() * 1.4
+  }));
+
+  function tunnel(p, t){
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    const cx = W * .5, cy = H * .55, k = Math.min(W, H) / 900;
+    const camZ = p * (N - 1) * GAP * 1.6 + t * 18;
+    const spin = -p * Math.PI * 1.5 - t * .02;
+    const len = RINGS * GAP;
+    ctx.lineCap = 'round';
+
+    for (let i = 0; i < RINGS; i++){
+      let z = ((i * GAP - camZ) % len + len) % len + 60;
+      const s = FOCAL / z * k, fog = Math.min(1, Math.max(0, (z - 260) / 1100)) * Math.max(0, 1 - z / len);
+      if (fog <= .01) continue;
+      const rr = R * s, rot = spin + i * .21;
+
+      ctx.strokeStyle = `rgba(${rgb},${(fog * .12).toFixed(3)})`;
+      ctx.lineWidth = Math.max(.5, 1.2 * s);
+      ctx.beginPath();
+      ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+      ctx.stroke();
+
+      const T = W < 768 ? 36 : TICKS, every = T / 12;
+      for (const hour of [false, true]){
+        const l = (hour ? 46 : 18) * s;
+        ctx.beginPath();
+        for (let j = 0; j < T; j++){
+          if ((j % every === 0) !== hour) continue;
+          const a = rot + j / T * Math.PI * 2, c = Math.cos(a), d = Math.sin(a);
+          ctx.moveTo(cx + c * (rr - l), cy + d * (rr - l));
+          ctx.lineTo(cx + c * rr, cy + d * rr);
         }
-        requestAnimationFrame(tick);
-        io.unobserve(el);
-      });
-    }, { threshold: 0.3 });
-    nums.forEach(n => io.observe(n));
+        ctx.strokeStyle = `rgba(${rgb},${(fog * (hour ? .3 : .14)).toFixed(3)})`;
+        ctx.lineWidth = Math.max(.5, (hour ? 3 : 1.4) * s);
+        ctx.stroke();
+      }
+
+      const ha = rot * 3 + i;
+      ctx.strokeStyle = `rgba(${rgb},${(fog * .16).toFixed(3)})`;
+      ctx.lineWidth = Math.max(.5, 2 * s);
+      if (rr < Math.min(W, H) * .45){
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(ha) * rr * .55, cy + Math.sin(ha) * rr * .55);
+        ctx.stroke();
+      }
+    }
+
+    for (const q of dust){
+      const z = ((q.z - camZ * 1.1) % len + len) % len + 40, s = FOCAL / z * k, fog = Math.min(1, Math.max(0, (z - 300) / 900)) * Math.max(0, 1 - z / len);
+      const a = q.a + spin * .3;
+      ctx.fillStyle = `rgba(${rgb},${(fog * .35).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(cx + Math.cos(a) * q.r * s, cy + Math.sin(a) * q.r * s, Math.max(.4, q.s * s * 2.2), 0, Math.PI * 2);
+      ctx.fill();
+    }
   }
+
+  let firstY = 0, lastY = 0, endY = 0;
+  const measure = () => {
+    if (!line || !list || !chs[0]) return;
+    const mark = c => line.offsetTop * 0 + list.offsetTop + c.offsetTop + c.firstElementChild.offsetTop + 8;
+    firstY = mark(chs[0]);
+    lastY = mark(chs[N - 1]);
+    const last = chs[N - 1];
+    endY = list.offsetTop + last.offsetTop + last.offsetHeight - parseFloat(getComputedStyle(last).paddingBottom);
+    for (const el of [rail, sec.querySelector('.story__dtrack'), sec.querySelector('.story__ttrack')]){
+      if (el) {
+        el.style.setProperty('--r0', firstY + 'px');
+        el.style.setProperty('--rh', (endY - firstY) + 'px');
+      }
+    }
+    if (innerWidth >= 768) size();
+  };
+
+  let raf = 0, p = 0, lastT = 0;
+  function update(){
+    raf = 0;
+    if (!line) return;
+    const lr = line.getBoundingClientRect(), mid = innerHeight * .5;
+    const y = Math.min(lastY, Math.max(firstY, mid - lr.top));
+    p = (y - firstY) / Math.max(1, lastY - firstY);
+    sec.style.setProperty('--p', p.toFixed(4));
+    sec.style.setProperty('--warm', p.toFixed(3));
+    sec.classList.toggle('at-start', p < .002);
+    let i = 0;
+    for (let k = 0; k < N; k++) {
+      if (lr.top + list.offsetTop + chs[k].offsetTop < mid + 40) i = k;
+    }
+    show(i);
+    if (innerWidth >= 768 && !reduced && !root.classList.contains('lite')) tunnel(p, 0);
+  }
+
+  const q = () => { if (!raf) raf = requestAnimationFrame(update); };
+  window.addEventListener('scroll', q, { passive: true });
+  lenis?.on?.('scroll', q);
+  window.addEventListener('resize', () => { measure(); q(); });
+  new MutationObserver(() => { readRgb(); q(); }).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+  readRgb();
+  measure();
+  show(0);
+  update();
+  document.fonts?.ready?.then(() => { measure(); q(); });
+  window.addEventListener('load', () => { measure(); q(); });
+
+  let driftT = 0;
+  function drift(now){
+    const dt = Math.min(64, now - (lastT || now));
+    lastT = now;
+    driftT += dt / 1000;
+    if (innerWidth >= 768 && !reduced && !root.classList.contains('lite')) tunnel(p, driftT);
+    requestAnimationFrame(drift);
+  }
+  requestAnimationFrame(drift);
 })();
 
-// ─── CONTACT MODAL (#modal) ───
+// ─── CONTACT MODAL (#modal) & START A PROJECT BUTTONS ───
 (() => {
-  const modal = $('#modal'), openBtn = $('#contactOpen'), closeBtn = $('#modalClose');
-  const form = $('#contactForm'), sent = $('#contactSent'), resetBtn = $('#contactReset');
+  const modal = $('#modal'), closeBtn = $('#mClose');
+  const form = $('#reqForm');
   if (!modal) return;
 
-  function open() {
+  function openModal() {
     modal.hidden = false;
     requestAnimationFrame(() => modal.classList.add('on'));
     stopScroll();
   }
 
-  function close() {
+  function closeModal() {
     modal.classList.remove('on');
     setTimeout(() => { modal.hidden = true; startScroll(); }, 350);
   }
 
-  openBtn?.addEventListener('click', open);
-  closeBtn?.addEventListener('click', close);
-  modal.addEventListener('click', e => { if (e.target === modal) close(); });
-  window.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) close(); });
+  document.querySelectorAll('[data-contact], #navStart').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  closeBtn?.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
 
   form?.addEventListener('submit', e => {
     e.preventDefault();
-    form.hidden = true;
-    if (sent) sent.hidden = false;
-  });
-
-  resetBtn?.addEventListener('click', () => {
-    form?.reset();
-    if (form) form.hidden = false;
-    if (sent) sent.hidden = true;
+    const name = $('#f-name')?.value || '';
+    const email = $('#f-email')?.value || '';
+    const project = $('#f-project')?.value || '';
+    const subject = encodeURIComponent(`Project Inquiry from ${name}`);
+    const body = encodeURIComponent(`Hi Kaushal,\n\nName: ${name}\nEmail: ${email}\n\nProject Details:\n${project}`);
+    window.location.href = `mailto:kaushalmaranm@gmail.com?subject=${subject}&body=${body}`;
+    closeModal();
   });
 })();
 

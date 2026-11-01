@@ -333,7 +333,7 @@ html[data-mode="dark"] .hero::before{opacity:1}
   border-radius:28px;box-shadow:0 30px 80px -25px rgba(0,0,0,.5);border:1px solid rgba(var(--fg-rgb),.12)}
 body.ready .fig{opacity:1;transform:translate(-50%,0)}
 @media (min-width:1024px){
-  .fig{top:6.5rem;bottom:auto;height:min(calc(100% - var(--bar-h) - 8.5rem),38rem);aspect-ratio:1/1;left:auto;right:calc(max(0px,(100% - var(--container-shell)) / 2) + var(--gut-lg));transform:translateY(2.5rem)}
+  .fig{top:9.75rem;bottom:auto;height:min(calc(100% - var(--bar-h) - 11.5rem),36rem);aspect-ratio:1/1;left:auto;right:calc(max(0px,(100% - var(--container-shell)) / 2) + var(--gut-lg));transform:translateY(2.5rem)}
   body.ready .fig{transform:none}
 }
 .fig__wm{position:absolute;left:50%;translate:-50% 0;bottom:42%;white-space:nowrap;pointer-events:none;user-select:none;font-weight:700;line-height:1;letter-spacing:-.02em;color:rgba(255,255,255,.62);font-size:4.25rem}

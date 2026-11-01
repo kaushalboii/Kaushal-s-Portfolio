@@ -411,19 +411,26 @@
 <div class="passage" id="passage" aria-hidden="true" hidden></div>
 
 <!-- ============ Skill Exhibition Room (Opens Through Doors) ============ -->
-<div class="roomv" id="roomv" role="dialog" aria-modal="true" hidden>
+<div class="roomv" id="roomv" role="dialog" aria-modal="true" data-lenis-prevent hidden>
   <div class="roomv__glow" id="roomvGlow" aria-hidden="true"></div>
-  <div class="shell roomv__in">
+  <div class="wrap roomv__wrap">
     <div class="roomv__top">
+      <button class="roomv__chip" id="roomvBack">← Back to the doors</button>
       <span class="roomv__door" id="roomvDoor">Door 01 · iOS Development</span>
-      <button class="pill pill--outline" id="roomvBack">Back to the doors ↑</button>
     </div>
-    <div class="roomv__head">
-      <h2 class="roomv__title" id="roomvTitle">iOS Native Ecosystem</h2>
+    <section class="roomv__intro">
+      <h1 class="roomv__title" id="roomvTitle">iOS Native Ecosystem</h1>
       <p class="roomv__desc" id="roomvDesc">High-performance native iOS applications built with Swift, SwiftUI, Combine, and CoreData.</p>
-      <span class="count" id="roomvCount" style="margin-top:14px;font-family:ui-monospace,monospace;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-from)">03 Featured Projects</span>
+      <span class="count roomv__count" id="roomvCount">04 Featured Projects</span>
+    </section>
+    <section class="stack roomv__stack" id="roomvStack" aria-label="Projects"></section>
+    <div class="outro roomv__outro">
+      <p>Interested in collaborating or exploring more source code?</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="https://github.com/kaushalboii" target="_blank" rel="noopener" class="pill pill--dark"><span>Explore GitHub ↗</span></a>
+        <button class="roomv__chip" id="roomvBackBottom">Back to the doors ↑</button>
+      </div>
     </div>
-    <div class="roomv-stack" id="roomvStack"></div>
   </div>
 </div>
 

@@ -782,22 +782,89 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
 // ─── HERO ROTATING CONTROL CARD (#hcard) ───
 (() => {
   const hcard = $('#hcard'); if (!hcard) return;
-  const slides = $$('.slide', hcard), dots = $$('.dots i', hcard);
+  const slides = $$('.slide', hcard);
+  const dots = $$('.dots i', hcard);
+  const iconImg = $('#hcardIcon');
+  const prevBtn = $('#hcardPrev');
+  const nextBtn = $('#hcardNext');
+  const N = slides.length;
+  if (!N) return;
+
+  const ICONS = [
+    'assets/apps/zenlife-icon.jpg',
+    'assets/apps/viana360-icon.jpg',
+    'assets/apps/vianabuy-icon.jpg',
+    'assets/apps/zenlife-icon.jpg',
+    'apple-touch-icon.png'
+  ];
+
   let cur = 0;
+  let timer = null;
+  let isHovered = false;
 
   function show(i) {
+    cur = (i + N) % N;
     slides.forEach((s, idx) => {
-      s.style.opacity = idx === i ? '1' : '0';
-      s.style.transform = idx === i ? 'none' : 'translateY(10px)';
-      s.style.pointerEvents = idx === i ? 'auto' : 'none';
+      const on = idx === cur;
+      s.style.opacity = on ? '1' : '0';
+      s.style.transform = on ? 'none' : 'translateY(10px)';
+      s.style.pointerEvents = on ? 'auto' : 'none';
     });
-    dots.forEach((d, idx) => d.classList.toggle('on', idx === i));
-    cur = i;
+    dots.forEach((d, idx) => d.classList.toggle('on', idx === cur));
+    if (iconImg && ICONS[cur]) {
+      iconImg.style.opacity = '0.35';
+      iconImg.style.transform = 'scale(0.92)';
+      setTimeout(() => {
+        iconImg.src = ICONS[cur];
+        iconImg.style.opacity = '1';
+        iconImg.style.transform = 'none';
+      }, 150);
+    }
   }
 
-  $('#prevSlide')?.addEventListener('click', () => show((cur - 1 + slides.length) % slides.length));
-  $('#nextSlide')?.addEventListener('click', () => show((cur + 1) % slides.length));
+  function next() { show(cur + 1); }
+  function prev() { show(cur - 1); }
+
+  prevBtn?.addEventListener('click', e => { e.stopPropagation(); prev(); resetTimer(); });
+  nextBtn?.addEventListener('click', e => { e.stopPropagation(); next(); resetTimer(); });
+  dots.forEach((d, idx) => {
+    d.style.cursor = 'pointer';
+    d.addEventListener('click', e => { e.stopPropagation(); show(idx); resetTimer(); });
+  });
+
+  // Clicking the hcard opens the corresponding door
+  hcard.addEventListener('click', () => {
+    const activeSlide = slides[cur];
+    const doorIdx = activeSlide ? parseInt(activeSlide.dataset.door || '0', 10) : 0;
+    const works = document.getElementById('works');
+    if (works) {
+      window.__snapTo ? window.__snapTo(works.offsetTop) : works.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        const doorBtn = document.querySelector(`.doorway[data-door="${doorIdx}"]`);
+        doorBtn?.click();
+      }, 700);
+    }
+  });
+
+  function startTimer() {
+    stopTimer();
+    timer = setInterval(() => {
+      if (!isHovered && !document.hidden) next();
+    }, 3800);
+  }
+  function stopTimer() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+  function resetTimer() {
+    startTimer();
+  }
+
+  hcard.addEventListener('mouseenter', () => { isHovered = true; });
+  hcard.addEventListener('mouseleave', () => { isHovered = false; });
+
   show(0);
+  startTimer();
 })();
 
 // ══════════════════════════════════════════════════════════════
@@ -815,6 +882,14 @@ const ROOMS_DATA = [
     projects: [
       {
         icon: '🧘',
+        iconImg: 'assets/apps/zenlife-icon.jpg',
+        isStoreApp: true,
+        screenshots: [
+          'assets/apps/zenlife-screen-1.jpg',
+          'assets/apps/zenlife-screen-2.jpg',
+          'assets/apps/zenlife-screen-3.jpg',
+          'assets/apps/zenlife-screen-4.jpg'
+        ],
         iconBg: '#2D1B2D',
         num: '01 / 04',
         category: 'iOS App · Health & Sound',
@@ -851,6 +926,13 @@ const ROOMS_DATA = [
       },
       {
         icon: '📡',
+        iconImg: 'assets/apps/viana360-icon.jpg',
+        isStoreApp: true,
+        screenshots: [
+          'assets/apps/viana360-screen-1.jpg',
+          'assets/apps/viana360-screen-2.jpg',
+          'assets/apps/viana360-screen-3.jpg'
+        ],
         iconBg: '#1B263B',
         num: '02 / 04',
         category: 'iOS App · Industrial IoT',
@@ -886,6 +968,13 @@ const ROOMS_DATA = [
       },
       {
         icon: '🛍️',
+        iconImg: 'assets/apps/vianabuy-icon.jpg',
+        isStoreApp: true,
+        screenshots: [
+          'assets/apps/vianabuy-screen-1.jpg',
+          'assets/apps/vianabuy-screen-2.jpg',
+          'assets/apps/vianabuy-screen-3.jpg'
+        ],
         iconBg: '#2D281B',
         num: '03 / 04',
         category: 'iOS App · Lifestyle Commerce',
@@ -1687,13 +1776,112 @@ const ROOMS_DATA = [
     roomvDesc.textContent = data.desc;
     roomvCount.textContent = data.count;
 
+
+// ─── CONTINUOUS CINEMATIC VIDEO-LIKE APP REEL ENGINE ───
+function initVideoReels(container = document) {
+  const reels = container.querySelectorAll('.video-reel');
+  reels.forEach(reel => {
+    if (reel.__initialized) return;
+    reel.__initialized = true;
+
+    const slides = reel.querySelectorAll('.video-reel__slide');
+    const bar = reel.querySelector('.video-reel__bar i');
+    const curEl = reel.querySelector('.reel-cur');
+    const timeEl = reel.querySelector('[data-reel-time]');
+    const statusEl = reel.querySelector('.video-reel__status-text');
+    const playIcon = reel.querySelector('.video-reel__play-icon');
+    const prevBtn = reel.querySelector('.reel-nav--prev');
+    const nextBtn = reel.querySelector('.reel-nav--next');
+    const N = slides.length;
+    if (N <= 1) return;
+
+    let cur = 0;
+    let playing = true;
+    let progress = 0;
+    let seconds = 1;
+    const SLIDE_DURATION = 3200; // 3.2s per slide
+    let lastTime = performance.now();
+    let rafId = null;
+
+    function setSlide(nextIdx) {
+      slides[cur].classList.remove('active');
+      cur = (nextIdx + N) % N;
+      slides[cur].classList.add('active');
+      if (curEl) curEl.textContent = String(cur + 1).padStart(2, '0');
+      progress = 0;
+      if (bar) bar.style.width = '0%';
+    }
+
+    function tick(now) {
+      const dt = now - lastTime;
+      lastTime = now;
+
+      if (playing) {
+        progress += dt / SLIDE_DURATION;
+        if (bar) bar.style.width = `${Math.min(100, progress * 100).toFixed(1)}%`;
+
+        if (progress >= 1) {
+          setSlide(cur + 1);
+          seconds = (seconds % 99) + 1;
+          if (timeEl) timeEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+        }
+      }
+
+      rafId = requestAnimationFrame(tick);
+    }
+
+    rafId = requestAnimationFrame(tick);
+
+    // Hover / touch slows down & pauses
+    function pause() {
+      playing = false;
+      if (statusEl) statusEl.textContent = 'Paused · Tap to inspect';
+      if (playIcon) playIcon.textContent = '⏸';
+      reel.classList.add('is-paused');
+    }
+    function resume() {
+      playing = true;
+      lastTime = performance.now();
+      if (statusEl) statusEl.textContent = 'Playing App Demo';
+      if (playIcon) playIcon.textContent = '▶';
+      reel.classList.remove('is-paused');
+    }
+
+    reel.addEventListener('mouseenter', pause);
+    reel.addEventListener('mouseleave', resume);
+    reel.addEventListener('touchstart', pause, { passive: true });
+    reel.addEventListener('touchend', () => setTimeout(resume, 2500), { passive: true });
+
+    prevBtn?.addEventListener('click', e => {
+      e.stopPropagation();
+      setSlide(cur - 1);
+      pause();
+    });
+    nextBtn?.addEventListener('click', e => {
+      e.stopPropagation();
+      setSlide(cur + 1);
+      pause();
+    });
+  });
+}
+
     roomvStack.innerHTML = data.projects.map((p, idx) => `
       <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
         <div class="card__in">
           <div class="card__info">
             <div class="app">
-              <div class="app__icon" style="background:${p.iconBg}">${p.icon}</div>
-              <p class="card__meta"><span class="no">${p.num}</span><i></i><span>${p.category}</span></p>
+              <div class="app__icon" style="background:${p.iconBg}">
+                ${p.iconImg ? `<img src="${p.iconImg}" alt="${p.title}" class="app__icon-img">` : p.icon}
+              </div>
+              <p class="card__meta">
+                <span class="no">${p.num}</span><i></i><span>${p.category}</span>
+                ${p.isStoreApp ? `
+                  <span class="app-store-pill">
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
+                    App Store
+                  </span>
+                ` : ''}
+              </p>
             </div>
             <h2 id="p${i}_${idx}">${p.title}</h2>
             <p class="sub">${p.sub}</p>
@@ -1733,7 +1921,40 @@ const ROOMS_DATA = [
                       <svg viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l1.3-1.4A10.6 10.6 0 0 0 8 .3 10.6 10.6 0 0 0 .7 3.2L2 4.6a8.7 8.7 0 0 1 6-2.4z"/></svg>
                     </span>
                   </div>
-                  ${p.mockupContent}
+                  ${p.screenshots && p.screenshots.length > 0 ? `
+                    <div class="video-reel" data-reel-id="${idx}">
+                      <div class="video-reel__viewport">
+                        <div class="video-reel__slides">
+                          ${p.screenshots.map((src, sIdx) => `
+                            <div class="video-reel__slide ${sIdx === 0 ? 'active' : ''}" data-idx="${sIdx}">
+                              <img src="${src}" alt="${p.title} Screen ${sIdx + 1}" loading="lazy">
+                            </div>
+                          `).join('')}
+                        </div>
+                      </div>
+                      <div class="video-reel__overlay">
+                        <div class="video-reel__badge">
+                          <span class="video-reel__rec"></span>
+                          <span class="video-reel__tag">APP STORE PREVIEW</span>
+                          <span class="video-reel__time" data-reel-time>00:01</span>
+                        </div>
+                        <div class="video-reel__scrubber">
+                          <div class="video-reel__bar"><i style="width:0%"></i></div>
+                        </div>
+                        <div class="video-reel__foot">
+                          <div class="video-reel__status">
+                            <span class="video-reel__play-icon">▶</span>
+                            <span class="video-reel__status-text">Playing App Demo</span>
+                          </div>
+                          <div class="video-reel__counter">
+                            <span class="reel-cur">01</span> / <span>${String(p.screenshots.length).padStart(2, '0')}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <button class="reel-nav reel-nav--prev" type="button" aria-label="Previous screenshot">‹</button>
+                      <button class="reel-nav reel-nav--next" type="button" aria-label="Next screenshot">›</button>
+                    </div>
+                  ` : p.mockupContent}
                 </div>
               </div>
             </div>
@@ -1741,6 +1962,8 @@ const ROOMS_DATA = [
         </div>
       </article>
     `).join('');
+
+    initVideoReels(roomvStack);
 
     roomv.scrollTop = 0;
     roomv.hidden = false;

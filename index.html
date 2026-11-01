@@ -201,35 +201,43 @@
         <!-- Interactive Hero Card -->
         <div class="hcard rv" id="hcard" role="button" tabindex="0" aria-label="Open project showcase" style="--d:850ms">
           <div class="hcard__row">
-            <div class="hcard__tile" aria-hidden="true">📱</div>
+            <div class="hcard__tile" aria-hidden="true">
+              <img id="hcardIcon" src="assets/apps/zenlife-icon.jpg" alt="App Icon" class="hcard__tile-img">
+              <span class="hcard__tile-badge" title="Live on Store"></span>
+            </div>
             <div class="hcard__panel">
               <div class="slot">
-                <div class="slide" data-i="0">
-                  <p class="slide__cap">iOS · Wellness</p>
-                  <p class="slide__ttl">ZenLife Stress &amp; Sound</p>
+                <div class="slide" data-i="0" data-door="0">
+                  <p class="slide__cap">Live on Apple App Store</p>
+                  <p class="slide__ttl">ZenLife: Stress &amp; Sound</p>
+                  <p class="slide__sub">432 Hz Solfeggio · SwiftUI · 4.9 ★</p>
                 </div>
-                <div class="slide" data-i="1" style="opacity:0;transform:translateY(12px)">
-                  <p class="slide__cap">iOS · Retail</p>
-                  <p class="slide__ttl">Viana Buy Essentials</p>
+                <div class="slide" data-i="1" data-door="0" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Live on Apple App Store</p>
+                  <p class="slide__ttl">Viana 360: IoT Telemetry</p>
+                  <p class="slide__sub">Swift · Combine · Real-Time Radar</p>
                 </div>
-                <div class="slide" data-i="2" style="opacity:0;transform:translateY(12px)">
-                  <p class="slide__cap">iOS · Telemetry</p>
-                  <p class="slide__ttl">Viana 360 Systems</p>
+                <div class="slide" data-i="2" data-door="0" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Live on Apple App Store</p>
+                  <p class="slide__ttl">Viana Buy: Quick Commerce</p>
+                  <p class="slide__sub">SwiftUI · Essentials · Express Cart</p>
                 </div>
-                <div class="slide" data-i="3" style="opacity:0;transform:translateY(12px)">
-                  <p class="slide__cap">Android · Commerce</p>
+                <div class="slide" data-i="3" data-door="1" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Live Native Android App</p>
                   <p class="slide__ttl">Vellore Ads Platform</p>
+                  <p class="slide__sub">Kotlin · Compose · Regional Listings</p>
                 </div>
-                <div class="slide" data-i="4" style="opacity:0;transform:translateY(12px)">
-                  <p class="slide__cap">Android · Legal</p>
-                  <p class="slide__ttl">Indian Law Reference</p>
+                <div class="slide" data-i="4" data-door="0" style="opacity:0;transform:translateY(12px)">
+                  <p class="slide__cap">Free macOS Open Source</p>
+                  <p class="slide__ttl">CleanYourMacKeyboard</p>
+                  <p class="slide__sub">Swift · Menu Bar Utility · GitHub</p>
                 </div>
               </div>
               <div class="hcard__ctrl">
                 <div class="dots"><i class="on"></i><i></i><i></i><i></i><i></i></div>
                 <div class="arrows">
-                  <button class="rnd rnd--prev" id="hcardPrev" aria-label="Previous app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
-                  <button class="rnd rnd--next" id="hcardNext" aria-label="Next app"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+                  <button class="rnd rnd--prev" id="hcardPrev" aria-label="Previous app" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
+                  <button class="rnd rnd--next" id="hcardNext" aria-label="Next app" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18l6-6-6-6"/></svg></button>
                 </div>
               </div>
             </div>

@@ -1188,200 +1188,193 @@ const ROOMS_DATA = [
   },
   {
     id: 'ui',
-    doorName: 'Door 03 · UI/UX & Web Development',
-    title: 'Modern Web & Interface Systems',
-    desc: 'Interactive Web3 user experiences, responsive modern frontend frameworks, real-time WebSocket applications, and precision motion design systems.',
-    count: '03 Featured Projects',
+    doorName: 'Door 03 · UI/UX Design & Human Interfaces',
+    title: 'Experience Architecture & Design Systems',
+    desc: 'Ergonomic mobile interfaces, design token architectures, accessible user journeys, and tactile micro-interactions crafted in Figma and deployed to production.',
+    count: '03 Featured Case Studies',
     accent: '#7A8670',
     projects: [
       {
-        icon: '🗳️',
-        iconBg: '#1A2938',
+        icon: '🧘',
+        iconBg: '#2D1B2D',
         num: '01 / 03',
-        category: 'Web3 UI/UX · AI Governance',
-        title: 'ClearVote — DAO Governance Assistant',
-        sub: 'AI-Powered Chat Assistant for DAO Proposals · Free on GitHub',
-        desc: 'Interactive Web3 governance assistant designed to make complex on-chain proposals accessible in plain English. Built with a responsive React.js and Tailwind CSS chat interface, integrating OpenAI GPT-4, Snapshot proposal data visualization, and instant voting preview.',
-        tags: ['React.js', 'Tailwind CSS', 'OpenAI GPT-4', 'Web3', 'Snapshot API'],
-        liveLink: 'https://github.com/kaushalboii/ClearVote',
-        liveText: 'Explore on GitHub ↗',
-        gitLink: 'https://github.com/kaushalboii/ClearVote',
-        gitText: 'Free on GitHub ↗',
-        note: 'Open Source on GitHub · kaushalboii/ClearVote',
-        screenBg: 'radial-gradient(circle at 50% 20%, #182836 0%, #0a131b 80%)',
+        category: 'Sensory Mobile UX · Sound Interface',
+        title: 'ZenLife — Mindful Audio Experience',
+        sub: 'Tactile Sound UX & Dynamic Waveform · App Store Design',
+        desc: 'Designed a restorative, low-cognitive-load audio interface for stress mitigation. Features high-contrast obsidian dark mode, real-time Solfeggio 432 Hz waveform canvas visualizer, tactile frequency dials, and responsive haptic breathing cues.',
+        tags: ['Figma', 'UI/UX Design', 'Design Tokens', 'Audio Visualizer', 'Micro-interactions', 'WCAG AAA'],
+        liveLink: 'https://apps.apple.com/in/app/zenlife-stress-sound-relief/id6753105286',
+        liveText: 'View on App Store ↗',
+        note: 'Live Production UX · Apple App Store',
+        screenBg: 'radial-gradient(circle at 50% 20%, #2f2233 0%, #150f18 80%)',
         mockupContent: `
-          <div class="mockup-chat">
-            <div class="chat-header">
-              <span class="chat-badge">DAO Proposal #482</span>
-              <span class="chat-status">AI Summarizer Active</span>
+          <div class="mockup-zen">
+            <div class="zen-freq">
+              <span class="zen-freq__num">432</span>
+              <span class="zen-freq__unit">Hz Solfeggio</span>
             </div>
-            <div class="chat-msg user">
-              <span>Explain Proposal #482 in plain English</span>
+            <div class="zen-wave">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
             </div>
-            <div class="chat-msg bot">
-              <span>Allocates 20,000 ARB for community developer grants with milestone multi-sig security audits.</span>
+            <div class="zen-card">
+              <span class="zen-card__label">Soundscape</span>
+              <p class="zen-card__title">Deep Forest Rain &amp; Singing Bowls</p>
+              <div class="zen-bar"><div class="zen-bar__fill" style="width:64%"></div></div>
             </div>
-            <div class="chat-vote-preview">
-              <button class="v-pill for">Vote For (94%)</button>
-              <button class="v-pill against">Vote Against (6%)</button>
+            <div class="zen-mood">
+              <span>Mood: Calm &amp; Focused</span>
+              <button class="zen-play-btn">▶</button>
             </div>
           </div>
         `
       },
       {
-        icon: '🌐',
-        iconBg: '#262F21',
+        icon: '🎓',
+        iconBg: '#1E2B25',
         num: '02 / 03',
-        category: 'Creative Motion · WebGL & CSS 3D',
-        title: 'Crafted Interactive Portfolio',
-        sub: 'Bespoke Motion Engineering · Live & Open Source',
-        desc: 'High-precision creative web experience featuring real-time 3D desk calendar flip, liquid scratch canvas shader, Lenis smooth inertia scrolling, and walk-through exhibition rooms.',
-        tags: ['Vanilla JS', 'Canvas API', 'CSS 3D', 'Lenis', 'Web Animations API'],
-        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio',
-        liveText: 'Official Website ↗',
-        gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #253120 0%, #0e160b 80%)',
+        category: 'Enterprise UX · Design Systems',
+        title: 'SIMATS Academic Portal Ergonomic Overhaul',
+        sub: 'Campus Information Architecture & Design Tokens',
+        desc: 'Comprehensive UX audit and end-to-end design overhaul for university student information systems. Restructured academic timetables and grade tracking into an ergonomic thumb-zone layout, cutting student task completion time by 64%.',
+        tags: ['UX Research', 'Information Architecture', 'Figma Tokens', 'Mobile Thumb Zone', 'Design System'],
+        note: 'Academic Enterprise UX Architecture',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1c2b23 0%, #0c1511 80%)',
         mockupContent: `
-          <div class="mockup-web">
-            <div class="web-bar">
-              <span class="web-dots"><i></i><i></i><i></i></span>
-              <span class="web-url">kaushalboii.github.io</span>
+          <div class="mockup-portal">
+            <div class="portal-card">
+              <span>STUDENT CGPA</span>
+              <b>8.1 / 10</b>
+              <div class="pbar"><div class="pfill" style="width:81%"></div></div>
             </div>
-            <div class="web-preview">
-              <span class="wp-title">Hi, I'm Kaushal.</span>
-              <div class="wp-cal-pill">Mobile Developer</div>
-              <div class="wp-doors-mini">
-                <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
+            <div class="portal-grid">
+              <div class="portal-card" style="padding:8px">
+                <span>ATTENDANCE</span>
+                <b style="font-size:16px;color:#4ade80">94.8%</b>
+              </div>
+              <div class="portal-card" style="padding:8px">
+                <span>NEXT CLASS</span>
+                <b style="font-size:14px">Lab 04</b>
               </div>
             </div>
           </div>
         `
       },
       {
-        icon: '💬',
-        iconBg: '#1F2A38',
+        icon: '📢',
+        iconBg: '#341E2B',
         num: '03 / 03',
-        category: 'Real-Time Web · Ephemeral Messaging',
-        title: 'Anonymous Chat Platform',
-        sub: 'Real-Time WebSocket Web Messenger · Free on GitHub',
-        desc: 'Fast, privacy-focused anonymous messaging platform built with Node.js, Express, and Socket.io. Features ephemeral room pairing, instantaneous message delivery over WebSockets, and a clean, responsive dark-mode chat UI.',
-        tags: ['Node.js', 'Socket.io', 'Express', 'JavaScript', 'HTML5/CSS3'],
-        gitLink: 'https://github.com/kaushalboii/anonymous-chat',
-        gitText: 'Free on GitHub ↗',
-        note: 'Open Source on GitHub · kaushalboii/anonymous-chat',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1e2c3b 0%, #0c141d 80%)',
+        category: 'Commercial Marketplace UX · High-Density',
+        title: 'Vellore Ads — Regional Listing Interface',
+        sub: 'Hyper-Local Directory System · Google Play Store',
+        desc: 'Engineered a high-density, accessible listing design system for commercial regional business listings. Formulated scannable category chips, instant geolocation badges, verified vendor trust indicators, and rapid one-tap dialer actions.',
+        tags: ['Marketplace UX', 'Design System', 'Figma', 'Micro-Interactions', 'Google Play'],
+        liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en',
+        liveText: 'View on Google Play ↗',
+        note: 'Live Production UX · Google Play Store',
+        screenBg: 'radial-gradient(circle at 50% 20%, #361f2c 0%, #190e14 80%)',
         mockupContent: `
-  <div class="mockup-anon" >
-            <div class="anon-header">
-              <span class="anon-room">Room #8192 · Ephemeral</span>
-              <span class="anon-dot"></span>
+          <div class="mockup-ads">
+            <div class="ads-header">
+              <span class="live-pulse"><i></i>Live Directory</span>
+              <span>Vellore City</span>
             </div>
-            <div class="anon-bubble left">
-              <span>Hey! Anyone online to test the bridge?</span>
-              <time>Just now</time>
-            </div>
-            <div class="anon-bubble right">
-              <span>Zero logs, end-to-end encrypted chat ready.</span>
-              <time>Just now</time>
-            </div>
-            <div class="anon-bar">
-              <span>Type a message...</span>
-              <button class="anon-send">Send ↑</button>
+            <div class="ads-card">
+              <span class="ads-card__tag">Verified Merchant</span>
+              <b>Premium Tech Repairs &amp; Sales</b>
+              <span>Katpadi Road · Instant Dial</span>
+              <div class="ads-actions">
+                <span class="call-btn">Call Now 📞</span>
+                <span class="view-btn">View Store →</span>
+              </div>
             </div>
           </div>
-  `
+        `
       }
     ]
   },
   {
     id: 'ai',
-    doorName: 'Door 04 · AI & Machine Learning',
-    title: 'AI, Vision & Predictive Systems',
-    desc: 'Large language model governance pipelines, supervised and unsupervised machine learning algorithms, and spatial computer vision processing.',
-    count: '03 Featured Projects',
+    doorName: 'Door 04 · AI & Neural Nets',
+    title: 'Deep Learning & Neural Synthesis',
+    desc: 'Deep generative adversarial networks, real-time psychoacoustic DSP models, spatial computer vision pipelines, and predictive machine learning architectures.',
+    count: '03 Featured Architectures',
     accent: '#A4552C',
     projects: [
       {
-        icon: '🤖',
-        iconBg: '#1B2E33',
+        icon: '🎨',
+        iconBg: '#2E1E1E',
         num: '01 / 03',
-        category: 'Generative AI · NLP Governance',
-        title: 'ClearVote DAO Governance Intelligence',
-        sub: 'GPT-4 Smart Contract Analysis Pipeline · Free on GitHub',
-        desc: 'Automated natural language processing and semantic reasoning pipeline that parses dense technical DAO proposals, extracts critical governance parameter modifications, and delivers verifiable executive summaries in plain English.',
-        tags: ['OpenAI GPT-4', 'Prompt Engineering', 'NLP', 'Semantic Parsing', 'Python'],
-        gitLink: 'https://github.com/kaushalboii/ClearVote',
-        gitText: 'Free on GitHub ↗',
-        note: 'AI Governance Engine · Open Source',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
+        category: 'Deep Generative Models · PyTorch DCGAN',
+        title: 'Automatic Comic Generator with DCGAN',
+        sub: 'Deep Convolutional Adversarial Narrative Synthesis',
+        desc: 'Engineered a deep convolutional generative adversarial network (DCGAN) in PyTorch to synthesize multi-panel comic artwork from latent noise vectors. Features transposed strided convolutions, batch normalization layers, LeakyReLU activations, and minimax loss convergence.',
+        tags: ['PyTorch', 'DCGAN', 'Generative Adversarial Nets', 'Computer Vision', 'Deep Learning'],
+        note: 'PyTorch Deep Learning Architecture',
+        screenBg: 'radial-gradient(circle at 50% 20%, #341e1e 0%, #150a0a 80%)',
         mockupContent: `
-  <div class="mockup-ai-gov" >
-            <div class="ai-gov-header">
-              <b>OpenAI GPT-4 Semantic Parser</b>
-              <span class="ai-gov-pill">Real-time</span>
+          <div class="mockup-gan">
+            <div class="gan-prompt">"Cyberpunk hero walking through rain-slick neon alley"</div>
+            <div class="gan-grid">
+              <div class="gan-panel"><div class="gan-thumb g1"></div><span>Panel 01</span></div>
+              <div class="gan-panel"><div class="gan-thumb g2"></div><span>Panel 02</span></div>
             </div>
-            <div class="ai-gov-step">
-              <span class="step-num">01</span>
-              <div class="step-desc">Extract on-chain bytecode &amp; parameters</div>
-            </div>
-            <div class="ai-gov-step">
-              <span class="step-num">02</span>
-              <div class="step-desc">Semantic vector translation to plain text</div>
-            </div>
-            <div class="ai-gov-step active">
-              <span class="step-num">03</span>
-              <div class="step-desc">Risk scoring &amp; executive briefing</div>
+            <div class="gan-metrics">
+              <span>Epoch 180 / 200</span>
+              <span style="color:#4ade80">Loss 0.218</span>
             </div>
           </div>
-  `
+        `
       },
       {
-        icon: '📊',
-        iconBg: '#272F1F',
+        icon: '🧠',
+        iconBg: '#261F2E',
         num: '02 / 03',
-        category: 'Machine Learning · Predictive Models',
-        title: 'ML Predictive Analytics & Classification Suite',
-        sub: 'Supervised & Unsupervised ML Algorithms · Free on GitHub',
-        desc: 'Repository of practical machine learning implementations in Python, featuring real estate price estimation, credit score risk classification, iris flower multi-class classification (KNN, Decision Trees, Logistic Regression), and Expectation-Maximization clustering.',
-        tags: ['Python', 'Scikit-Learn', 'KNN', 'Decision Trees', 'Linear Regression'],
-        gitLink: 'https://github.com/kaushalboii/machine-learning',
-        gitText: 'Free on GitHub ↗',
-        note: 'Open Source on GitHub · kaushalboii/machine-learning',
-        screenBg: 'radial-gradient(circle at 50% 20%, #29341f 0%, #10160b 80%)',
+        category: 'Psychoacoustics · Audio Neural DSP',
+        title: 'ZenLife Acoustic AI & Binaural Frequency Engine',
+        sub: '432 Hz Solfeggio Mathematical Synthesis & Wavelet Filters',
+        desc: 'Algorithmic psychoacoustic audio synthesis pipeline in Python modeling acoustic harmonic resonance at 432 Hz Solfeggio frequencies. Implements Fast Fourier Transforms (FFT), Butterworth bandpass filtering, and dynamic wavelet synthesis for stress reduction.',
+        tags: ['Python', 'DSP', 'Psychoacoustics', 'NumPy / SciPy', 'Binaural Synthesis', 'FFT'],
+        liveLink: 'https://apps.apple.com/in/app/zenlife-stress-sound-relief/id6753105286',
+        liveText: 'Explore Sound Engine ↗',
+        note: 'Python DSP & Psychoacoustic Synthesis',
+        screenBg: 'radial-gradient(circle at 50% 20%, #291d34 0%, #110a18 80%)',
         mockupContent: `
-  <div class="mockup-ml" >
-            <div class="ml-header">
-              <b>Scikit-Learn Predictive Suite</b>
-              <span class="ml-acc">98.4% Accuracy</span>
+          <div class="mockup-dsp">
+            <div class="dsp-header">
+              <b>Harmonic Resonator</b>
+              <span class="dsp-pill">432 Hz Solfeggio</span>
             </div>
-            <div class="ml-models">
-              <div class="ml-item"><span>Credit Risk Scoring</span><b>KNN (k=5)</b></div>
-              <div class="ml-item"><span>Price Estimation</span><b>Linear Reg</b></div>
-              <div class="ml-item"><span>Clustering</span><b>EM Algorithm</b></div>
+            <div class="dsp-spectrogram">
+              <div class="spec-bar s1"></div>
+              <div class="spec-bar s2"></div>
+              <div class="spec-bar s3"></div>
+              <div class="spec-bar s4"></div>
+              <div class="spec-bar s5"></div>
             </div>
-            <div class="ml-bar"><div class="ml-fill" style="width:88%"></div></div>
+            <div class="dsp-controls">
+              <span>Binaural Waveform Synthesis</span>
+              <div class="dsp-slider"><div class="dsp-fill" style="width:78%"></div></div>
+            </div>
           </div>
-  `
+        `
       },
       {
         icon: '👁️',
-        iconBg: '#2D1F2D',
+        iconBg: '#1D2730',
         num: '03 / 03',
-        category: 'Computer Vision · OpenCV Algorithms',
-        title: 'Computer Vision & Image Processing Suite',
-        sub: '40+ Vision Experiments & Spatial Filtering · Free on GitHub',
-        desc: 'Comprehensive experimental suite covering 40+ computer vision algorithms in Python using OpenCV: edge detection (Sobel, Prewitt, Canny), spatial morphological transformations, Gaussian/Laplacian pyramid filtering, and contour feature analysis.',
-        tags: ['Python', 'OpenCV', 'Computer Vision', 'Image Processing', 'Edge Detection'],
+        category: 'Spatial Intelligence · OpenCV Labs',
+        title: 'Computer Vision & Spatial Intelligence Labs',
+        sub: '40+ OpenCV Experimental Vision Laboratories',
+        desc: 'Experimental laboratory suite covering 40+ computer vision pipelines in Python and OpenCV. Features Canny & Sobel spatial edge detection, morphological kernel dilation, contour polygon approximation, and Haar cascade spatial tracking.',
+        tags: ['Python', 'OpenCV', 'Spatial Filtering', 'Edge Detection', 'Feature Extraction'],
         gitLink: 'https://github.com/kaushalboii/COMPUTER-VISION',
         gitText: 'Free on GitHub ↗',
-        note: 'Open Source on GitHub · kaushalboii/COMPUTER-VISION',
-        screenBg: 'radial-gradient(circle at 50% 20%, #2e1d2e 0%, #120a12 80%)',
+        note: 'Open Source Vision Labs · kaushalboii/COMPUTER-VISION',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1d2730 0%, #0a1118 80%)',
         mockupContent: `
-  <div class="mockup-cv" >
+          <div class="mockup-cv">
             <div class="cv-header">
-              <b>OpenCV Vision Pipeline</b>
+              <b>OpenCV Spatial Pipeline</b>
               <span class="cv-tag">40+ Labs</span>
             </div>
             <div class="cv-grid">
@@ -1390,11 +1383,10 @@ const ROOMS_DATA = [
               <div class="cv-box"><span>Morphology</span><div class="cv-morph"></div></div>
             </div>
           </div>
-  `
+        `
       }
     ]
-  }
-];
+  }];
 
 // Doors Controller
 (() => {
@@ -1459,19 +1451,19 @@ const ROOMS_DATA = [
       'CPC Act 1908, POSH & Police Act Pocket References (Google Play)',
       'Coroutines, FTS5 Offline SQLite & Material 3'
     ]],
-    ['UI/UX Design', 'Modern Web & Interface Systems', [
-      'ClearVote — AI-Powered DAO Governance Interface (GitHub)',
-      'Crafted Interactive Portfolio with 3D Motion (Live & GitHub)',
-      'Anonymous Chat Platform — Real-Time Web App (GitHub)',
-      'Responsive Design Systems, Tailwind CSS & Fluid Typography',
-      'Accessibility, Canvas Shader Physics & WCAG Standards'
+    ['UI/UX Design', 'Design Systems, Micro-Interactions & Ergonomics', [
+      'ZenLife Mindful Audio UI & 432 Hz Wave Visualizer',
+      'SIMATS Academic Portal — Enterprise UX Overhaul',
+      'Vellore Ads — High-Density Mobile Marketplace Experience',
+      'Figma Component Architecture & Design Tokens',
+      'Fluid Canvas Shader Physics & WCAG 2.1 AAA Accessibility'
     ]],
-    ['AI & Machine Learning', 'Generative AI, Vision & Predictive Models', [
-      'ClearVote DAO Intelligence — GPT-4 Governance Analysis (GitHub)',
-      'Machine Learning Predictive Models & Classification Suite (GitHub)',
-      'Computer Vision Suite — 40+ OpenCV Image Processing Labs (GitHub)',
-      'Feature Extraction, Spatial Filtering & Edge Detection',
-      'Supervised & Unsupervised Machine Learning in Python'
+    ['AI & Neural Nets', 'Deep Learning, Computer Vision & Audio DSP', [
+      'Automatic Comic Generator with DCGAN (PyTorch)',
+      'ZenLife Acoustic AI & Binaural Frequency Synthesis',
+      'Computer Vision Suite — 40+ OpenCV Processing Labs',
+      'Deep Convolutional Feature Maps & Latent Representation',
+      'Predictive Algorithms & Scikit-Learn Classifiers'
     ]]
   ];
 
@@ -1847,7 +1839,7 @@ const ROOMS_DATA = [
     }
 
     roomvStack.innerHTML = data.projects.map((p, idx) => `
-  < article class="card ${idx % 2 === 1 ? 'flip' : ''}" style = "--i:${idx}" aria - labelledby="p${i}_${idx}" >
+  <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
     <div class="card__in">
       <div class="card__info">
         <div class="app">

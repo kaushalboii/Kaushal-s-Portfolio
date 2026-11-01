@@ -333,7 +333,7 @@ html[data-mode="dark"] .hero::before{opacity:1}
   border-radius:28px;box-shadow:0 30px 80px -25px rgba(0,0,0,.5);border:1px solid rgba(var(--fg-rgb),.12)}
 body.ready .fig{opacity:1;transform:translate(-50%,0)}
 @media (min-width:1024px){
-  .fig{height:min(calc(100% - var(--bar-h) - 4rem),38rem);aspect-ratio:1/1;left:auto;right:calc(max(0px,(100% - var(--container-shell)) / 2) + var(--gut-lg));transform:translateY(2.5rem)}
+  .fig{top:6.5rem;bottom:auto;height:min(calc(100% - var(--bar-h) - 8.5rem),38rem);aspect-ratio:1/1;left:auto;right:calc(max(0px,(100% - var(--container-shell)) / 2) + var(--gut-lg));transform:translateY(2.5rem)}
   body.ready .fig{transform:none}
 }
 .fig__wm{position:absolute;left:50%;translate:-50% 0;bottom:42%;white-space:nowrap;pointer-events:none;user-select:none;font-weight:700;line-height:1;letter-spacing:-.02em;color:rgba(255,255,255,.62);font-size:4.25rem}
@@ -2316,20 +2316,20 @@ html[data-mode="dark"] .roomv__stack .stage::after {
 .sf{position:relative;overflow:hidden}
 .sf__ascii-bg{
   position:absolute;
-  top:1.5rem;
+  top:2rem;
   left:0;
   right:0;
   bottom:auto;
-  height:300px;
-  max-height:300px;
+  height:420px;
+  max-height:430px;
   display:flex;
   align-items:flex-start;
   justify-content:center;
   pointer-events:none;
   z-index:0;
   overflow:hidden;
-  mask-image:linear-gradient(to bottom, #000 60%, transparent 95%);
-  -webkit-mask-image:linear-gradient(to bottom, #000 60%, transparent 95%);
+  mask-image:linear-gradient(to bottom, #000 65%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom, #000 65%, transparent 100%);
   opacity:.25;
   transition:opacity .35s ease;
 }
@@ -2337,13 +2337,13 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
 .sf__ascii{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:6.2px;line-height:6px;letter-spacing:0;color:var(--foreground);user-select:none;margin:0;white-space:pre;transition:all .4s ease}
 @media (min-width:1024px){
   .sf__ascii-bg{
-    top:2.2rem;
-    height:310px;
-    max-height:315px;
+    top:2.5rem;
+    height:430px;
+    max-height:440px;
     justify-content:flex-end;
     padding-right:clamp(2rem,7vw,7rem);
-    mask-image:linear-gradient(to left,#000 65%,transparent 100%),linear-gradient(to bottom,#000 60%,transparent 95%);
-    -webkit-mask-image:linear-gradient(to left,#000 65%,transparent 100%),linear-gradient(to bottom,#000 60%,transparent 95%);
+    mask-image:linear-gradient(to left,#000 65%,transparent 100%),linear-gradient(to bottom,#000 65%,transparent 100%);
+    -webkit-mask-image:linear-gradient(to left,#000 65%,transparent 100%),linear-gradient(to bottom,#000 65%,transparent 100%);
     opacity:.75;
   }
   html[data-mode=dark] .sf__ascii-bg{opacity:.85}

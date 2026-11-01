@@ -58,6 +58,52 @@
   </div>
 </div>
 
+<script>
+(function() {
+  var ld = document.getElementById('loader');
+  var count = document.getElementById('ldCount');
+  if (!ld) return;
+  var pills = ld.querySelectorAll('.ld__pill');
+  var startTime = null;
+  var duration = 1050;
+  var finished = false;
+
+  function endLoader() {
+    if (finished) return;
+    finished = true;
+    ld.classList.add('out');
+    document.body.classList.add('ready');
+    window.__introReady = true;
+    window.dispatchEvent(new CustomEvent('intro:ready'));
+    setTimeout(function() {
+      try { ld.remove(); } catch(e){}
+    }, 850);
+  }
+
+  function loop(now) {
+    if (!startTime) startTime = now;
+    var elapsed = now - startTime;
+    var p = Math.min(1, elapsed / duration);
+    var val = Math.floor(p * 100);
+    if (count) count.textContent = String(val).padStart(3, '0');
+    ld.style.setProperty('--p', p.toFixed(3));
+    pills.forEach(function(pill, idx) {
+      if (p >= (idx + 0.3) / (pills.length + 0.5)) {
+        pill.classList.add('on');
+      }
+    });
+    if (p < 1) {
+      requestAnimationFrame(loop);
+    } else {
+      setTimeout(endLoader, 160);
+    }
+  }
+
+  requestAnimationFrame(loop);
+  setTimeout(endLoader, 2200);
+})();
+</script>
+
 <!-- ============ Header ============ -->
 <header class="hdr rv">
   <div class="shell hdr__in">
@@ -392,46 +438,76 @@
   <!-- Kaushal ASCII Code Portrait Background -->
   <div class="sf__ascii-bg" aria-hidden="true">
     <pre class="sf__ascii">
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-88888888888888888888888888888888888888888888888888888888888888888888888888888888888888
-88888888888888888888888888888888888888888888880088000880000000000008888888888880800000
-000000000000000000000000000000000000CCC;,:t,:,..;,.;,::;iC000000C000C00CCCCCC00000CCCC
-000000CCCCCCCCCCCCCCCCCC00000000000:ti,:,   ,,,.  ..:,;i.,,::tCLCCCCCCCCC0CC00CCLCCLCC
-CCLLLLLLCCLLLLLLLCCLLLLLLCLLLLLLLL;,,   .         ..,:i.,;:i.:LLffLLLLLLLLffLLLLLLLLLL
-LLffffLffffLLffffLttLLLLLLLLLLfffff:   +i++++++i;:: ..,: ...,:i;fffttttfLffffLffffffff
-tttttt1tttttttftftttttttfffffffffffi. 1,.,:+111111t1i:,..    ,i+ttttttttttttttttttfftt
-ffftttfffffffffffftfttttttffffffffft1,,.   111.     .L8Li   .;;tttffttft1tttttttttttt1
-fffLfffffttfffLLfffffffLCCLLLLfffftt;11t+1ffLLt1111fLLCL;t:1iffLftttfftttttLLttff11t1t
-000000000000000000000000000000000000C1+i.;,;,.;1+111ttti++t1CCCCLLCCLLLLLfffLLLfffffff
-0000000000000000000000000000000000000+;+11i,;+1111++i+:.100000000000000000000000000000
-000000000000000000000000000000000008Ct1,,,..,::ii,..+t00000000000000000000000000000000
-0000000000CC00000000C00LttttLCLf088800Ci;;;,:;;::1fttCC0C00000000000000000000000000000
-11CLLL1fLCLCf11tttfL1+1+8888888C00C0080000i++++i+ttffL01111111ttt1111ttft111t11tttt11t
-1tt11++++11++++++i+8@@@@88888880800CL888888LL11+1tfi1fL08@@11111t1111111++11+11tt11111
-ftt1fffff1+1tftf8800800088@88C@@88800000CCCCCCC1ttff+80CC880@@@0fftt111+1tt111ttt11++1
-t++1t11+1+++1t+80000000C8@C8@@0C@@808@88888080000ft1iC8@@8#888@@8@CCCCCC000CCCCC0CCCCC
-ffftti+11ftttL000000000CC0@00088L@@8@08@@88@80@0881iC88#@@@#8@8@@@#CLffLCCLLL000000000
-+1t1+111i11+1000C00C080CC0C0@008L8@@8000@@@@@@8888C;@88@8@@@@@88@@@@ffft+iii1tfffttttt
-;i+1i+ii++1100C00C000008800000@@CL08@000C8@8@@808808@88@@@@@@@8@@@8@@L+++++i11t1+1tti;
-++++i1+f1:i10000C0C0C00008@800008@C08880000@88@8000@@0080@8@@@@@@88@@@+++i;;i;i1ti;;;i
-;iiii;ii++i11C0L0CC0CCCC0008@@@880LC0@80C0C8@8@8800@80888@@8@8@@@88888@t1tttfftttfttft
-i111tt+ii;;i;iCCCCCC0CC0C0008@@@008LC0@800008@@80C0@@880088888@@088888@#1++11111++1tti
-ii++ft1t1iit1i+fC00CCCCC08088888@@8LC00@800C0@@8880@@@888@8888@@00888@@@@011+111++;i+t
-+1+i++11++11t+++f0CCCCCC00CC8C@@@@@@@@0008000888880@8@800C@@@@@L0000008@@@ft1ii+1ttttt
-,;iiiii;ii;;1i;itCfLCLCCLCCC8888888888tfttftftLC0088@@@880CC808f0888088@##@1+++1+++ii+
-i+;+ti;i+i;,,,:iiLLLLLLfLf0000000000i++11111t11tt1ttttt11t1tt1iffftfftffttf##11t1itfff
-;:,+;+i;+iii;i+++CCLLLLLt0LLC0C0Cii;iii;;ii;;iiiiiii+i++i+++1i:1+1111++++1f18@+++1++iL
-+ttt++i11tftttfttfCCCCLLLCCftftt++i;;;iiiiiiii;iiiii;ttfttt1  ++++1+1i++,;+tLf1tt1tfff
-fttf1tf11tt+ftfft10CCLLLCCL0LLLfLLLLffLCCCLCLCCCLCCCC0800CCCLLCLf1t1;;;;;+11tLt1t1tftf
-.1tttfLLLtffttt1fttCCLC0CCC8CCCCCC00CCC0080000000008800@@@8888880L11+iiii+11tfLttt1tt1
-1..t11t11t111tttttt100CCLffCC0CCCC0CC00C008008088088008@@@8088888CC+t1i+++111tfC1+;;;;
-;Lf.;:fLLft1+tttt111LLCLLLL0CCCC000000008080000888888800@@888@88000Ltttf++ii+ttCti+ttt
-;iii1::ft1tt1it1+11++fLLLL0000000C0000088008080000888888C@#@@@8800CLLtttt1+++11fLtt1+1
-iii;i;tLLLffLfftffLf+1CLLCC00000C000000888@888888@88888@0;@@888800CC0Ct1tt1++++:+0fftf
-.,i+1ii1CLLLLLfCLLfffLfLCCLLC0CC0C088800000888888888808801@@@@88888088fft11; +11+:;8LL
- ...,;tfffLfffLLffLLffffLLLf0LiifC000800008888888@@@888@0ti8@88888800@LLLfL111ttffLttt
-    ;,.++++LLLLLLLffffLLLLCLC+tii111tfft11t++@@8@@@8888@8fi@8880880808@fff1+++1ffLLCLf
-   ...,.++iifffffttft1tff0CLft;1tt1tt1tffffttffLff11+;iL@@t8888@8888LfLttf+1;:+11tttff
+                            -                               
+                         -=+:..----:                        
+                       -.... .: .. .:-                      
+                     ... ..     .:.: ...                    
+                    :..      .     :...                     
+                    ::             ....:.                   
+                          ..       .   :.                   
+                    .  .-----::.   .   ...                  
+                     . -=====--::   ..  .                   
+                       .  .-=---=-:.    ::                  
+                     :     +-    .==                        
+                     --.   ==    .-+   .:                   
+                      ==--=++-::-=+*:--:                    
+                     -=--===+*-=++++:-:-                    
+                      =-..  .==--==--=:                     
+                      :-:::..: -===.:=                      
+                      -:--::-=---:--:                       
+                       .:-::-=-:::=-                        
+                    %#=-    .:.. -=                         
+                   +##*::      .-=                          
+                 :%%###*.::::::=++                          
+              %%#########+-:::-==+#                         
+           %%%%%###**######----=+=**                        
+         %%%%%%%%###*+%%###*---=--=#%@                      
+        ####%%%%%%#%#*%%%+***--=-.+##%%                     
+       %#####%%%*%%#%###*****#=++-%**%#%%=                  
+      %#######%%##%%#%#%###*#*+++-##%@##%%@                 
+      ######*%*%%##%%#%%%%#####+=-%%%%%#@%%                 
+     ###########%%*%%%#%%%%#%#%#-*%@%%@%#@%@                
+     ###*###**%##%#%%%#%%%%%#%%%-#%@%%%%#%%@@               
+    *########**%##*#%%##%%%%%%%%-%%@%%%%%%%@%               
+    ###*###%####%#%#%%%##%%%%#%%:%#%%%%%%%%%%               
+    #*##***#%##*#%*+#%###%%%%%%%.@#%%%%%%%%#%%              
+    #*##**###%#*##%+#%####%%%%#%:%##@%%%%%%%%%              
+    ###***####%#*#%%##%#*#%%%%#%#%###%%@%%@#%%@             
+    *#***#####%%%##%*#%#*##%%%%#%@#%#%%%%%%%%%%             
+     #*****#*##%%%##*#%#*##%%%%#%%###%%%%%##%%%             
+     ****#######%%%%%*%%##*%%##*%@###%#%@%#%%%%-            
+     .*****#####%@%##*#%##*#%%#*%%%##%#%%@##%%%@            
+      *******##%#%%%%*#%%*##%%%#@%%##%##%@#%%#%@@           
+       #*****###**+*%*##%#*#%%%%@%%##@%%%@##%%%%%           
+       #********#%%%@@#######%%#%%%##%%%%*#####%@%          
+       ********#%%%%%%@%=+#*###%*%%%#*##%+*#%###%%          
+       *++****#####%%%%===+==*##*%%%##*%%=#%%##%@@          
+       +++**+*######%#---=========-=====*+++=+++*#@         
+       ***+*++*######--------=======---= ======+-=#@        
+       ***+*+######*:::::::::----------- --=====+*=@        
+        **+**++***#::::::::::::::::::--- ====----=*#.       
+        ****+=+++*-::::::::::::::::::::: ----:----=+        
+        ***++**======--=-===++=++***+++==::::---+-=*        
+        #*****+***+++++***++******###**+*+: ....:-=+=       
+         *************+*#***##*##*#%%#####*  ::::==+*       
+         ***#*******#***##########%%%###%##  :::-===+       
+         **##**#**#*#######%#%###%#%%######*  :---==+       
+          ##*++##*****##*#####%#%##*%%%####+   ----=+*      
+          #*++*#****######%##%%###**@@%%%%%#*  ---:-=*      
+          **++*#**########%######%%#%%####***   -:--=+      
+          :*++#****#**####%##%%#####*@%%%%%#+*   ----+      
+           +***#*#*########%#######%#@@%%%####    ---++     
+           *+**####*##*#%%%%%##%%%%%*@@%%%##*#    ---=%.    
+            +####**###*####%%%%%%##%%-%%#%%##%    :...:-:   
+            +*+#**#######%%%%##%#%#%#-%%%%###%    .---::-   
+             +++#****#######%%%%%%%%#-%%%%####=   =-====.   
+             =-+.:-::##%###%%%%%%%%%#-%%##%###%   =-=+++=   
+             ::=:::=-=-=-+%%%%%%%%#%%-%%#####%%   --=++**   
+             .-==:--====+===-:-@%%#%#:%%%%#*##%  --.-+*+*   
+             .:==--=--+++-=+++==-:%@%:%%%%##%##  --.-===+   
+              --=-==----++++++++*++==:-::----+#  :-=-=+=-   
+                =:--==+++=+++++*+=++::-=:==-=**  .:=-=:=-   
+                =-=-=+=+++**+*+***==.:=--++==+*  ..-:::-
     </pre>
   </div>
   <div class="sf__in">

@@ -475,14 +475,14 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   if (navOpen && navm) {
     navOpen.addEventListener('click', () => {
       navm.hidden = false;
-      requestAnimationFrame(() => navm.classList.add('on'));
+      requestAnimationFrame(() => navm.classList.add('open', 'on'));
       stopScroll();
     });
   }
 
   function closeMenu() {
     if (!navm) return;
-    navm.classList.remove('on');
+    navm.classList.remove('open', 'on');
     setTimeout(() => { navm.hidden = true; startScroll(); }, 350);
   }
 
@@ -530,7 +530,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
       measure.textContent = w;
       max = Math.max(max, measure.getBoundingClientRect().width);
     }
-    const wEm = max / fs + 1.15; // generous padding so words never clip or overflow edge
+    const wEm = max / fs + 1.45; // generous padding so words never clip or overflow edge
     body.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
     cal.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
     const avail = (cal.closest('.h1')?.getBoundingClientRect().width || window.innerWidth) - fs * 0.25;
@@ -568,8 +568,8 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
     // Opacity snap at .285 completely hides front word while perpendicular to prevent double letters!
     face.animate([
       { opacity: 1 },
-      { opacity: 1, offset: .285 },
-      { opacity: 0, offset: .295 },
+      { opacity: 1, offset: .22 },
+      { opacity: 0, offset: .24 },
       { opacity: 0 }
     ], { duration: FLIP, easing: 'linear', fill: 'forwards' });
 
@@ -1822,7 +1822,13 @@ const ROOMS_DATA = [
   const setYear = y => {
     if (y === shownYear) return;
     shownYear = y;
-    String(y).split('').forEach((d, k) => cols[k] && cols[k].style.setProperty('--d', d));
+    const digits = String(y).padStart(4, '0').split('');
+    digits.forEach((d, k) => {
+      if (cols[k]) {
+        cols[k].style.setProperty('--d', d);
+        cols[k].style.transform = `translateY(-${Number(d) * 10}%)`;
+      }
+    });
   };
 
   const show = i => {
@@ -1981,12 +1987,12 @@ const ROOMS_DATA = [
 
   function openModal() {
     modal.hidden = false;
-    requestAnimationFrame(() => modal.classList.add('on'));
+    requestAnimationFrame(() => modal.classList.add('open', 'on'));
     stopScroll();
   }
 
   function closeModal() {
-    modal.classList.remove('on');
+    modal.classList.remove('open', 'on');
     setTimeout(() => { modal.hidden = true; startScroll(); }, 350);
   }
 
@@ -2014,7 +2020,15 @@ const ROOMS_DATA = [
 })();
 
 // ─── INITIALIZATION & READY DISPATCH ───
-window.addEventListener('DOMContentLoaded', () => {
+function onReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn, { once: true });
+  } else {
+    fn();
+  }
+}
+
+onReady(() => {
   const fig = $('#fig'), figCanvas = $('#figCanvas');
   if (fig && figCanvas) {
     liquidReveal(fig, figCanvas, 'assets/kaushal-opt.png');
@@ -2022,14 +2036,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Fade out loader & signal intro ready
   const loader = $('#loader');
-  setTimeout(() => {
-    if (loader) {
+  if (loader && !loader.classList.contains('out')) {
+    setTimeout(() => {
       loader.classList.add('out');
-      setTimeout(() => loader.remove(), 800);
-    }
+      setTimeout(() => {
+        try { loader.remove(); } catch(e){}
+      }, 850);
+      document.body.classList.add('ready');
+      window.dispatchEvent(new CustomEvent('intro:ready'));
+    }, 900);
+  } else {
     document.body.classList.add('ready');
     window.dispatchEvent(new CustomEvent('intro:ready'));
-  }, 900);
+  }
 });
 
 // ─── GOOGLE ANALYTICS & COOKIE CONSENT ───

@@ -64,74 +64,391 @@ function scrollToId(id) {
   requestAnimationFrame(raf);
 })();
 
-// ─── PULL CORD LIGHT / DARK TOGGLE ───
-(() => {
-  const cord = $('#cord'), pull = $('#cordPull');
-  if (!cord || !pull) return;
+// ─── STICKY HEADER & LIVE CLOCK ───
+{
+  const hdr = $('.hdr');
+  const upd = () => hdr?.classList.toggle('stuck', window.pageYOffset > 24);
+  window.addEventListener('scroll', upd, { passive: true });
+  upd();
+}
 
-  const savedMode = localStorage.getItem('kaushal-mode');
-  if (savedMode) root.dataset.mode = savedMode;
+const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function tickClock(){
+  const d = new Date(), h = d.getHours();
+  const time = `${h % 12 || 12}:${String(d.getMinutes()).padStart(2,'0')}${h < 12 ? 'am' : 'pm'}`;
+  const date = `${d.getDate()} ${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
+  document.querySelectorAll('[data-time]').forEach(e => e.textContent = time);
+  document.querySelectorAll('[data-date]').forEach(e => e.textContent = date);
+  document.querySelectorAll('[data-dshort]').forEach(e => e.textContent = `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)}`);
+  document.querySelectorAll('[data-navtime]').forEach(e => e.textContent = ' — ' + time);
+}
+tickClock();
+setInterval(tickClock, 1000);
 
-  let y = 0, vy = 0, dragging = false, startY = 0, currentY = 0;
-  const REST = 0, MAX_PULL = 90, THRESHOLD = 55;
-
-  function updatePull(dy) {
-    const clamped = Math.max(0, Math.min(MAX_PULL, dy));
-    pull.style.transform = `translateY(${clamped}px)`;
+// ─── MODE (LIGHT / DARK) & PULL CORD VERLET SIMULATION ───
+const MODE_KEY = 'kaushal-mode';
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+function getMode(){ return root.dataset.mode === 'dark' ? 'dark' : 'light'; }
+function setMode(m, animate = true){
+  if (animate && !reduced && document.startViewTransition){
+    document.startViewTransition(() => setMode(m, false));
+    return;
   }
+  if (m === 'dark') root.dataset.mode = 'dark'; else delete root.dataset.mode;
+  themeMeta?.setAttribute('content', m === 'dark' ? '#1A1818' : '#EEEAE6');
+  $('#cordHit')?.setAttribute('aria-checked', String(m === 'dark'));
+  try { localStorage.setItem(MODE_KEY, m); } catch (e) {}
+}
+const savedMode = (() => { try { return localStorage.getItem(MODE_KEY); } catch(e){ return null; } })();
+if (savedMode) setMode(savedMode, false);
+else setMode(getMode(), false);
+const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
 
-  function toggleMode() {
-    const isDark = root.dataset.mode === 'dark';
-    const next = isDark ? 'light' : 'dark';
-    root.dataset.mode = next;
-    try { localStorage.setItem('kaushal-mode', next); } catch (e) {}
+(function pullCord(){
+  const wrap = $('#cord'); if (!wrap) return;
+  const cv = $('.cord__cv', wrap), hit = $('#cordHit');
+  if (!cv || !hit) return;
+  const ctx = cv.getContext('2d');
+  const N = 26;                         // segments
+  const G = 4600;                       // gravity, px/s²
+  const STEP = 1 / 120;                 // fixed physics step
+  const ITER = 16;                      // constraint passes
+  let dpr = 1, W = 300, H = 500;
+  let L = 220, EXT_MAX = 46, HIDDEN = 70, seg = 10, ax = 200, thick = 3.2, knobS = 1;
+  let pts = [];                         // {x,y,px,py,w}
+  let ext = 0, extV = 0, armed = true;
+  let grab = -1, grabOff = { x:0, y:0 }, target = null, ptr = null, ptrPrev = null;
+  let downAt = 0, downPos = null, moved = 0;
+  let acc = 0, lastT = 0, t = 0;
+  let dropped = false, live = false;
 
-    // Audio click feedback via Web Audio API
-    try {
-      const actx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = actx.createOscillator();
-      const gain = actx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(isDark ? 880 : 440, actx.currentTime);
-      gain.gain.setValueAtTime(0.08, actx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.08);
-      osc.connect(gain); gain.connect(actx.destination);
-      osc.start(); osc.stop(actx.currentTime + 0.08);
-    } catch (e) {}
-  }
-
-  function snapBack() {
-    dragging = false;
-    pull.style.transition = 'transform .45s cubic-bezier(.175, .885, .32, 1.275)';
-    pull.style.transform = `translateY(${REST}px)`;
-    setTimeout(() => { pull.style.transition = ''; }, 450);
-  }
-
-  pull.addEventListener('pointerdown', e => {
-    dragging = true;
-    startY = e.clientY;
-    pull.setPointerCapture(e.pointerId);
-    pull.style.transition = 'none';
-  });
-
-  pull.addEventListener('pointermove', e => {
-    if (!dragging) return;
-    const dy = e.clientY - startY;
-    updatePull(dy);
-    if (dy > THRESHOLD && !pull._triggered) {
-      pull._triggered = true;
-      toggleMode();
+  function layout(){
+    const rem = parseFloat(getComputedStyle(root).fontSize) || 16;
+    const vw = innerWidth, vh = innerHeight;
+    let offset;
+    if (vw >= 1024){ offset = 4.25 * rem; L = Math.min(270, Math.max(190, vh * .3)); EXT_MAX = 72; thick = 3.7; knobS = 1.3; }
+    else if (vw >= 640){ offset = 5.9 * rem; L = Math.min(220, Math.max(160, vh * .2)); EXT_MAX = 62; thick = 3.4; knobS = 1.2; }
+    else { offset = 5.7 * rem; L = 70; EXT_MAX = 54; thick = 3.1; knobS = 1.1; }
+    HIDDEN = EXT_MAX + 18;
+    W = Math.min(vw, 340);
+    H = Math.round(L + EXT_MAX + 170);
+    wrap.style.height = H + 'px';
+    dpr = Math.min(devicePixelRatio || 1, 2);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    const ck = document.querySelector('.hdr .clock');
+    if (ck && ck.offsetWidth){
+      offset = vw >= 1200 ? Math.max(1.2 * rem, vw - ck.getBoundingClientRect().right - 1.4 * rem) : 2.4 * rem;
     }
+    const newAx = W - offset;
+    const total = L + HIDDEN;
+    seg = total / N;
+    if (!pts.length){
+      for (let i = 0; i <= N; i++){
+        const x = newAx, y = -HIDDEN + i * seg;
+        pts.push({ x, y, px: x, py: y, w: i === 0 ? 0 : i === N ? .28 : 1 });
+      }
+    } else {
+      const dx = newAx - ax;
+      for (const p of pts){ p.x += dx; p.px += dx; }
+    }
+    ax = newAx;
+  }
+
+  function step(dt){
+    if (!dropped) return;
+    t += dt;
+    if (grab < 0){
+      const K = 760, C = 21;
+      extV += (-K * ext - C * extV) * dt;
+      ext += extV * dt;
+    }
+    if (ext > EXT_MAX * .8 && armed && live){
+      armed = false;
+      toggleMode();
+      try {
+        const actx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = actx.createOscillator();
+        const gain = actx.createGain();
+        osc.frequency.setValueAtTime(root.dataset.mode === 'dark' ? 880 : 540, actx.currentTime);
+        gain.gain.setValueAtTime(0.08, actx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.08);
+        osc.connect(gain); gain.connect(actx.destination);
+        osc.start(); osc.stop(actx.currentTime + 0.08);
+      } catch (e) {}
+      try { navigator.vibrate?.(12); } catch (e) {}
+    }
+    if (ext < EXT_MAX * .22) armed = true;
+
+    const a = pts[0];
+    a.x = a.px = ax; a.y = a.py = -HIDDEN + ext;
+
+    const wind = reduced ? 0 : (Math.sin(t * .63) * 16 + Math.sin(t * 1.71 + 1.3) * 7);
+    const damp = grab >= 0 ? .992 : .9875;
+    for (let i = 1; i <= N; i++){
+      if (i === grab) continue;
+      const p = pts[i];
+      const vx = (p.x - p.px) * damp, vy = (p.y - p.py) * damp;
+      p.px = p.x; p.py = p.y;
+      p.x += vx + wind * dt * dt * (i / N);
+      p.y += vy + G * dt * dt;
+    }
+    if (grab >= 0 && target){
+      const g = pts[grab];
+      g.px = g.x; g.py = g.y;
+      g.x = target.x; g.y = target.y;
+    }
+    for (let k = 0; k < ITER; k++){
+      for (let i = 0; i < N; i++){
+        const p1 = pts[i], p2 = pts[i + 1];
+        const w1 = (i === grab) ? 0 : p1.w, w2 = (i + 1 === grab) ? 0 : p2.w;
+        const sw = w1 + w2; if (!sw) continue;
+        const dx = p2.x - p1.x, dy = p2.y - p1.y;
+        const d = Math.hypot(dx, dy) || 1e-6;
+        const diff = (d - seg) / d / sw;
+        p1.x += dx * diff * w1; p1.y += dy * diff * w1;
+        p2.x -= dx * diff * w2; p2.y -= dy * diff * w2;
+      }
+    }
+    for (let i = 1; i <= N; i++){
+      const p = pts[i];
+      if (p.x < 14){ p.x = 14; } else if (p.x > W - 14){ p.x = W - 14; }
+      if (p.y > H - 46){ p.y = H - 46; }
+    }
+  }
+
+  function updateDrag(){
+    if (grab < 0 || !ptr) return;
+    let tx = ptr.x - grabOff.x, ty = ptr.y - grabOff.y;
+    const bx = ax, by = -HIDDEN;
+    const reach = grab * seg;
+    let dx = tx - bx, dy = ty - by, d = Math.hypot(dx, dy) || 1e-6;
+    let need = d - reach;
+    if (need > EXT_MAX){
+      const over = need - EXT_MAX;
+      const allowed = reach + EXT_MAX + over * .14 / (1 + over / 160);
+      tx = bx + dx / d * allowed; ty = by + dy / d * allowed;
+      need = EXT_MAX;
+    }
+    const targetExt = Math.max(0, need);
+    const prevExt = ext;
+    ext += (targetExt - ext) * .55;
+    extV = (ext - prevExt) * 60;
+    target = { x: Math.max(14, Math.min(W - 14, tx)), y: Math.min(H - 46, ty) };
+  }
+
+  const local = e => { const r = wrap.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
+  function startDrag(e_, i_){ wake(); return startDrag_(e_, i_); }
+  function startDrag_(e, idx){
+    grab = idx;
+    const p = local(e), g = pts[idx];
+    grabOff = { x: p.x - g.x, y: p.y - g.y };
+    ptr = ptrPrev = p; target = { x: g.x, y: g.y };
+    downAt = performance.now(); downPos = p; moved = 0;
+    wrap.classList.add('dragging');
+    addEventListener('pointermove', onMove, { passive: false });
+    addEventListener('pointerup', endDrag);
+    addEventListener('pointercancel', endDrag);
+  }
+  function onMove(e){
+    if (grab < 0) return;
+    e.preventDefault();
+    ptrPrev = ptr; ptr = local(e);
+    moved = Math.max(moved, Math.hypot(ptr.x - downPos.x, ptr.y - downPos.y));
+  }
+  function endDrag(){
+    if (grab < 0) return;
+    const g = pts[grab];
+    if (ptr && ptrPrev){
+      const vx = (ptr.x - ptrPrev.x), vy = (ptr.y - ptrPrev.y);
+      g.px = g.x - vx * .5; g.py = g.y - vy * .5;
+    }
+    const tap = moved < 6 && performance.now() - downAt < 300;
+    grab = -1; target = null; ptr = ptrPrev = null;
+    wrap.classList.remove('dragging');
+    removeEventListener('pointermove', onMove);
+    removeEventListener('pointerup', endDrag);
+    removeEventListener('pointercancel', endDrag);
+    if (tap) tug();
+  }
+  function tug(){ wake(); extV = EXT_MAX * 44; pts[N].px = pts[N].x + 1.5; }
+
+  hit.addEventListener('pointerdown', e => {
+    if (!dropped) return;
+    e.preventDefault();
+    try { hit.setPointerCapture(e.pointerId); } catch (_) {}
+    startDrag(e, N);
+  });
+  hit.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); tug(); } });
+  hit.addEventListener('click', e => e.preventDefault());
+
+  document.addEventListener('pointerdown', e => {
+    if (!dropped || e.pointerType !== 'mouse' || e.button !== 0 || grab >= 0 || e.target === hit) return;
+    const p = local(e);
+    if (p.x < 0 || p.y < 0 || p.x > W || p.y > H) return;
+    let best = -1, bd = 11;
+    for (let i = 2; i <= N; i++){
+      if (pts[i].y < 0) continue;
+      const d = Math.hypot(pts[i].x - p.x, pts[i].y - p.y);
+      if (d < bd){ bd = d; best = i; }
+    }
+    if (best > 0){ e.preventDefault(); startDrag(e, best); }
   });
 
-  const onRelease = () => {
-    if (!dragging) return;
-    pull._triggered = false;
-    snapBack();
-  };
+  addEventListener('pointermove', e => {
+    if (grab >= 0 || e.pointerType !== 'mouse') return;
+    const p = local(e);
+    if (p.x < -20 || p.y < -20 || p.x > W + 20 || p.y > H + 20){ brush.last = null; return; }
+    if (brush.last){
+      wake();
+      const vx = p.x - brush.last.x, vy = p.y - brush.last.y;
+      for (let i = 2; i <= N; i++){
+        const q = pts[i], d = Math.hypot(q.x - p.x, q.y - p.y);
+        if (d < 16){ const f = (1 - d / 16) * .35; q.x += vx * f; q.y += vy * f * .5; }
+      }
+    }
+    brush.last = p;
+  }, { passive: true });
+  const brush = { last: null };
 
-  pull.addEventListener('pointerup', onRelease);
-  pull.addEventListener('pointercancel', onRelease);
+  function pathThrough(c, ps){
+    c.beginPath();
+    c.moveTo(ps[0].x, ps[0].y);
+    for (let i = 1; i < ps.length - 1; i++){
+      const mx = (ps[i].x + ps[i + 1].x) / 2, my = (ps[i].y + ps[i + 1].y) / 2;
+      c.quadraticCurveTo(ps[i].x, ps[i].y, mx, my);
+    }
+    const l = ps[ps.length - 1]; c.lineTo(l.x, l.y);
+  }
+  function samples(ps, spacing){
+    const out = [];
+    let carry = 0;
+    for (let i = 0; i < ps.length - 1; i++){
+      const a = ps[i], b = ps[i + 1];
+      const dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1e-6;
+      let s = carry;
+      while (s < len){ out.push({ x: a.x + dx * s / len, y: a.y + dy * s / len, tx: dx / len, ty: dy / len }); s += spacing; }
+      carry = s - len;
+    }
+    return out;
+  }
+  function knobPath(c){
+    c.beginPath();
+    c.moveTo(-3.1, 6.2);
+    c.bezierCurveTo(-3.6, 10.5, -9.6, 13.5, -9.6, 22.5);
+    c.bezierCurveTo(-9.6, 30.5, -5.4, 35, 0, 35);
+    c.bezierCurveTo(5.4, 35, 9.6, 30.5, 9.6, 22.5);
+    c.bezierCurveTo(9.6, 13.5, 3.6, 10.5, 3.1, 6.2);
+    c.closePath();
+  }
+  function drawKnob(c, x, y, ang, shadowOnly){
+    c.save();
+    c.translate(x, y); c.rotate(ang - Math.PI / 2); c.scale(knobS, knobS);
+    if (shadowOnly){
+      knobPath(c); c.fill();
+      c.fillRect(-3.4, -.5, 6.8, 7.5);
+      c.restore(); return;
+    }
+    const fg = c.createLinearGradient(-3.6, 0, 3.6, 0);
+    fg.addColorStop(0, '#5b4a2c'); fg.addColorStop(.3, '#e8d59e'); fg.addColorStop(.55, '#b0924f'); fg.addColorStop(1, '#4a3a1f');
+    c.fillStyle = fg;
+    c.beginPath(); c.roundRect ? c.roundRect(-3.5, -.6, 7, 7.6, 1.2) : c.rect(-3.5, -.6, 7, 7.6); c.fill();
+    c.fillStyle = 'rgba(0,0,0,.25)'; c.fillRect(-3.5, 2.6, 7, .7); c.fillRect(-3.5, 4.4, 7, .6);
+    knobPath(c);
+    const bg = c.createLinearGradient(-9.6, 0, 9.6, 0);
+    bg.addColorStop(0, '#24150c'); bg.addColorStop(.22, '#6b3f22'); bg.addColorStop(.4, '#a8693d');
+    bg.addColorStop(.58, '#7c4828'); bg.addColorStop(.85, '#3b2213'); bg.addColorStop(1, '#1d110a');
+    c.fillStyle = bg; c.fill();
+    c.save(); knobPath(c); c.clip();
+    c.strokeStyle = 'rgba(30,14,6,.28)'; c.lineWidth = .55;
+    for (let k = -3; k <= 3; k++){
+      c.beginPath(); c.moveTo(k * 2.4 - .6, 8); c.bezierCurveTo(k * 2.9 + 1, 16, k * 2.2 - 1, 26, k * 1.6, 35); c.stroke();
+    }
+    const hl = c.createRadialGradient(-3.6, 17, .5, -3.6, 17, 9);
+    hl.addColorStop(0, 'rgba(255,226,190,.42)'); hl.addColorStop(1, 'rgba(255,226,190,0)');
+    c.fillStyle = hl; c.fillRect(-10, 6, 20, 30);
+    const bo = c.createLinearGradient(0, 24, 0, 35.5);
+    bo.addColorStop(0, 'rgba(0,0,0,0)'); bo.addColorStop(1, 'rgba(0,0,0,.35)');
+    c.fillStyle = bo; c.fillRect(-10, 6, 20, 30);
+    c.restore();
+    c.fillStyle = 'rgba(255,240,220,.38)';
+    c.beginPath(); c.ellipse(-4.4, 20.5, 1.1, 5.2, -.08, 0, Math.PI * 2); c.fill();
+    c.restore();
+  }
+  function draw(){
+    const c = ctx;
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.clearRect(0, 0, W, H);
+    const ps = pts;
+    const last = ps[N], prev = ps[N - 1];
+    const ang = Math.atan2(last.y - prev.y, last.x - prev.x);
+
+    const sa = parseFloat(getComputedStyle(root).getPropertyValue('--cord-shadow')) || .2;
+    c.save();
+    c.translate(7, 11);
+    if ('filter' in c) c.filter = 'blur(3px)';
+    c.strokeStyle = `rgba(0,0,0,${sa * .8})`; c.lineWidth = thick + 1; c.lineCap = 'round';
+    pathThrough(c, ps); c.stroke();
+    c.fillStyle = `rgba(0,0,0,${sa})`;
+    drawKnob(c, last.x, last.y, ang, true);
+    c.restore();
+
+    c.lineCap = 'round'; c.lineJoin = 'round';
+    pathThrough(c, ps);
+    c.strokeStyle = '#6f6455'; c.lineWidth = thick + 1.3; c.stroke();
+    c.strokeStyle = '#d6ccba'; c.lineWidth = thick; c.stroke();
+    const sm = samples(ps, thick * 1.05);
+    c.lineWidth = Math.max(.6, thick * .24);
+    c.strokeStyle = 'rgba(96,82,64,.55)';
+    c.beginPath();
+    for (const q of sm){
+      if (q.y < -2) continue;
+      const nx = -q.ty, ny = q.tx, h = thick * .5;
+      c.moveTo(q.x - nx * h - q.tx * h * .7, q.y - ny * h - q.ty * h * .7);
+      c.lineTo(q.x + nx * h + q.tx * h * .7, q.y + ny * h + q.ty * h * .7);
+    }
+    c.stroke();
+    c.save();
+    c.translate(-thick * .2, -thick * .05);
+    pathThrough(c, ps);
+    c.strokeStyle = 'rgba(255,252,244,.55)'; c.lineWidth = thick * .28; c.stroke();
+    c.restore();
+
+    drawKnob(c, last.x, last.y, ang, false);
+
+    const kx = last.x + Math.cos(ang) * 20 * knobS, ky = last.y + Math.sin(ang) * 20 * knobS;
+    hit.style.transform = `translate(${kx}px, ${ky}px)`;
+  }
+
+  let sleeping = false, still = 0;
+  let touchedAt = 0;
+  function wake(){ still = 0; touchedAt = performance.now(); if (!sleeping) return; sleeping = false; lastT = 0; acc = 0; requestAnimationFrame(loop); }
+  window.__cordWake = wake;
+  function loop(now){
+    if (!lastT) lastT = now;
+    let dt = Math.min((now - lastT) / 1000, 1 / 20); lastT = now;
+    updateDrag();
+    acc += dt;
+    while (acc >= STEP){ step(STEP); acc -= STEP; }
+    if (dropped && live && grab < 0 && now - touchedAt > 2500) for (const q of pts){ q.px += (q.x - q.px) * .06; q.py += (q.y - q.py) * .06; }
+    draw();
+    let motion = Math.abs(extV) + Math.abs(ext);
+    for (const q of pts) motion = Math.max(motion, Math.abs(q.x - q.px) + Math.abs(q.y - q.py));
+    if (dropped && live && grab < 0 && motion < .06){ if (++still > 30){ for (const q of pts){ q.px = q.x; q.py = q.y; } sleeping = true; return; } } else still = 0;
+    requestAnimationFrame(loop);
+  }
+
+  layout();
+  pts.forEach((p, i) => { p.y = p.py = -HIDDEN - i * seg * .98; p.x = p.px = ax + Math.sin(i * .5) * 1.5; });
+  const drop = () => {
+    dropped = true;
+    for (const p of pts){ p.px = p.x - .45; }
+    setTimeout(() => { live = true; }, 900);
+  };
+  if (document.body.classList.contains('ready')) drop();
+  else window.addEventListener('intro:ready', () => setTimeout(drop, 650), { once: true });
+  addEventListener('resize', () => { wake(); clearTimeout(layout._t); layout._t = setTimeout(() => { layout(); wake(); }, 100); });
+  new MutationObserver(wake).observe(root, { attributes: true, attributeFilter: ['data-mode'] });
+  requestAnimationFrame(loop);
 })();
 
 // ─── NAVIGATION & FULLSCREEN MENU ───
@@ -211,7 +528,7 @@ function scrollToId(id) {
       measure.textContent = w;
       max = Math.max(max, measure.getBoundingClientRect().width);
     }
-    const wEm = max / fs + 0.8 + 0.06; // word + side padding
+    const wEm = max / fs + 1.15; // generous padding so words never clip or overflow edge
     body.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
     cal.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
     const avail = (cal.closest('.h1')?.getBoundingClientRect().width || window.innerWidth) - fs * 0.25;
@@ -1570,3 +1887,33 @@ window.addEventListener('DOMContentLoaded', () => {
     window.dispatchEvent(new CustomEvent('intro:ready'));
   }, 900);
 });
+
+// ─── GOOGLE ANALYTICS & COOKIE CONSENT ───
+(() => {
+  const GA_ID = 'G-7J3EE7B9EE';
+  const K = 'kaushal-analytics';
+  let v = null;
+  try { v = localStorage.getItem(K); } catch (e) {}
+  const load = () => {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function(){ dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    const s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+  };
+  if (v === 'yes') return load();
+  if (v === 'no') return;
+  const b = document.getElementById('ck');
+  if (!b) return;
+  b.hidden = false;
+  b.addEventListener('click', e => {
+    const c = e.target.closest('[data-ck]');
+    if (!c) return;
+    try { localStorage.setItem(K, c.dataset.ck); } catch (err) {}
+    b.hidden = true;
+    if (c.dataset.ck === 'yes') load();
+  });
+})();

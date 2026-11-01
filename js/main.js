@@ -836,6 +836,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     cur = (i + N) % N;
     slides.forEach((s, idx) => {
       const on = idx === cur;
+
       s.classList.toggle('active', on);
       s.style.opacity = on ? '1' : '0';
       s.style.transform = on ? 'none' : 'translateY(6px)';
@@ -1256,8 +1257,8 @@ const ROOMS_DATA = [
               </div>
             </div>
             `}
-          </div>
-        `
+          </div >
+  `
       },
       {
         icon: '💬',
@@ -1273,7 +1274,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/anonymous-chat',
         screenBg: 'radial-gradient(circle at 50% 20%, #1e2c3b 0%, #0c141d 80%)',
         mockupContent: `
-          <div class="mockup-anon">
+  < div class="mockup-anon" >
             <div class="anon-header">
               <span class="anon-room">Room #8192 · Ephemeral</span>
               <span class="anon-dot"></span>
@@ -1290,8 +1291,8 @@ const ROOMS_DATA = [
               <span>Type a message...</span>
               <button class="anon-send">Send ↑</button>
             </div>
-          </div>
-        `
+          </div >
+  `
       }
     ]
   },
@@ -1317,7 +1318,7 @@ const ROOMS_DATA = [
         note: 'AI Governance Engine · Open Source',
         screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
         mockupContent: `
-          <div class="mockup-ai-gov">
+  < div class="mockup-ai-gov" >
             <div class="ai-gov-header">
               <b>OpenAI GPT-4 Semantic Parser</b>
               <span class="ai-gov-pill">Real-time</span>
@@ -1334,8 +1335,8 @@ const ROOMS_DATA = [
               <span class="step-num">03</span>
               <div class="step-desc">Risk scoring &amp; executive briefing</div>
             </div>
-          </div>
-        `
+          </div >
+  `
       },
       {
         icon: '📊',
@@ -1351,7 +1352,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/machine-learning',
         screenBg: 'radial-gradient(circle at 50% 20%, #29341f 0%, #10160b 80%)',
         mockupContent: `
-          <div class="mockup-ml">
+  < div class="mockup-ml" >
             <div class="ml-header">
               <b>Scikit-Learn Predictive Suite</b>
               <span class="ml-acc">98.4% Accuracy</span>
@@ -1362,8 +1363,8 @@ const ROOMS_DATA = [
               <div class="ml-item"><span>Clustering</span><b>EM Algorithm</b></div>
             </div>
             <div class="ml-bar"><div class="ml-fill" style="width:88%"></div></div>
-          </div>
-        `
+          </div >
+  `
       },
       {
         icon: '👁️',
@@ -1379,7 +1380,7 @@ const ROOMS_DATA = [
         note: 'Open Source on GitHub · kaushalboii/COMPUTER-VISION',
         screenBg: 'radial-gradient(circle at 50% 20%, #2e1d2e 0%, #120a12 80%)',
         mockupContent: `
-          <div class="mockup-cv">
+  < div class="mockup-cv" >
             <div class="cv-header">
               <b>OpenCV Vision Pipeline</b>
               <span class="cv-tag">40+ Labs</span>
@@ -1389,8 +1390,8 @@ const ROOMS_DATA = [
               <div class="cv-box"><span>Sobel Filter</span><div class="cv-sobel"></div></div>
               <div class="cv-box"><span>Morphology</span><div class="cv-morph"></div></div>
             </div>
-          </div>
-        `
+          </div >
+  `
       }
     ]
   }
@@ -1437,7 +1438,7 @@ const ROOMS_DATA = [
   const doorsState = units.map(u => {
     const way = $('.doorway', u), door = $('.door', u);
     const s = spring({ tension: 130, friction: 15 }, v => {
-      door.style.transform = `rotateY(${-v * 72}deg)`;
+      door.style.transform = `rotateY(${- v * 72}deg)`;
       const spill = $('.spill', u);
       if (spill) spill.style.opacity = String(Math.min(1, v * 1.5));
     });
@@ -1479,14 +1480,14 @@ const ROOMS_DATA = [
     if (!dinfo || !INFO[i]) return;
     dinfo.querySelector('.dinfo__h').textContent = INFO[i][0];
     dinfo.querySelector('.dinfo__t').textContent = INFO[i][1];
-    dinfo.querySelector('.dinfo__p').innerHTML = INFO[i][2].map(s => `<li>${s}</li>`).join('');
+    dinfo.querySelector('.dinfo__p').innerHTML = INFO[i][2].map(s => `< li > ${ s }</li > `).join('');
   };
 
   // Cursor Badge Tracking
   let badgeOver = false;
   const placeBadge = e => {
     if (!badge) return;
-    badge.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+    badge.style.transform = `translate3d(${ e.clientX }px, ${ e.clientY }px, 0) translate(-50 %, -50 %)`;
   };
   const showBadge = on => {
     badgeOver = on;
@@ -1514,8 +1515,8 @@ const ROOMS_DATA = [
     const wr = wallEl.getBoundingClientRect(), r = units[i].getBoundingClientRect();
     const rightSide = vi >= Math.ceil(visible.length / 2);
     const left = rightSide ? r.left - wr.left - 290 : r.right - wr.left + 36;
-    dinfo.style.left = `${Math.max(16, left)}px`;
-    dinfo.style.top = `${r.top - wr.top + 20}px`;
+    dinfo.style.left = `${ Math.max(16, left) } px`;
+    dinfo.style.top = `${ r.top - wr.top + 20 } px`;
     dinfo.style.textAlign = rightSide ? 'right' : 'left';
     setInfo(i);
     dinfo.classList.add('on');
@@ -1590,7 +1591,7 @@ const ROOMS_DATA = [
     if (Math.abs(t - mCur) < 0.001) mCur = t;
 
     const step = units[1] && units[0] ? (units[1].offsetLeft - units[0].offsetLeft) : (window.innerWidth * 0.6);
-    if (mRow) mRow.style.transform = `translate3d(${(-mCur * step).toFixed(2)}px,0,0)`;
+    if (mRow) mRow.style.transform = `translate3d(${(-mCur * step).toFixed(2)}px, 0, 0)`;
     mIdx = Math.round(t);
     mShow(mForce >= 0 ? mForce : mIdx);
 
@@ -1724,7 +1725,7 @@ const ROOMS_DATA = [
       $('.hdr')?.classList.add('away');
 
       const sr = sec.getBoundingClientRect();
-      sec.style.transformOrigin = `${cx - sr.left}px ${cy - sr.top}px`;
+      sec.style.transformOrigin = `${ cx - sr.left }px ${ cy - sr.top } px`;
       sec.classList.add('through');
 
       const t0 = performance.now(), D = reduced ? 1 : 1100;
@@ -1735,7 +1736,7 @@ const ROOMS_DATA = [
       const step = now => {
         const p = Math.min(1, (now - t0) / D), e = ease(p), sc = zoomOf(e);
         const f = Math.min(1, e * 1.6);
-        sec.style.transform = `translate(${tx * f}px, ${ty * f}px) scale(${sc})`;
+        sec.style.transform = `translate(${ tx * f}px, ${ ty * f}px) scale(${ sc })`;
 
         if (!handed && (sc >= sEnd / 1.15 || p >= 1)) {
           handed = true;
@@ -1799,12 +1800,12 @@ const ROOMS_DATA = [
 
           if (playing) {
             progress += dt / SLIDE_DURATION;
-            if (bar) bar.style.width = `${Math.min(100, progress * 100).toFixed(1)}%`;
+            if (bar) bar.style.width = `${ Math.min(100, progress * 100).toFixed(1) }% `;
 
             if (progress >= 1) {
               setSlide(cur + 1);
               seconds = (seconds % 99) + 1;
-              if (timeEl) timeEl.textContent = `00:${String(seconds).padStart(2, '0')}`;
+              if (timeEl) timeEl.textContent = `00:${ String(seconds).padStart(2, '0') } `;
             }
           }
 
@@ -1847,23 +1848,23 @@ const ROOMS_DATA = [
     }
 
     roomvStack.innerHTML = data.projects.map((p, idx) => `
-      <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
-        <div class="card__in">
-          <div class="card__info">
-            <div class="app">
-              <div class="app__icon" style="background:${p.iconBg}">
-                ${p.iconImg ? `<img src="${p.iconImg}" alt="${p.title}" class="app__icon-img">` : p.icon}
-              </div>
-              <p class="card__meta">
-                <span class="no">${p.num}</span><i></i><span>${p.category}</span>
-                ${p.isStoreApp ? (
-        p.storeType === 'play' ? `
+  < article class="card ${idx % 2 === 1 ? 'flip' : ''}" style = "--i:${idx}" aria - labelledby="p${i}_${idx}" >
+    <div class="card__in">
+      <div class="card__info">
+        <div class="app">
+          <div class="app__icon" style="background:${p.iconBg}">
+            ${p.iconImg ? `<img src="${p.iconImg}" alt="${p.title}" class="app__icon-img">` : p.icon}
+          </div>
+          <p class="card__meta">
+            <span class="no">${p.num}</span><i></i><span>${p.category}</span>
+            ${p.isStoreApp ? (
+              p.storeType === 'play' ? `
                     <span class="play-store-pill">
                       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186c-.328-.31-.52-.756-.52-1.286V3.1c0-.53.192-.976.519-1.286zm11.238 9.131l2.368-2.368-11.45-6.52c-.443-.252-.888-.242-1.205-.07l10.287 8.958zm0 2.11l-10.287 8.958c.317.172.762.182 1.205-.07l11.45-6.52-2.368-2.368zm1.055-1.055l3.208 1.828c.954.543.954 1.428 0 1.971l-3.208 1.828-2.072-2.072 2.072-2.072z"/></svg>
                       Google Play
                     </span>
                   ` : (
-          p.storeType === 'macos' ? `
+                p.storeType === 'macos' ? `
                       <span class="app-store-pill app-store-pill--macos">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
                         macOS App
@@ -1874,30 +1875,30 @@ const ROOMS_DATA = [
                         App Store
                       </span>
                     `
-        )
-      ) : ''}
-              </p>
-            </div>
-            <h2 id="p${i}_${idx}">${p.title}</h2>
-            <p class="sub">${p.sub}</p>
-            <p class="desc">${p.desc}</p>
-            <ul class="tags">
-              ${p.tags.map(t => `<li>${t}</li>`).join('')}
-            </ul>
-            <div class="card__actions">
-              ${p.liveLink ? `
+              )
+            ) : ''}
+          </p>
+        </div>
+        <h2 id="p${i}_${idx}">${p.title}</h2>
+        <p class="sub">${p.sub}</p>
+        <p class="desc">${p.desc}</p>
+        <ul class="tags">
+          ${p.tags.map(t => `<li>${t}</li>`).join('')}
+        </ul>
+        <div class="card__actions">
+          ${p.liveLink ? `
                 <a href="${p.liveLink}" target="_blank" rel="noopener" class="live-badge">
                   <span>${p.liveText}</span>
                 </a>
               ` : ''}
-              ${p.gitLink ? `
+          ${p.gitLink ? `
                 <a href="${p.gitLink}" target="_blank" rel="noopener" class="git-badge">
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
                   <span>${p.gitText}</span>
                 </a>
               ` : ''}
-            </div>
-            ${p.suiteLinks && p.suiteLinks.length > 0 ? `
+        </div>
+        ${p.suiteLinks && p.suiteLinks.length > 0 ? `
               <div class="suite-links" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
                 ${p.suiteLinks.map(s => `
                   <a href="${s.url}" target="_blank" rel="noopener" class="suite-pill" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--foreground);text-decoration:none;border:1px solid rgba(255,255,255,0.14);transition:all .2s">
@@ -1906,11 +1907,11 @@ const ROOMS_DATA = [
                 `).join('')}
               </div>
             ` : ''}
-            <span class="note">${p.note}</span>
-          </div>
+        <span class="note">${p.note}</span>
+      </div>
 
-          <div class="stage" aria-hidden="true">
-            ${p.storeType === 'macos' ? `
+      <div class="stage" aria-hidden="true">
+        ${p.storeType === 'macos' ? `
               <div class="mac-frame">
                 <div class="mac-frame__body">
                   <div class="mac-frame__topbar">
@@ -1981,10 +1982,10 @@ const ROOMS_DATA = [
               </div>
             </div>
             `}
-          </div>
-        </div>
-      </article>
-    `).join('');
+      </div>
+    </div>
+      </article >
+  `).join('');
 
     initVideoReels(roomvStack);
 
@@ -2013,7 +2014,7 @@ const ROOMS_DATA = [
       const stepBack = now => {
         const p = Math.min(1, (now - t0) / D), e = ease(p);
         const sc = Math.exp(Math.log(S) * (1 - e));
-        sec.style.transform = `translate(${X * (1 - e)}px, ${Y * (1 - e)}px) scale(${sc})`;
+        sec.style.transform = `translate(${ X * (1 - e)}px, ${ Y * (1 - e) }px) scale(${ sc })`;
 
         if (p < 1) requestAnimationFrame(stepBack);
         else {
@@ -2072,7 +2073,7 @@ const ROOMS_DATA = [
     digits.forEach((d, k) => {
       if (cols[k]) {
         cols[k].style.setProperty('--d', d);
-        cols[k].style.transform = `translateY(-${Number(d) * 10}%)`;
+        cols[k].style.transform = `translateY(-${ Number(d) * 10} %)`;
       }
     });
   };
@@ -2125,7 +2126,7 @@ const ROOMS_DATA = [
       if (fog <= .01) continue;
       const rr = R * s, rot = spin + i * .21;
 
-      ctx.strokeStyle = `rgba(${rgb},${(fog * .12).toFixed(3)})`;
+      ctx.strokeStyle = `rgba(${ rgb }, ${(fog * .12).toFixed(3)})`;
       ctx.lineWidth = Math.max(.5, 1.2 * s);
       ctx.beginPath();
       ctx.arc(cx, cy, rr, 0, Math.PI * 2);
@@ -2141,13 +2142,13 @@ const ROOMS_DATA = [
           ctx.moveTo(cx + c * (rr - l), cy + d * (rr - l));
           ctx.lineTo(cx + c * rr, cy + d * rr);
         }
-        ctx.strokeStyle = `rgba(${rgb},${(fog * (hour ? .3 : .14)).toFixed(3)})`;
+        ctx.strokeStyle = `rgba(${ rgb }, ${(fog * (hour ? .3 : .14)).toFixed(3)})`;
         ctx.lineWidth = Math.max(.5, (hour ? 3 : 1.4) * s);
         ctx.stroke();
       }
 
       const ha = rot * 3 + i;
-      ctx.strokeStyle = `rgba(${rgb},${(fog * .16).toFixed(3)})`;
+      ctx.strokeStyle = `rgba(${ rgb }, ${(fog * .16).toFixed(3)})`;
       ctx.lineWidth = Math.max(.5, 2 * s);
       if (rr < Math.min(W, H) * .45) {
         ctx.beginPath();
@@ -2160,7 +2161,7 @@ const ROOMS_DATA = [
     for (const q of dust) {
       const z = ((q.z - camZ * 1.1) % len + len) % len + 40, s = FOCAL / z * k, fog = Math.min(1, Math.max(0, (z - 300) / 900)) * Math.max(0, 1 - z / len);
       const a = q.a + spin * .3;
-      ctx.fillStyle = `rgba(${rgb},${(fog * .35).toFixed(3)})`;
+      ctx.fillStyle = `rgba(${ rgb }, ${(fog * .35).toFixed(3)})`;
       ctx.beginPath();
       ctx.arc(cx + Math.cos(a) * q.r * s, cy + Math.sin(a) * q.r * s, Math.max(.4, q.s * s * 2.2), 0, Math.PI * 2);
       ctx.fill();
@@ -2259,9 +2260,9 @@ const ROOMS_DATA = [
     const name = $('#f-name')?.value || '';
     const email = $('#f-email')?.value || '';
     const project = $('#f-project')?.value || '';
-    const subject = encodeURIComponent(`Project Inquiry from ${name}`);
-    const body = encodeURIComponent(`Hi Kaushal,\n\nName: ${name}\nEmail: ${email}\n\nProject Details:\n${project}`);
-    window.location.href = `mailto:kaushalmaranm@gmail.com?subject=${subject}&body=${body}`;
+    const subject = encodeURIComponent(`Project Inquiry from ${ name } `);
+    const body = encodeURIComponent(`Hi Kaushal, \n\nName: ${ name } \nEmail: ${ email } \n\nProject Details: \n${ project } `);
+    window.location.href = `mailto:kaushalmaranm @gmail.com?subject = ${ subject }& body=${ body } `;
     closeModal();
   });
 })();
@@ -2279,8 +2280,8 @@ const ROOMS_DATA = [
       const scale = (availWidth * 0.96) / textWidth;
       const targetPx = Math.floor(100 * scale);
       const clampedPx = Math.max(24, Math.min(160, targetPx));
-      wordEl.style.fontSize = `${clampedPx}px`;
-      wordEl.style.setProperty('--wf', `${clampedPx}px`);
+      wordEl.style.fontSize = `${ clampedPx } px`;
+      wordEl.style.setProperty('--wf', `${ clampedPx } px`);
     }
   }
 

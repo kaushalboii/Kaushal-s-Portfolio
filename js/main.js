@@ -836,8 +836,9 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     cur = (i + N) % N;
     slides.forEach((s, idx) => {
       const on = idx === cur;
+      s.classList.toggle('active', on);
       s.style.opacity = on ? '1' : '0';
-      s.style.transform = on ? 'none' : 'translateY(10px)';
+      s.style.transform = on ? 'none' : 'translateY(6px)';
       s.style.pointerEvents = on ? 'auto' : 'none';
     });
     dots.forEach((d, idx) => d.classList.toggle('on', idx === cur));
@@ -1047,8 +1048,7 @@ const ROOMS_DATA = [
         isStoreApp: true,
         storeType: 'macos',
         screenshots: [
-          'assets/apps/cleanmac-screen-1.jpg',
-          'assets/apps/cleanmac-screen-2.jpg'
+          'assets/apps/cleanmac-web-hero.jpg'
         ],
         iconBg: '#1E252B',
         num: '04 / 04',
@@ -1155,7 +1155,7 @@ const ROOMS_DATA = [
         screenBg: 'radial-gradient(circle at 50% 20%, #2e231e 0%, #140d0a 80%)'
       },
       {
-        icon: '🏛️',
+        icon: '⚖️',
         iconImg: 'assets/apps/cpc-icon.jpg',
         isStoreApp: true,
         storeType: 'play',
@@ -1163,52 +1163,79 @@ const ROOMS_DATA = [
           'assets/apps/cpc-screen-1.jpg',
           'assets/apps/cpc-screen-2.jpg',
           'assets/apps/cpc-screen-3.jpg',
-          'assets/apps/posh-screen-1.jpg',
-          'assets/apps/posh-screen-2.jpg',
-          'assets/apps/police-screen-1.jpg',
-          'assets/apps/police-screen-2.jpg',
-          'assets/apps/election-screen-1.jpg'
+          'assets/apps/cpc-screen-4.jpg',
+          'assets/apps/cpc-screen-5.jpg'
         ],
         iconBg: '#1F2936',
         num: '04 / 04',
-        category: 'Android App Suite · Legal & Election Tools',
-        title: 'Statutory Pocket Reference Suite',
-        sub: 'CPC 1908, POSH Act, Police Act & Election 2026 · Google Play Store',
-        desc: 'A complete suite of specialized legal and institutional applications published on Google Play, including the Code of Civil Procedure (CPC), Prevention of Sexual Harassment (POSH) Act, Police Act, and the Bar Council of Tamil Nadu & Puducherry Election 2026 portal.',
-        tags: ['Kotlin', 'Google Play', 'CPC 1908', 'POSH Act', 'Police Act', 'BCTNPY 2026'],
+        category: 'Android App · Civil Procedure Law',
+        title: 'CPC Act - Pocket Reference App',
+        sub: 'Code of Civil Procedure 1908 · Google Play Store',
+        desc: 'Comprehensive, offline-first statutory reference for the Code of Civil Procedure 1908. Features instant Order & Rule lookup, bilingual section navigation, high-speed full-text search, and case-law bookmarking for advocates and civil judges.',
+        tags: ['Kotlin', 'Jetpack Compose', 'Offline First', 'FTS5 Search', 'Google Play'],
         liveLink: 'https://play.google.com/store/apps/details?id=com.cpc.pocketreference&hl=en',
         liveText: 'View CPC on Google Play ↗',
-        gitLink: 'https://github.com/kaushalboii/Indian-Law-Bilingual-Pocket-Reference-App',
-        gitText: 'Suite on GitHub ↗',
         suiteLinks: [
-          { title: 'CPC Pocket Reference', url: 'https://play.google.com/store/apps/details?id=com.cpc.pocketreference&hl=en' },
           { title: 'POSH Act Reference', url: 'https://play.google.com/store/apps/details?id=com.posh.pocketreference&hl=en' },
           { title: 'Police Act Reference', url: 'https://play.google.com/store/apps/details?id=com.policeact.pocketreference.app&hl=en' },
-          { title: 'BCTNPY Election 2026', url: 'https://play.google.com/store/apps/details?id=com.bctnpy.election2026&hl=en' },
-          { title: 'BSA Pocket Reference', url: 'https://play.google.com/store/apps/details?id=com.bsa.pocketreference&hl=en' }
+          { title: 'BCTNPY Election 2026', url: 'https://play.google.com/store/apps/details?id=com.bctnpy.election2026&hl=en' }
         ],
-        note: '5 Published Google Play Apps + Open Source',
+        note: 'Live on Google Play Store · 100% Offline Reference',
         screenBg: 'radial-gradient(circle at 50% 20%, #1e2837 0%, #0c121b 80%)'
       }
     ]
   },
   {
     id: 'ui',
-    doorName: 'Door 03 · UI/UX & Web Design',
-    title: 'Interactive Web & Design Systems',
-    desc: 'Award-caliber digital interfaces, design tokens, micro-interactions, liquid canvas physics, and 3D WebGL scenes engineered for high engagement.',
+    doorName: 'Door 03 · UI/UX & Web Development',
+    title: 'Modern Web & Interface Systems',
+    desc: 'Interactive Web3 user experiences, responsive modern frontend frameworks, real-time WebSocket applications, and precision motion design systems.',
     count: '03 Featured Projects',
     accent: '#7A8670',
     projects: [
       {
+        icon: '🗳️',
+        iconBg: '#1A2938',
+        num: '01 / 03',
+        category: 'Web3 UI/UX · AI Governance',
+        title: 'ClearVote — DAO Governance Assistant',
+        sub: 'AI-Powered Chat Assistant for DAO Proposals · Free on GitHub',
+        desc: 'Interactive Web3 governance assistant designed to make complex on-chain proposals accessible in plain English. Built with a responsive React.js and Tailwind CSS chat interface, integrating OpenAI GPT-4, Snapshot proposal data visualization, and instant voting preview.',
+        tags: ['React.js', 'Tailwind CSS', 'OpenAI GPT-4', 'Web3', 'Snapshot API'],
+        liveLink: 'https://github.com/kaushalboii/ClearVote',
+        liveText: 'Explore on GitHub ↗',
+        gitLink: 'https://github.com/kaushalboii/ClearVote',
+        gitText: 'Free on GitHub ↗',
+        note: 'Open Source on GitHub · kaushalboii/ClearVote',
+        screenBg: 'radial-gradient(circle at 50% 20%, #182836 0%, #0a131b 80%)',
+        mockupContent: `
+          <div class="mockup-chat">
+            <div class="chat-header">
+              <span class="chat-badge">DAO Proposal #482</span>
+              <span class="chat-status">AI Summarizer Active</span>
+            </div>
+            <div class="chat-msg user">
+              <span>Explain Proposal #482 in plain English</span>
+            </div>
+            <div class="chat-msg bot">
+              <span>Allocates 20,000 ARB for community developer grants with milestone multi-sig security audits.</span>
+            </div>
+            <div class="chat-vote-preview">
+              <button class="v-pill for">Vote For (94%)</button>
+              <button class="v-pill against">Vote Against (6%)</button>
+            </div>
+          </div>
+        `
+      },
+      {
         icon: '🌐',
         iconBg: '#262F21',
-        num: '01 / 03',
-        category: 'Creative Engineering · WebGL',
+        num: '02 / 03',
+        category: 'Creative Motion · WebGL & CSS 3D',
         title: 'Crafted Interactive Portfolio',
-        sub: 'Exact Motion Recreation of therishithakor.com · Free on GitHub',
-        desc: 'High-precision creative engineering featuring real-time 3D desk calendar flip, liquid scratch canvas shader, Lenis smooth scrolling, and walk-through exhibition rooms.',
-        tags: ['Vanilla JS', 'CSS 3D', 'Lenis', 'Canvas API', 'Web Animations API'],
+        sub: 'Bespoke Motion Engineering · Live & Open Source',
+        desc: 'High-precision creative web experience featuring real-time 3D desk calendar flip, liquid scratch canvas shader, Lenis smooth inertia scrolling, and walk-through exhibition rooms.',
+        tags: ['Vanilla JS', 'Canvas API', 'CSS 3D', 'Lenis', 'Web Animations API'],
         liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio',
         liveText: 'Official Website ↗',
         gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
@@ -1223,52 +1250,46 @@ const ROOMS_DATA = [
             </div>
             <div class="web-preview">
               <span class="wp-title">Hi, I\'m Kaushal.</span>
-              <div class="wp-cal-pill">iOS Developer</div>
+              <div class="wp-cal-pill">Mobile Developer</div>
               <div class="wp-doors-mini">
                 <span class="wp-d d1"></span><span class="wp-d d2"></span><span class="wp-d d3"></span>
               </div>
             </div>
+            `}
           </div>
         `
       },
       {
-        icon: '📐',
-        iconImg: 'assets/apps/simats-icon.jpg',
-        screenshots: ['assets/apps/simats-screen-1.jpg'],
-        iconBg: '#30261E',
-        num: '02 / 03',
-        category: 'Information Architecture · Figma',
-        title: 'SIMATS Academic Portal Ergonomic Redesign',
-        sub: 'Enterprise Academic Portal UX & Accessibility Case Study',
-        desc: 'Ground-up ergonomic redesign of the university student information portal. Streamlined grade tracking, fee payments, and timetable scheduling into a high-efficiency dashboard with 40% reduced cognitive load.',
-        tags: ['Figma', 'Design Tokens', 'WCAG AAA', 'Information Architecture'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'University UX System Case Study',
-        screenBg: 'radial-gradient(circle at 50% 20%, #32251a 0%, #150e09 80%)'
-      },
-      {
-        icon: '🎨',
-        iconBg: '#2E222D',
+        icon: '💬',
+        iconBg: '#1F2A38',
         num: '03 / 03',
-        category: 'Design Systems · Design Tokens',
-        title: 'Dark Mode & Glassmorphic Token System',
-        sub: 'Modern Cross-Platform Token Architecture',
-        desc: 'Semantic, multi-tier design token architecture unified across iOS (SwiftUI), Android (Jetpack Compose), and web (CSS Custom Properties). Includes calibrated contrast curves and WCAG AAA compliance.',
-        tags: ['Design Tokens', 'CSS Custom Properties', 'Style Dictionary', 'Figma'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'Cross-Platform Design System',
-        screenBg: 'radial-gradient(circle at 50% 20%, #301f2f 0%, #140b13 80%)',
+        category: 'Real-Time Web · Ephemeral Messaging',
+        title: 'Anonymous Chat Platform',
+        sub: 'Real-Time WebSocket Web Messenger · Free on GitHub',
+        desc: 'Fast, privacy-focused anonymous messaging platform built with Node.js, Express, and Socket.io. Features ephemeral room pairing, instantaneous message delivery over WebSockets, and a clean, responsive dark-mode chat UI.',
+        tags: ['Node.js', 'Socket.io', 'Express', 'JavaScript', 'HTML5/CSS3'],
+        gitLink: 'https://github.com/kaushalboii/anonymous-chat',
+        gitText: 'Free on GitHub ↗',
+        note: 'Open Source on GitHub · kaushalboii/anonymous-chat',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1e2c3b 0%, #0c141d 80%)',
         mockupContent: `
-          <div class="mockup-tokens">
-            <div class="token-row">
-              <span class="swatch s-bg"></span><b>--bg: #0D0E0E</b>
+          <div class="mockup-anon">
+            <div class="anon-header">
+              <span class="anon-room">Room #8192 · Ephemeral</span>
+              <span class="anon-dot"></span>
             </div>
-            <div class="token-row">
-              <span class="swatch s-acc"></span><b>--accent: #D9C6C6</b>
+            <div class="anon-bubble left">
+              <span>Hey! Anyone online to test the bridge?</span>
+              <time>Just now</time>
             </div>
-            <div class="token-check"><span>WCAG Contrast: 11.4:1 AAA</span></div>
+            <div class="anon-bubble right">
+              <span>Zero logs, end-to-end encrypted chat ready.</span>
+              <time>Just now</time>
+            </div>
+            <div class="anon-bar">
+              <span>Type a message...</span>
+              <button class="anon-send">Send ↑</button>
+            </div>
           </div>
         `
       }
@@ -1277,74 +1298,97 @@ const ROOMS_DATA = [
   {
     id: 'ai',
     doorName: 'Door 04 · AI & Machine Learning',
-    title: 'AI & Deep Learning Systems',
-    desc: 'Deep learning architectures, generative adversarial networks (GANs), audio digital signal processing (DSP), and natural language embeddings.',
+    title: 'AI, Vision & Predictive Systems',
+    desc: 'Large language model governance pipelines, supervised and unsupervised machine learning algorithms, and spatial computer vision processing.',
     count: '03 Featured Projects',
     accent: '#A4552C',
     projects: [
       {
-        icon: '🎨',
-        iconImg: 'assets/apps/comicgan-icon.jpg',
-        screenshots: ['assets/apps/comicgan-screen-1.jpg'],
-        iconBg: '#1E2A34',
-        num: '01 / 03',
-        category: 'Deep Learning · Generative AI',
-        title: 'Automatic Comic GAN',
-        sub: 'PyTorch Deep Convolutional GAN · Research Project',
-        desc: 'Generative Adversarial Network that synthesizes stylistically consistent comic characters and narrative panels from noise vectors using deep convolutional generator-discriminator pairs.',
-        tags: ['PyTorch', 'DCGAN', 'Computer Vision', 'Neural Networks', 'Python'],
-        gitLink: 'https://github.com/kaushalboii/automatic-comic-generator-using-gan',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1c2b36 0%, #0b1319 80%)'
-      },
-      {
-        icon: '🧬',
+        icon: '🤖',
         iconBg: '#1B2E33',
-        num: '02 / 03',
-        category: 'Client DSP · Neural Harmonics',
-        title: 'ZenLife Acoustic Signal Engine',
-        sub: 'Binaural DSP & Soundscape Synthesis Engine',
-        desc: 'Client-side algorithmic digital signal processing (DSP) engine generating real-time harmonic acoustic waves, binaural beats, and 432 Hz Solfeggio soundscapes directly on-device using custom waveform synthesis algorithms.',
-        tags: ['DSP', 'AudioKit', 'NumPy', 'Binaural Harmonics', 'Swift', 'Client Synthesis'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'High-Fidelity 48 kHz Acoustic Signal Engine',
+        num: '01 / 03',
+        category: 'Generative AI · NLP Governance',
+        title: 'ClearVote DAO Governance Intelligence',
+        sub: 'GPT-4 Smart Contract Analysis Pipeline · Free on GitHub',
+        desc: 'Automated natural language processing and semantic reasoning pipeline that parses dense technical DAO proposals, extracts critical governance parameter modifications, and delivers verifiable executive summaries in plain English.',
+        tags: ['OpenAI GPT-4', 'Prompt Engineering', 'NLP', 'Semantic Parsing', 'Python'],
+        gitLink: 'https://github.com/kaushalboii/ClearVote',
+        gitText: 'Free on GitHub ↗',
+        note: 'AI Governance Engine · Open Source',
         screenBg: 'radial-gradient(circle at 50% 20%, #1b3036 0%, #0b1518 80%)',
         mockupContent: `
-          <div class="mockup-dsp">
-            <div class="dsp-header">
-              <b>Harmonic Audio DSP Engine</b>
-              <span class="dsp-pill">48 kHz · 24-bit</span>
+          <div class="mockup-ai-gov">
+            <div class="ai-gov-header">
+              <b>OpenAI GPT-4 Semantic Parser</b>
+              <span class="ai-gov-pill">Real-time</span>
             </div>
-            <div class="dsp-spectrogram">
-              <div class="spec-bar s1"></div><div class="spec-bar s2"></div><div class="spec-bar s3"></div><div class="spec-bar s4"></div><div class="spec-bar s5"></div>
+            <div class="ai-gov-step">
+              <span class="step-num">01</span>
+              <div class="step-desc">Extract on-chain bytecode &amp; parameters</div>
             </div>
-            <div class="dsp-controls">
-              <span>Binaural Beat: 8.0 Hz (Theta)</span>
-              <div class="dsp-slider"><div class="dsp-fill" style="width:72%"></div></div>
+            <div class="ai-gov-step">
+              <span class="step-num">02</span>
+              <div class="step-desc">Semantic vector translation to plain text</div>
+            </div>
+            <div class="ai-gov-step active">
+              <span class="step-num">03</span>
+              <div class="step-desc">Risk scoring &amp; executive briefing</div>
             </div>
           </div>
         `
       },
       {
-        icon: '🧠',
+        icon: '📊',
         iconBg: '#272F1F',
-        num: '03 / 03',
-        category: 'NLP · Educational Tech',
-        title: 'Personalized Learning Paths',
-        sub: 'Adaptive Educational Path Recommendation System',
-        desc: 'Natural language processing model that assesses student knowledge gaps and constructs dynamic, non-linear study curricula with optimal spaced repetition intervals.',
-        tags: ['Python', 'NLP', 'Embeddings', 'Cosine Similarity', 'SIMATS Research'],
-        gitLink: 'https://github.com/kaushalboii',
-        gitText: 'View on GitHub ↗',
-        note: 'SIMATS Research Paper & Implementation',
+        num: '02 / 03',
+        category: 'Machine Learning · Predictive Models',
+        title: 'ML Predictive Analytics & Classification Suite',
+        sub: 'Supervised & Unsupervised ML Algorithms · Free on GitHub',
+        desc: 'Repository of practical machine learning implementations in Python, featuring real estate price estimation, credit score risk classification, iris flower multi-class classification (KNN, Decision Trees, Logistic Regression), and Expectation-Maximization clustering.',
+        tags: ['Python', 'Scikit-Learn', 'KNN', 'Decision Trees', 'Linear Regression'],
+        gitLink: 'https://github.com/kaushalboii/machine-learning',
+        gitText: 'Free on GitHub ↗',
+        note: 'Open Source on GitHub · kaushalboii/machine-learning',
         screenBg: 'radial-gradient(circle at 50% 20%, #29341f 0%, #10160b 80%)',
         mockupContent: `
-          <div class="mockup-nlp">
-            <div class="nlp-node n1"><span>Linear Algebra</span><b>Mastered (98%)</b></div>
-            <div class="nlp-arrow">↓ 0.89 cosine affinity</div>
-            <div class="nlp-node n2"><span>Vector Calculus</span><b>Next Recommended</b></div>
+          <div class="mockup-ml">
+            <div class="ml-header">
+              <b>Scikit-Learn Predictive Suite</b>
+              <span class="ml-acc">98.4% Accuracy</span>
+            </div>
+            <div class="ml-models">
+              <div class="ml-item"><span>Credit Risk Scoring</span><b>KNN (k=5)</b></div>
+              <div class="ml-item"><span>Price Estimation</span><b>Linear Reg</b></div>
+              <div class="ml-item"><span>Clustering</span><b>EM Algorithm</b></div>
+            </div>
+            <div class="ml-bar"><div class="ml-fill" style="width:88%"></div></div>
+          </div>
+        `
+      },
+      {
+        icon: '👁️',
+        iconBg: '#2D1F2D',
+        num: '03 / 03',
+        category: 'Computer Vision · OpenCV Algorithms',
+        title: 'Computer Vision & Image Processing Suite',
+        sub: '40+ Vision Experiments & Spatial Filtering · Free on GitHub',
+        desc: 'Comprehensive experimental suite covering 40+ computer vision algorithms in Python using OpenCV: edge detection (Sobel, Prewitt, Canny), spatial morphological transformations, Gaussian/Laplacian pyramid filtering, and contour feature analysis.',
+        tags: ['Python', 'OpenCV', 'Computer Vision', 'Image Processing', 'Edge Detection'],
+        gitLink: 'https://github.com/kaushalboii/COMPUTER-VISION',
+        gitText: 'Free on GitHub ↗',
+        note: 'Open Source on GitHub · kaushalboii/COMPUTER-VISION',
+        screenBg: 'radial-gradient(circle at 50% 20%, #2e1d2e 0%, #120a12 80%)',
+        mockupContent: `
+          <div class="mockup-cv">
+            <div class="cv-header">
+              <b>OpenCV Vision Pipeline</b>
+              <span class="cv-tag">40+ Labs</span>
+            </div>
+            <div class="cv-grid">
+              <div class="cv-box"><span>Canny Edge</span><div class="cv-edge"></div></div>
+              <div class="cv-box"><span>Sobel Filter</span><div class="cv-sobel"></div></div>
+              <div class="cv-box"><span>Morphology</span><div class="cv-morph"></div></div>
+            </div>
           </div>
         `
       }
@@ -1401,10 +1445,34 @@ const ROOMS_DATA = [
   });
 
   const INFO = [
-    ['iOS Development', 'Swift, SwiftUI & Apple Ecosystem', ['ZenLife — Sound-Based Stress Relief (App Store)', 'Viana 360 — Real-Time Systems Telemetry (App Store)', 'Viana Buy — Everyday Essentials & Commerce (App Store)', 'CleanYourMacKeyboard — Free macOS Utility (Open Source)', 'CoreData, Audio Engine & Liquid Micro-interactions']],
-    ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', ['Vellore Ads — Commercial Listing Platform (Google Play)', 'Constitution of India — Complete Bare Act (Google Play)', 'BNS, BNSS & BSA — Criminal Law Suite 2023 (Google Play)', 'Statutory Reference Suite: CPC, POSH, Police Act (Google Play)', 'Coroutines, FTS5 Offline SQLite & Material 3']],
-    ['UI/UX Design', 'Ergonomics, Micro-interactions & Design Tokens', ['Crafted Interactive Portfolio with 3D Motion', 'Figma Component Libraries & Design Tokens', 'SIMATS Academic Portal Ergonomic Redesign', 'High-contrast Dark Mode & Glassmorphism Tokens', 'Fluid Canvas Shader Physics & WCAG AAA Standards']],
-    ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic AI & Binaural DSP Engine (Python)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']]
+    ['iOS Development', 'Swift, SwiftUI & Apple Ecosystem', [
+      'ZenLife — Sound-Based Stress Relief (App Store)',
+      'Viana 360 — Real-Time Systems Telemetry (App Store)',
+      'Viana Buy — Everyday Essentials & Commerce (App Store)',
+      'CleanYourMacKeyboard — Free macOS App (Open Source)',
+      'CoreData, Audio Engine & Liquid Micro-interactions'
+    ]],
+    ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', [
+      'Vellore Ads — Commercial Listing Platform (Google Play)',
+      'Constitution of India — Complete Bare Act (Google Play)',
+      'BNS, BNSS & BSA — Criminal Law Suite 2023 (Google Play)',
+      'CPC Act 1908, POSH & Police Act Pocket References (Google Play)',
+      'Coroutines, FTS5 Offline SQLite & Material 3'
+    ]],
+    ['UI/UX Design', 'Modern Web & Interface Systems', [
+      'ClearVote — AI-Powered DAO Governance Interface (GitHub)',
+      'Crafted Interactive Portfolio with 3D Motion (Live & GitHub)',
+      'Anonymous Chat Platform — Real-Time Web App (GitHub)',
+      'Responsive Design Systems, Tailwind CSS & Fluid Typography',
+      'Accessibility, Canvas Shader Physics & WCAG Standards'
+    ]],
+    ['AI & Machine Learning', 'Generative AI, Vision & Predictive Models', [
+      'ClearVote DAO Intelligence — GPT-4 Governance Analysis (GitHub)',
+      'Machine Learning Predictive Models & Classification Suite (GitHub)',
+      'Computer Vision Suite — 40+ OpenCV Image Processing Labs (GitHub)',
+      'Feature Extraction, Spatial Filtering & Edge Detection',
+      'Supervised & Unsupervised Machine Learning in Python'
+    ]]
   ];
 
   const setInfo = i => {
@@ -1842,6 +1910,24 @@ const ROOMS_DATA = [
           </div>
 
           <div class="stage" aria-hidden="true">
+            ${p.storeType === 'macos' ? `
+              <div class="mac-frame">
+                <div class="mac-frame__body">
+                  <div class="mac-frame__topbar">
+                    <div class="mac-frame__dots">
+                      <span class="m-dot red"></span>
+                      <span class="m-dot yellow"></span>
+                      <span class="m-dot green"></span>
+                    </div>
+                    <div class="mac-frame__title">CleanYourMacKeyboard — Free macOS App</div>
+                    <div class="mac-frame__badge">macOS 14+</div>
+                  </div>
+                  <div class="mac-frame__screen">
+                    <img src="${p.screenshots[0]}" alt="${p.title} Web Preview" class="mac-frame__img" loading="lazy">
+                  </div>
+                </div>
+              </div>
+            ` : `
             <div class="phone">
               <div class="phone__body">
                 <i class="phone__btn l" style="top:19%;height:4%"></i>
@@ -1894,6 +1980,7 @@ const ROOMS_DATA = [
                 </div>
               </div>
             </div>
+            `}
           </div>
         </div>
       </article>

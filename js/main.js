@@ -72,17 +72,46 @@ function scrollToId(id) {
   upd();
 }
 
-const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 function tickClock(){
-  const d = new Date(), h = d.getHours();
-  const time = `${h % 12 || 12}:${String(d.getMinutes()).padStart(2,'0')}${h < 12 ? 'am' : 'pm'}`;
-  const date = `${d.getDate()} ${MONTHS[d.getMonth()]}, ${d.getFullYear()}`;
-  document.querySelectorAll('[data-time]').forEach(e => e.textContent = time);
-  document.querySelectorAll('[data-date]').forEach(e => e.textContent = date);
-  document.querySelectorAll('[data-dshort]').forEach(e => e.textContent = `${d.getDate()} ${MONTHS[d.getMonth()].slice(0, 3)}`);
-  document.querySelectorAll('[data-navtime]').forEach(e => e.textContent = ' — ' + time);
-  document.querySelectorAll('[data-ftime]').forEach(e => e.textContent = time);
-  document.querySelectorAll('[data-fyear]').forEach(e => e.textContent = String(d.getFullYear()));
+  const now = new Date();
+  try {
+    const timeFmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Kolkata',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true
+    });
+    const parts = timeFmt.formatToParts(now);
+    const hour = parts.find(p => p.type === 'hour')?.value || '12';
+    const minute = parts.find(p => p.type === 'minute')?.value || '00';
+    const dayPeriod = (parts.find(p => p.type === 'dayPeriod')?.value || 'am').toLowerCase();
+    const time = `${hour}:${minute}${dayPeriod}`;
+
+    const dateFmt = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Kolkata',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
+    const dParts = dateFmt.formatToParts(now);
+    const day = dParts.find(p => p.type === 'day')?.value || String(now.getDate());
+    const month = dParts.find(p => p.type === 'month')?.value || 'November';
+    const year = dParts.find(p => p.type === 'year')?.value || String(now.getFullYear());
+    const date = `${day} ${month}, ${year}`;
+    const shortDate = `${day} ${month.slice(0, 3)}`;
+
+    document.querySelectorAll('[data-time]').forEach(e => e.textContent = time);
+    document.querySelectorAll('[data-date]').forEach(e => e.textContent = date);
+    document.querySelectorAll('[data-dshort]').forEach(e => e.textContent = shortDate);
+    document.querySelectorAll('[data-navtime]').forEach(e => e.textContent = ' — ' + time);
+    document.querySelectorAll('[data-ftime]').forEach(e => e.textContent = time);
+    document.querySelectorAll('[data-fyear]').forEach(e => e.textContent = year);
+  } catch(e) {
+    const h = now.getHours();
+    const time = `${h % 12 || 12}:${String(now.getMinutes()).padStart(2,'0')}${h < 12 ? 'am' : 'pm'}`;
+    document.querySelectorAll('[data-time]').forEach(el => el.textContent = time);
+    document.querySelectorAll('[data-ftime]').forEach(el => el.textContent = time);
+  }
 }
 tickClock();
 setInterval(tickClock, 1000);
@@ -794,8 +823,8 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     'assets/apps/zenlife-icon.jpg',
     'assets/apps/viana360-icon.jpg',
     'assets/apps/vianabuy-icon.jpg',
-    'assets/apps/zenlife-icon.jpg',
-    'apple-touch-icon.png'
+    'assets/apps/velloreads-icon.jpg',
+    'assets/apps/cleanmac-icon.png'
   ];
 
   let cur = 0;
@@ -1013,6 +1042,13 @@ const ROOMS_DATA = [
       },
       {
         icon: '⌨️',
+        iconImg: 'assets/apps/cleanmac-icon.png',
+        isStoreApp: true,
+        storeType: 'macos',
+        screenshots: [
+          'assets/apps/cleanmac-screen-1.jpg',
+          'assets/apps/cleanmac-screen-2.jpg'
+        ],
         iconBg: '#1E252B',
         num: '04 / 04',
         category: 'macOS App · Utilities',
@@ -1020,26 +1056,12 @@ const ROOMS_DATA = [
         sub: 'macOS Keyboard Lock Utility · Free & Open Source',
         desc: 'Native macOS Swift menu bar utility that safely locks all keyboard and touch bar input with a single click, allowing users to wipe down and sanitize their keyboard without triggering unwanted keypresses or terminal inputs.',
         tags: ['macOS', 'Swift', 'AppKit', 'Input Monitoring', 'Free & Open Source'],
+        liveLink: 'https://kaushalboii.github.io/CleanYourMacKeyboard/',
+        liveText: 'Official Website ↗',
         gitLink: 'https://github.com/kaushalboii/CleanYourMacKeyboard',
         gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #202b33 0%, #0e1418 80%)',
-        mockupContent: `
-          <div class="mockup-mac">
-            <div class="mac-lock-badge">
-              <span class="mac-lock-icon">🔒</span>
-              <span class="mac-lock-status">Cleaning Mode Active</span>
-            </div>
-            <div class="mac-timer">
-              <span class="mac-timer__sec">00:24</span>
-              <span class="mac-timer__lbl">Keyboard Inputs Suppressed</span>
-            </div>
-            <div class="mac-hud">
-              <p>Wipe keys cleanly with microfiber cloth</p>
-              <span class="mac-esc-pill">Hold ESC 3s to Unlock</span>
-            </div>
-          </div>
-        `
+        note: '100% Free / Open Source · Universal Binary (Intel & Apple Silicon)',
+        screenBg: 'radial-gradient(circle at 50% 20%, #202b33 0%, #0e1418 80%)'
       }
     ]
   },
@@ -1048,104 +1070,111 @@ const ROOMS_DATA = [
     doorName: 'Door 02 · Android Development',
     title: 'Android Native Applications',
     desc: 'Robust Android apps engineered using modern Kotlin conventions, Jetpack Compose, Coroutines, ROOM SQLite, and Material 3 design systems.',
-    count: '03 Featured Projects',
+    count: '04 Featured Projects',
     accent: '#4A3540',
     projects: [
       {
         icon: '📢',
+        iconImg: 'assets/apps/velloreads-icon.jpg',
+        isStoreApp: true,
+        storeType: 'play',
+        screenshots: [
+          'assets/apps/velloreads-screen-1.jpg',
+          'assets/apps/velloreads-screen-2.jpg',
+          'assets/apps/velloreads-screen-4.jpg'
+        ],
         iconBg: '#341E2B',
-        num: '01 / 03',
+        num: '01 / 04',
         category: 'Android App · Classifieds & Ads',
-        title: 'Vellore Ads',
+        title: 'Vellore Ads Platform',
         sub: 'Commercial Listing Platform · Google Play Store',
         desc: 'Commercial listing and advertising directory. Features instant location filters, high-density listing catalogues, verified merchant profiles, and region-specific classified ad management.',
         tags: ['Kotlin', 'Jetpack Compose', 'MySQL', 'PHP REST APIs', 'Material 3'],
-        liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en_IN',
-        liveText: 'Get on Google Play ↗',
+        liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en',
+        liveText: 'View on Google Play ↗',
         note: 'Live on Google Play Store',
-        screenBg: 'radial-gradient(circle at 50% 20%, #361f2c 0%, #190e14 80%)',
-        mockupContent: `
-          <div class="mockup-ads">
-            <div class="ads-header">
-              <span class="ads-loc">📍 Vellore, Tamil Nadu</span>
-              <span class="ads-filter">Filter ▾</span>
-            </div>
-            <div class="ads-banner">
-              <b>Commercial Hub Spotlight</b>
-              <span>Featured Local Services & Retail</span>
-            </div>
-            <div class="ads-card">
-              <div class="ads-card__tag">Verified Merchant</div>
-              <b>Sri Sai Automotive Spares</b>
-              <span>Katpadi Road · Open Now</span>
-              <div class="ads-actions"><span class="call-btn">📞 Call Now</span><span class="view-btn">Details →</span></div>
-            </div>
-          </div>
-        `
+        screenBg: 'radial-gradient(circle at 50% 20%, #361f2c 0%, #190e14 80%)'
+      },
+      {
+        icon: '📜',
+        iconImg: 'assets/apps/constitution-icon.jpg',
+        isStoreApp: true,
+        storeType: 'play',
+        screenshots: [
+          'assets/apps/constitution-screen-1.jpg',
+          'assets/apps/constitution-screen-2.jpg',
+          'assets/apps/constitution-screen-4.jpg'
+        ],
+        iconBg: '#212B23',
+        num: '02 / 04',
+        category: 'Android App · Constitutional Law',
+        title: 'Constitution of India (REF)',
+        sub: 'Complete Bare Act, Schedules & Amendments · Google Play Store',
+        desc: 'Engineered for advocates, legal scholars, and competitive exam aspirants. Comprehensive offline reference featuring all 395 Articles, Schedules, 106+ Amendments, bilingual reading modes, and lightning-fast FTS5 search.',
+        tags: ['Kotlin', 'SQLite FTS5', 'Offline First', 'Material You', 'Google Play'],
+        liveLink: 'https://play.google.com/store/apps/details?id=com.kaushal.constitutionindia&hl=en',
+        liveText: 'View on Google Play ↗',
+        note: 'Live on Google Play Store · Kaushal Maran',
+        screenBg: 'radial-gradient(circle at 50% 20%, #202e24 0%, #0d1610 80%)'
       },
       {
         icon: '⚖️',
-        iconBg: '#212B23',
-        num: '02 / 03',
-        category: 'Android App · Legal Reference',
-        title: 'Indian Law Reference Suite',
-        sub: 'Statutory Legal Suite in 11 Indian Languages · Free on GitHub',
-        desc: 'Comprehensive offline statutory reference suite containing Bharatiya Nyaya Sanhita (BNS), BNSS, BSA, IPC, CrPC, and Constitution of India in 11 Indian languages with instantaneous FTS5 SQLite search.',
-        tags: ['Kotlin', 'SQLite FTS5', '11 Languages', 'Material You', 'Free & Open Source'],
-        gitLink: 'https://github.com/kaushalboii/Indian-Law-Bilingual-Pocket-Reference-App',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #202e24 0%, #0d1610 80%)',
-        mockupContent: `
-          <div class="mockup-law">
-            <div class="law-lang-pills">
-              <span class="lang-on">English</span>
-              <span>தமிழ்</span>
-              <span>हिन्दी</span>
-              <span>తెలుగు</span>
-            </div>
-            <div class="law-search">
-              <span>🔍 Search Section, Act or Keyword...</span>
-            </div>
-            <div class="law-card">
-              <div class="law-badge">BNS § 103 (1)</div>
-              <b>Punishment for Murder</b>
-              <p>Whoever commits murder shall be punished with death or imprisonment for life...</p>
-              <div class="law-meta"><span>Cross-ref: IPC § 302</span><span class="bookmark-icon">★</span></div>
-            </div>
-          </div>
-        `
+        iconImg: 'assets/apps/bns-icon.jpg',
+        isStoreApp: true,
+        storeType: 'play',
+        screenshots: [
+          'assets/apps/bns-screen-1.jpg',
+          'assets/apps/bns-screen-2.jpg',
+          'assets/apps/bns-screen-4.jpg'
+        ],
+        iconBg: '#2D231E',
+        num: '03 / 04',
+        category: 'Android App · Criminal Law Reform',
+        title: 'BNS & BNSS 2023 Pocket Reference',
+        sub: 'Bharatiya Nyaya Sanhita & Bharatiya Nagarik Suraksha · Google Play',
+        desc: 'Instant statutory pocket guide for India’s landmark 2023 criminal codes: Bharatiya Nyaya Sanhita (BNS), BNSS, and Bharatiya Sakshya Adhiniyam (BSA). Features full cross-reference mapping from old IPC & CrPC sections.',
+        tags: ['Kotlin', 'Coroutines', 'IPC Conversion Matrix', 'Material 3', 'Google Play'],
+        liveLink: 'https://play.google.com/store/apps/details?id=com.bns.pocketreference&hl=en',
+        liveText: 'Get BNS on Google Play ↗',
+        suiteLinks: [
+          { title: 'BNS Act 2023', url: 'https://play.google.com/store/apps/details?id=com.bns.pocketreference&hl=en' },
+          { title: 'BNSS 2023 Reference', url: 'https://play.google.com/store/apps/details?id=com.bnss.pocketreference&hl=en' },
+          { title: 'BSA Evidence Act', url: 'https://play.google.com/store/apps/details?id=com.bsa.pocketreference&hl=en' }
+        ],
+        note: 'Live on Google Play Store · 3 Acts Suite',
+        screenBg: 'radial-gradient(circle at 50% 20%, #2e231e 0%, #140d0a 80%)'
       },
       {
-        icon: '🗳️',
+        icon: '🏛️',
+        iconImg: 'assets/apps/cpc-icon.jpg',
+        isStoreApp: true,
+        storeType: 'play',
+        screenshots: [
+          'assets/apps/cpc-screen-1.jpg',
+          'assets/apps/cpc-screen-2.jpg',
+          'assets/apps/posh-screen-1.jpg',
+          'assets/apps/police-screen-1.jpg'
+        ],
         iconBg: '#1F2936',
-        num: '03 / 03',
-        category: 'Android / Web · Democracy & Security',
-        title: 'ClearVote',
-        sub: 'Cryptographically Verified Voting System · Free on GitHub',
-        desc: 'Modern democratic voting interface featuring tamper-proof cryptographic audit receipts, voter credential validation, and decentralized tally integrity verification.',
-        tags: ['Android', 'Cryptography', 'JavaScript', 'Security Auditing', 'Open Source'],
-        gitLink: 'https://github.com/kaushalboii/ClearVote',
-        gitText: 'Free on GitHub ↗',
-        note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1e2837 0%, #0c121b 80%)',
-        mockupContent: `
-          <div class="mockup-vote">
-            <div class="vote-badge">
-              <span class="vote-shield">🛡️</span>
-              <span>Cryptographic Ballot Ready</span>
-            </div>
-            <div class="vote-candidate">
-              <b>Election 2026 Constituency Ballot</b>
-              <span class="vote-opt opt-selected">● Representative Candidate Alpha</span>
-              <span class="vote-opt">○ Representative Candidate Beta</span>
-            </div>
-            <div class="vote-receipt">
-              <span class="vote-hash">SHA: 7f8a9...4b1c</span>
-              <button class="vote-submit-btn">Cast Verified Ballot ✓</button>
-            </div>
-          </div>
-        `
+        num: '04 / 04',
+        category: 'Android App Suite · Legal & Election Tools',
+        title: 'Statutory Pocket Reference Suite',
+        sub: 'CPC 1908, POSH Act, Police Act & Election 2026 · Google Play Store',
+        desc: 'A complete suite of specialized legal and institutional applications published on Google Play, including the Code of Civil Procedure (CPC), Prevention of Sexual Harassment (POSH) Act, Police Act, and the Bar Council of Tamil Nadu & Puducherry Election 2026 portal.',
+        tags: ['Kotlin', 'Google Play', 'CPC 1908', 'POSH Act', 'Police Act', 'BCTNPY 2026'],
+        liveLink: 'https://play.google.com/store/apps/details?id=com.cpc.pocketreference&hl=en',
+        liveText: 'View CPC on Google Play ↗',
+        gitLink: 'https://github.com/kaushalboii/Indian-Law-Bilingual-Pocket-Reference-App',
+        gitText: 'Suite on GitHub ↗',
+        suiteLinks: [
+          { title: 'CPC Pocket Reference', url: 'https://play.google.com/store/apps/details?id=com.cpc.pocketreference&hl=en' },
+          { title: 'POSH Act Reference', url: 'https://play.google.com/store/apps/details?id=com.posh.pocketreference&hl=en' },
+          { title: 'Police Act Reference', url: 'https://play.google.com/store/apps/details?id=com.policeact.pocketreference.app&hl=en' },
+          { title: 'BCTNPY Election 2026', url: 'https://play.google.com/store/apps/details?id=com.bctnpy.election2026&hl=en' },
+          { title: 'BSA Pocket Reference', url: 'https://play.google.com/store/apps/details?id=com.bsa.pocketreference&hl=en' }
+        ],
+        note: '5 Published Google Play Apps + Open Source',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1e2837 0%, #0c121b 80%)'
       }
     ]
   },
@@ -1159,6 +1188,8 @@ const ROOMS_DATA = [
     projects: [
       {
         icon: '🎨',
+        iconImg: 'assets/apps/comicgan-icon.jpg',
+        screenshots: ['assets/apps/comicgan-screen-1.jpg'],
         iconBg: '#2C1F33',
         num: '01 / 03',
         category: 'Deep Learning · Computer Vision',
@@ -1169,22 +1200,7 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii/Automatic-Comic-Generation-using-GAN',
         gitText: 'Free on GitHub ↗',
         note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #301f38 0%, #140b19 80%)',
-        mockupContent: `
-          <div class="mockup-gan">
-            <div class="gan-prompt">
-              <span>Prompt: "Hero standing on rooftop neon rain"</span>
-            </div>
-            <div class="gan-grid">
-              <div class="gan-panel"><div class="gan-thumb g1"></div><span>Panel 1</span></div>
-              <div class="gan-panel"><div class="gan-thumb g2"></div><span>Panel 2</span></div>
-            </div>
-            <div class="gan-metrics">
-              <span>Generator Loss: 0.041</span>
-              <span class="gan-tag">Epoch 180</span>
-            </div>
-          </div>
-        `
+        screenBg: 'radial-gradient(circle at 50% 20%, #301f38 0%, #140b19 80%)'
       },
       {
         icon: '🧬',
@@ -1287,6 +1303,8 @@ const ROOMS_DATA = [
       },
       {
         icon: '📐',
+        iconImg: 'assets/apps/simats-icon.jpg',
+        screenshots: ['assets/apps/simats-screen-1.jpg'],
         iconBg: '#30261E',
         num: '02 / 03',
         category: 'UX Audit · Design Tokens',
@@ -1297,20 +1315,7 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii',
         gitText: 'View on GitHub ↗',
         note: 'Enterprise Campus Case Study',
-        screenBg: 'radial-gradient(circle at 50% 20%, #33261c 0%, #160e0a 80%)',
-        mockupContent: `
-          <div class="mockup-portal">
-            <div class="portal-card">
-              <span>Attendance Rate</span>
-              <b>94.8%</b>
-              <div class="pbar"><div class="pfill" style="width:94.8%"></div></div>
-            </div>
-            <div class="portal-grid">
-              <div class="pnode"><b>4.0 / 4.0</b><span>Term GPA</span></div>
-              <div class="pnode"><b>0 Backlogs</b><span>Status: Clear</span></div>
-            </div>
-          </div>
-        `
+        screenBg: 'radial-gradient(circle at 50% 20%, #33261c 0%, #160e0a 80%)'
       },
       {
         icon: '🪟',
@@ -1352,6 +1357,8 @@ const ROOMS_DATA = [
     projects: [
       {
         icon: '⚡',
+        iconImg: 'assets/apps/cloudsync-icon.jpg',
+        screenshots: ['assets/apps/cloudsync-screen-1.jpg'],
         iconBg: '#30261C',
         num: '01 / 03',
         category: 'Distributed Systems · Cloud Sync',
@@ -1362,22 +1369,7 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii/zenlife-backend',
         gitText: 'Free on GitHub ↗',
         note: '100% Free / Open Source Repository',
-        screenBg: 'radial-gradient(circle at 50% 20%, #33271c 0%, #150f09 80%)',
-        mockupContent: `
-          <div class="mockup-sync">
-            <div class="sync-card">
-              <span class="sync-status live-pulse"><i></i>Cloud Sync Online</span>
-              <b>MySQL Cluster · 38ms</b>
-            </div>
-            <div class="sync-log">
-              <code>POST /api/v1/sessions/sync</code>
-              <code>HTTP 200 OK · Delta: 0 conflict</code>
-            </div>
-            <div class="sync-stats">
-              <span>Sync Success: 99.98%</span>
-            </div>
-          </div>
-        `
+        screenBg: 'radial-gradient(circle at 50% 20%, #33271c 0%, #150f09 80%)'
       },
       {
         icon: '🗄️',
@@ -1487,8 +1479,8 @@ const ROOMS_DATA = [
   });
 
   const INFO = [
-    ['iOS Development', 'Swift, SwiftUI & App Store Ecosystem', ['ZenLife — Sound-Based Stress Relief (App Store)', 'Viana 360 — Real-Time Systems Telemetry (App Store)', 'Viana Buy — Everyday Essentials & Commerce (App Store)', 'CleanYourMacKeyboard — Free macOS App on GitHub', 'CoreData, Audio Engine & Liquid Micro-interactions']],
-    ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', ['Vellore Ads — Commercial Listing Platform (Play Store)', 'Indian Law Reference Suite — 11 Indian Languages (Free)', 'ClearVote — Cryptographically Audited Voting (Free)', 'ROOM SQLite, Coroutines & Material 3', 'Scalable Device Compatibility & Performance']],
+    ['iOS Development', 'Swift, SwiftUI & Apple Ecosystem', ['ZenLife — Sound-Based Stress Relief (App Store)', 'Viana 360 — Real-Time Systems Telemetry (App Store)', 'Viana Buy — Everyday Essentials & Commerce (App Store)', 'CleanYourMacKeyboard — Free macOS Utility (Open Source)', 'CoreData, Audio Engine & Liquid Micro-interactions']],
+    ['Android Development', 'Kotlin, Jetpack Compose & Clean Architecture', ['Vellore Ads — Commercial Listing Platform (Google Play)', 'Constitution of India — Complete Bare Act (Google Play)', 'BNS, BNSS & BSA — Criminal Law Suite 2023 (Google Play)', 'Statutory Reference Suite: CPC, POSH, Police Act (Google Play)', 'Coroutines, FTS5 Offline SQLite & Material 3']],
     ['AI & Machine Learning', 'Neural Networks & DSP Synthesis', ['Automatic Comic Generator with DCGAN (PyTorch)', 'ZenLife Acoustic AI & Binaural DSP Engine (Python)', 'Personalized Learning Paths via NLP & Embeddings', 'Algorithmic Optimization & Vector Search', 'SIMATS Engineering Research Projects']],
     ['UI/UX Design', 'Ergonomics, Micro-interactions & Design Tokens', ['Crafted Interactive Portfolio with 3D Motion', 'Figma Component Libraries & Design Tokens', 'SIMATS Academic Portal Ergonomic Redesign', 'High-contrast Dark Mode & Glassmorphism Tokens', 'Fluid Canvas Shader Physics & WCAG AAA Standards']],
     ['Backend & Systems', 'Scalable APIs, Databases & Cloud Sync', ['ZenLife Cloud Sync & Delta Engine (PHP 8 / MySQL)', 'Vellore Ads Regional Query Spatial Optimization', 'Cryptographic Ledger Microservice for ClearVote', 'Token Authentication & Conflict Resolution', 'Automated Production Build & Continuous Delivery']]
@@ -1875,12 +1867,26 @@ function initVideoReels(container = document) {
               </div>
               <p class="card__meta">
                 <span class="no">${p.num}</span><i></i><span>${p.category}</span>
-                ${p.isStoreApp ? `
-                  <span class="app-store-pill">
-                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
-                    App Store
-                  </span>
-                ` : ''}
+                ${p.isStoreApp ? (
+                  p.storeType === 'play' ? `
+                    <span class="play-store-pill">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186c-.328-.31-.52-.756-.52-1.286V3.1c0-.53.192-.976.519-1.286zm11.238 9.131l2.368-2.368-11.45-6.52c-.443-.252-.888-.242-1.205-.07l10.287 8.958zm0 2.11l-10.287 8.958c.317.172.762.182 1.205-.07l11.45-6.52-2.368-2.368zm1.055-1.055l3.208 1.828c.954.543.954 1.428 0 1.971l-3.208 1.828-2.072-2.072 2.072-2.072z"/></svg>
+                      Google Play
+                    </span>
+                  ` : (
+                    p.storeType === 'macos' ? `
+                      <span class="app-store-pill app-store-pill--macos">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
+                        macOS App
+                      </span>
+                    ` : `
+                      <span class="app-store-pill">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
+                        App Store
+                      </span>
+                    `
+                  )
+                ) : ''}
               </p>
             </div>
             <h2 id="p${i}_${idx}">${p.title}</h2>
@@ -1902,6 +1908,15 @@ function initVideoReels(container = document) {
                 </a>
               ` : ''}
             </div>
+            ${p.suiteLinks && p.suiteLinks.length > 0 ? `
+              <div class="suite-links" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;">
+                ${p.suiteLinks.map(s => `
+                  <a href="${s.url}" target="_blank" rel="noopener" class="suite-pill" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.08);color:var(--foreground);text-decoration:none;border:1px solid rgba(255,255,255,0.14);transition:all .2s">
+                    ${s.title} ↗
+                  </a>
+                `).join('')}
+              </div>
+            ` : ''}
             <span class="note">${p.note}</span>
           </div>
 
@@ -1935,7 +1950,7 @@ function initVideoReels(container = document) {
                       <div class="video-reel__overlay">
                         <div class="video-reel__badge">
                           <span class="video-reel__rec"></span>
-                          <span class="video-reel__tag">APP STORE PREVIEW</span>
+                          <span class="video-reel__tag">${p.storeType === 'play' ? 'GOOGLE PLAY PREVIEW' : (p.storeType === 'macos' ? 'MACOS APP PREVIEW' : (p.isStoreApp ? 'APP STORE PREVIEW' : 'PROJECT SHOWCASE'))}</span>
                           <span class="video-reel__time" data-reel-time>00:01</span>
                         </div>
                         <div class="video-reel__scrubber">
@@ -2219,11 +2234,12 @@ function initVideoReels(container = document) {
     setTimeout(() => { modal.hidden = true; startScroll(); }, 350);
   }
 
-  document.querySelectorAll('[data-contact], #navStart').forEach(btn => {
-    btn.addEventListener('click', e => {
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('[data-contact], #navStart');
+    if (btn) {
       e.preventDefault();
       openModal();
-    });
+    }
   });
 
   closeBtn?.addEventListener('click', closeModal);
@@ -2240,6 +2256,32 @@ function initVideoReels(container = document) {
     window.location.href = `mailto:kaushalmaranm@gmail.com?subject=${subject}&body=${body}`;
     closeModal();
   });
+})();
+
+// ─── DYNAMIC FOOTER WATERMARK AUTO-FIT: "M KAUSHAL MARAN" ───
+(() => {
+  function fitFooterWord() {
+    const wordEl = document.querySelector('.sf__word');
+    const spanEl = document.querySelector('.sf__word .full');
+    if (!wordEl || !spanEl) return;
+    const availWidth = Math.max(300, window.innerWidth - 24);
+    wordEl.style.fontSize = '100px';
+    const textWidth = spanEl.offsetWidth || 1;
+    if (textWidth > 0) {
+      const scale = (availWidth * 0.96) / textWidth;
+      const targetPx = Math.floor(100 * scale);
+      const clampedPx = Math.max(24, Math.min(160, targetPx));
+      wordEl.style.fontSize = `${clampedPx}px`;
+      wordEl.style.setProperty('--wf', `${clampedPx}px`);
+    }
+  }
+
+  window.addEventListener('resize', fitFooterWord, { passive: true });
+  window.addEventListener('orientationchange', fitFooterWord, { passive: true });
+  document.addEventListener('DOMContentLoaded', fitFooterWord);
+  setTimeout(fitFooterWord, 100);
+  setTimeout(fitFooterWord, 500);
+  setTimeout(fitFooterWord, 1500);
 })();
 
 // ─── INITIALIZATION & READY DISPATCH ───

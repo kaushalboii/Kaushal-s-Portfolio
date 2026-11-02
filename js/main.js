@@ -1220,7 +1220,7 @@ const ROOMS_DATA = [
         num: '01 / 01',
         isStoreApp: true,
         storeType: 'web',
-        category: 'Geotagged News Radar · Live Web App',
+        category: 'Geotagged News Radar',
         title: 'India News Radar — Real-Time Geotagged Intelligence',
         sub: 'Live Interactive Geotagged News Map, Breaking Bulletins & Multi-Source Intelligence',
         desc: 'Engineered an interactive real-time news radar delivering geotagged intelligence across India. Features an interactive SVG map with pulsating incident coordinates, multi-source live event correlation, category filtering (Politics, Markets, Climate, Defense), and live breaking ticker updates.',
@@ -1790,8 +1790,8 @@ const ROOMS_DATA = [
           <div class="app__icon" style="background:${p.iconBg}">
             ${p.iconImg ? `<img src="${p.iconImg}" alt="${p.title}" class="app__icon-img">` : p.icon}
           </div>
-          <p class="card__meta">
-            <span class="no">${p.num}</span><i></i><span>${p.category}</span>
+          <div class="card__meta">
+            <span class="no">${p.num}</span><i></i><span class="card__cat">${p.category}</span>
             ${p.isStoreApp ? (
               p.storeType === 'play' ? `
                     <span class="play-store-pill">
@@ -1819,7 +1819,7 @@ const ROOMS_DATA = [
                 )
               )
             ) : ''}
-          </p>
+          </div>
         </div>
         <h2 id="p${i}_${idx}">${p.title}</h2>
         <p class="sub">${p.sub}</p>

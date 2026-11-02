@@ -1559,44 +1559,63 @@ html[data-mode="dark"] .roomv__stack .card {
 .roomv__stack .app {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 18px;
+  width: 100%;
 }
 .roomv__stack .app__icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  flex: 0 0 52px;
+  width: 52px;
+  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
+  aspect-ratio: 1 / 1;
+  border-radius: 13px;
   display: grid;
   place-items: center;
-  font-size: 26px;
+  font-size: 24px;
   box-shadow: 0 8px 18px -10px rgba(0,0,0,.4), 0 0 0 1px rgba(var(--fg-rgb), .08);
+  overflow: hidden;
 }
 .roomv__stack .card__meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 6px 12px;
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--accent-from, #C4B0B0);
+  margin: 0;
+  line-height: 1.35;
 }
 .roomv__stack .card__meta .no {
-  color: rgba(var(--fg-rgb), .4);
+  color: rgba(var(--fg-rgb), .45);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: 700;
+  letter-spacing: .06em;
 }
 .roomv__stack .card__meta i {
-  width: 22px;
+  width: 18px;
   height: 1px;
   background: currentColor;
-  opacity: .5;
+  opacity: .45;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.roomv__stack .card__meta .card__cat {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .roomv__stack h2 {
   font-size: clamp(24px, 3.2vw, 40px);
   font-weight: 700;
   letter-spacing: -.02em;
-  line-height: 1.1;
-  margin-bottom: 8px;
+  line-height: 1.15;
+  margin: 0 0 10px 0;
   overflow-wrap: break-word;
   word-break: break-word;
 }
@@ -1604,7 +1623,8 @@ html[data-mode="dark"] .roomv__stack .card {
   font-size: 15px;
   font-weight: 500;
   color: rgba(var(--fg-rgb), .72);
-  margin-bottom: 18px;
+  margin: 0 0 16px 0;
+  line-height: 1.45;
 }
 .roomv__stack .desc {
   font-size: 16px;
@@ -2592,41 +2612,36 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
   border-radius: inherit;
   display: block;
 }
+.app-store-pill,
+.play-store-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  letter-spacing: .02em !important;
+  line-height: 1 !important;
+  margin-left: 4px !important;
+}
+.app-store-pill svg,
+.play-store-pill svg {
+  width: 10px !important;
+  height: 10px !important;
+  flex-shrink: 0 !important;
+}
 .app-store-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 999px;
   background: rgba(214,178,110,.18);
   color: #D6B26E;
   border: 1px solid rgba(214,178,110,.3);
-  margin-left: 6px;
-  letter-spacing: .02em;
-}
-.app-store-pill svg {
-  width: 10px;
-  height: 10px;
 }
 .play-store-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 999px;
   background: rgba(52, 168, 83, 0.16);
   color: #34A853;
   border: 1px solid rgba(52, 168, 83, 0.35);
-  margin-left: 6px;
-  letter-spacing: .02em;
-}
-.play-store-pill svg {
-  width: 10px;
-  height: 10px;
 }
 .app-store-pill--macos {
   background: rgba(140, 160, 255, 0.16);
@@ -2745,6 +2760,9 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
 .roomv__stack .card.card--web .card__info {
   width: 100% !important;
   max-width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
   order: 1 !important;
 }
 .roomv__stack .card.card--web .stage {

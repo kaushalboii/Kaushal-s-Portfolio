@@ -36,7 +36,7 @@ An architectural, editorial portfolio for **M Kaushal Maran**, Mobile App Develo
 - **3D Desk Flip Calendar (`#cal`)**: Mechanical ring-bound calendar cycling between Kaushal's core engineering identities with perspective curl and flip mechanics:
   1. `iOS Developer`
   2. `Android Developer`
-  3. `UI/UX Designer`
+  3. `Web Developer`
   4. `AI & ML Engineer`
   5. `Systems Architect`
 - **Floating Live App Showcase (`#hcard`)**: Interactive preview card showcasing verified App Store and open-source applications (ZenLife, Viana 360, Viana Buy, CleanYourMac Keyboard) with live rating badges, store links, and active engineering stack chips (`SwiftUI`, `Kotlin`, `CoreData & Room`, `macOS AppKit`).
@@ -76,12 +76,12 @@ Full-screen modal room experience featuring smooth stacked elevation cards with 
 | **BNS & BNSS 2023 Reference** | Android 8.0+ | Kotlin, Room Database, IPC to BNS Cross-Conversion Matrix, Criminal Procedure Reforms | [Live on Google Play Store](https://play.google.com/store/apps/details?id=com.law.bns) |
 | **CPC Act - Pocket Reference** | Android 8.0+ | Kotlin, Jetpack Compose, Offline First, Instant Section & Order FTS Search, Material 3 | [Live on Google Play Store](https://play.google.com/store/apps/details?id=com.law.cpc) |
 
-#### 🚪 Door 03 · UI/UX Design (`Design Systems, Micro-Interactions & Ergonomics`)
-| Project | Discipline | Design System & Deliverables | Access |
+#### 🚪 Door 03 · Web Development (`Modern Web Apps, Reactive Architecture & APIs`)
+| Project | Platform | Architecture & Technologies | Distribution |
 | :--- | :--- | :--- | :--- |
-| **ZenLife — Mindful Audio UI** | Mobile Product Design | Figma Design Tokens, 432 Hz Soundwave Visualizer, Micro-Interactions, WCAG 2.1 AAA | [Interactive Showcase](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
-| **SIMATS Academic Portal** | Enterprise UX Overhaul | UX Field Research, Information Architecture, Mobile Thumb-Zone Ergonomics, Figma System | [Academic System](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
-| **Vellore Ads — Marketplace UX** | Consumer Marketplace | High-Density Mobile Feed, Category Filtering Taxonomy, Localized Micro-Interactions | [Google Play](https://play.google.com/store/apps/details?id=com.velloreads.app) |
+| **Live News India** | Web App | Modern JavaScript, Responsive News Reader, Live Breaking News Feed | [Live on GitHub Pages](https://kaushalboii.github.io/Live-news-updated-India/) |
+| **SIMATS Academic Portal** | Web ERP | Campus Information Architecture, Real-Time Timetable Tracking, Dynamic Attendance | [Academic Portal](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
+| **High-Performance Portfolio** | Web Platform | Core Web Vitals Optimized (93+ Mobile PageSpeed), HTML5 Canvas 2D Physics, WebP Assets | [Live Showcase](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
 
 #### 🚪 Door 04 · AI & Neural Nets (`Deep Learning, Computer Vision & Audio DSP`)
 | Project | Domain | Model Architecture & Technologies | Source |

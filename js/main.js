@@ -69,9 +69,15 @@ function scrollToId(id) {
 // ─── STICKY HEADER & LIVE CLOCK ───
 {
   const hdr = $('.hdr');
-  const upd = () => hdr?.classList.toggle('stuck', window.pageYOffset > 24);
+  let isStuck = false;
+  const upd = () => {
+    const s = (window.scrollY || window.pageYOffset || 0) > 24;
+    if (s !== isStuck) {
+      isStuck = s;
+      hdr?.classList.toggle('stuck', s);
+    }
+  };
   window.addEventListener('scroll', upd, { passive: true });
-  upd();
 }
 
 function tickClock() {
@@ -533,7 +539,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   const SKILLS = [
     'iOS Developer',
     'Android Developer',
-    'UI/UX Designer',
+    'Web Developer',
     'AI & ML Engineer',
     'Systems Architect'
   ];
@@ -1201,43 +1207,44 @@ const ROOMS_DATA = [
     ]
   },
   {
-    id: 'ui',
-    doorName: 'Door 03 · UI/UX Design & Human Interfaces',
-    title: 'Experience Architecture & Design Systems',
-    desc: 'Ergonomic mobile interfaces, design token architectures, accessible user journeys, and tactile micro-interactions crafted in Figma and deployed to production.',
-    count: '03 Featured Case Studies',
+    id: 'web',
+    doorName: 'Door 03 · Web Development & Modern Apps',
+    title: 'Modern Web Applications & Responsive Systems',
+    desc: 'High-performance web applications, responsive real-time portals, and reactive frontend architectures built with modern JavaScript, semantic HTML5, CSS3, and dynamic RESTful APIs.',
+    count: '03 Featured Web Projects',
     accent: '#7A8670',
     projects: [
       {
-        icon: '🧘',
-        iconBg: '#2D1B2D',
+        icon: '📰',
+        iconBg: '#1B2C28',
         num: '01 / 03',
-        category: 'Sensory Mobile UX · Sound Interface',
-        title: 'ZenLife — Mindful Audio Experience',
-        sub: 'Tactile Sound UX & Dynamic Waveform · App Store Design',
-        desc: 'Designed a restorative, low-cognitive-load audio interface for stress mitigation. Features high-contrast obsidian dark mode, real-time Solfeggio 432 Hz waveform canvas visualizer, tactile frequency dials, and responsive haptic breathing cues.',
-        tags: ['Figma', 'UI/UX Design', 'Design Tokens', 'Audio Visualizer', 'Micro-interactions', 'WCAG AAA'],
-        liveLink: 'https://apps.apple.com/in/app/zenlife-stress-sound-relief/id6753105286',
-        liveText: 'View on App Store ↗',
-        note: 'Live Production UX · Apple App Store',
-        screenBg: 'radial-gradient(circle at 50% 20%, #2f2233 0%, #150f18 80%)',
+        category: 'Real-Time News Platform · Live Feed',
+        title: 'Live News India — Real-Time Breaking & Regional Updates',
+        sub: 'Dynamic News Aggregator & Live Breaking News Feed',
+        desc: 'Engineered a modern, responsive live news application delivering real-time national, regional, and breaking news updates across India. Features category filtering, responsive reader cards, live update sync, and high-speed data rendering.',
+        tags: ['Web Development', 'JavaScript', 'Responsive UI', 'Live API', 'News Feed', 'HTML5/CSS3'],
+        liveLink: 'https://kaushalboii.github.io/Live-news-updated-India/',
+        liveText: 'Launch Live Web App ↗',
+        gitLink: 'https://github.com/kaushalboii/Live-news-updated-India',
+        note: 'Live Production Web App · GitHub Pages',
+        screenBg: 'radial-gradient(circle at 50% 20%, #1e332d 0%, #0c1815 80%)',
         mockupContent: `
-          <div class="mockup-zen">
-            <div class="zen-freq">
-              <span class="zen-freq__num">432</span>
-              <span class="zen-freq__unit">Hz Solfeggio</span>
+          <div class="mockup-news" style="padding:16px;font-family:inherit;color:#E8E4E0">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:8px">
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:0.05em">
+                <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;box-shadow:0 0 6px #ef4444"></span> LIVE INDIA
+              </span>
+              <span style="font-size:11px;color:rgba(255,255,255,0.6)">Real-time Feed</span>
             </div>
-            <div class="zen-wave">
-              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.08)">
+              <span style="display:inline-block;background:#ef4444;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-bottom:6px">BREAKING NEWS</span>
+              <p style="font-size:13px;font-weight:600;margin:0 0 4px;line-height:1.35">National &amp; Regional Bulletins Across India</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.65);margin:0">Instant updates on politics, technology, economy, and state affairs.</p>
             </div>
-            <div class="zen-card">
-              <span class="zen-card__label">Soundscape</span>
-              <p class="zen-card__title">Deep Forest Rain &amp; Singing Bowls</p>
-              <div class="zen-bar"><div class="zen-bar__fill" style="width:64%"></div></div>
-            </div>
-            <div class="zen-mood">
-              <span>Mood: Calm &amp; Focused</span>
-              <button class="zen-play-btn">▶</button>
+            <div style="display:flex;gap:8px">
+              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">🇮🇳 National</span>
+              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">⚡ Breaking</span>
+              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">📈 Economy</span>
             </div>
           </div>
         `
@@ -1246,12 +1253,12 @@ const ROOMS_DATA = [
         icon: '🎓',
         iconBg: '#1E2B25',
         num: '02 / 03',
-        category: 'Enterprise UX · Design Systems',
-        title: 'SIMATS Academic Portal Ergonomic Overhaul',
-        sub: 'Campus Information Architecture & Design Tokens',
-        desc: 'Comprehensive UX audit and end-to-end design overhaul for university student information systems. Restructured academic timetables and grade tracking into an ergonomic thumb-zone layout, cutting student task completion time by 64%.',
-        tags: ['UX Research', 'Information Architecture', 'Figma Tokens', 'Mobile Thumb Zone', 'Design System'],
-        note: 'Academic Enterprise UX Architecture',
+        category: 'Enterprise Web Platform · Student ERP',
+        title: 'SIMATS Academic Web Portal',
+        sub: 'Campus Information Architecture & High-Performance Portal',
+        desc: 'Comprehensive web application and end-to-end interface overhaul for university student information systems. Formulated real-time timetable tracking, dynamic attendance visualization, and responsive semester grade reports.',
+        tags: ['Web Application', 'JavaScript', 'Responsive Grid', 'Information Architecture', 'Enterprise ERP'],
+        note: 'Academic Enterprise Web Application',
         screenBg: 'radial-gradient(circle at 50% 20%, #1c2b23 0%, #0c1511 80%)',
         mockupContent: `
           <div class="mockup-portal">
@@ -1274,32 +1281,31 @@ const ROOMS_DATA = [
         `
       },
       {
-        icon: '📢',
-        iconBg: '#341E2B',
+        icon: '⚡',
+        iconBg: '#232D1B',
         num: '03 / 03',
-        category: 'Commercial Marketplace UX · High-Density',
-        title: 'Vellore Ads — Regional Listing Interface',
-        sub: 'Hyper-Local Directory System · Google Play Store',
-        desc: 'Engineered a high-density, accessible listing design system for commercial regional business listings. Formulated scannable category chips, instant geolocation badges, verified vendor trust indicators, and rapid one-tap dialer actions.',
-        tags: ['Marketplace UX', 'Design System', 'Figma', 'Micro-Interactions', 'Google Play'],
-        liveLink: 'https://play.google.com/store/apps/details?id=com.velloreads.app&hl=en',
-        liveText: 'View on Google Play ↗',
-        note: 'Live Production UX · Google Play Store',
-        screenBg: 'radial-gradient(circle at 50% 20%, #361f2c 0%, #190e14 80%)',
+        category: 'High-Performance Web Platform · Lighthouse 93+',
+        title: 'Modern Portfolio & Reactive Web Engine',
+        sub: 'Modern Frontend Architecture & Canvas Physics',
+        desc: 'Engineered a bespoke, ultra-optimized single-page portfolio achieving 93+ Mobile Google PageSpeed and perfect 100s in Accessibility, Best Practices, and SEO. Incorporates fluid 3D CSS perspective doors, HTML5 Canvas scratch physics, and WebP asset delivery.',
+        tags: ['Web Performance', 'Canvas 2D', 'CSS 3D Transforms', 'Semantic HTML5', 'PageSpeed 93+'],
+        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio/',
+        liveText: 'Explore Web Engine ↗',
+        gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
+        note: 'Production Web Application · 93+ Mobile PageSpeed',
+        screenBg: 'radial-gradient(circle at 50% 20%, #202b1c 0%, #0e160c 80%)',
         mockupContent: `
-          <div class="mockup-ads">
-            <div class="ads-header">
-              <span class="live-pulse"><i></i>Live Directory</span>
-              <span>Vellore City</span>
+          <div class="mockup-ads" style="padding:16px;color:#E8E4E0">
+            <div class="ads-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+              <span class="live-pulse" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#4ade80">
+                <i style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block"></i>100% Native Web
+              </span>
+              <span style="font-size:11px;color:rgba(255,255,255,0.6)">PageSpeed 93+</span>
             </div>
-            <div class="ads-card">
-              <span class="ads-card__tag">Verified Merchant</span>
-              <b>Premium Tech Repairs &amp; Sales</b>
-              <span>Katpadi Road · Instant Dial</span>
-              <div class="ads-actions">
-                <span class="call-btn">Call Now 📞</span>
-                <span class="view-btn">View Store →</span>
-              </div>
+            <div class="ads-card" style="background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.08)">
+              <span class="ads-card__tag" style="font-size:10px;color:#d6b26e;font-weight:600">Performance Architecture</span>
+              <p style="font-size:13px;font-weight:600;margin:4px 0">Zero Bloat · 60 FPS Canvas Physics</p>
+              <span style="font-size:11px;color:rgba(255,255,255,0.65)">Core Web Vitals Optimized · Pure Vanilla Stack</span>
             </div>
           </div>
         `
@@ -1465,11 +1471,11 @@ const ROOMS_DATA = [
       'CPC Act 1908, POSH & Police Act Pocket References (Google Play)',
       'Coroutines, FTS5 Offline SQLite & Material 3'
     ]],
-    ['UI/UX Design', 'Design Systems, Micro-Interactions & Ergonomics', [
-      'ZenLife Mindful Audio UI & 432 Hz Wave Visualizer',
-      'SIMATS Academic Portal — Enterprise UX Overhaul',
-      'Vellore Ads — High-Density Mobile Marketplace Experience',
-      'Figma Component Architecture & Design Tokens',
+    ['Web Development', 'Modern Web Apps, Reactive Architecture & APIs', [
+      'Live News India — Real-Time Breaking & Regional News Platform',
+      'SIMATS Academic Portal — Enterprise Student Web App',
+      'High-Performance Portfolio & Web Architecture (93+ PageSpeed)',
+      'Semantic HTML5, Modern CSS Grid/Flexbox & JavaScript ES6+',
       'Fluid Canvas Shader Physics & WCAG 2.1 AAA Accessibility'
     ]],
     ['AI & Neural Nets', 'Deep Learning, Computer Vision & Audio DSP', [
@@ -2287,28 +2293,30 @@ const ROOMS_DATA = [
 
 // ─── DYNAMIC FOOTER WATERMARK AUTO-FIT: "M KAUSHAL MARAN" ───
 (() => {
+  let offCanvas = null;
   function fitFooterWord() {
     const wordEl = document.querySelector('.sf__word');
     const spanEl = document.querySelector('.sf__word .full');
     if (!wordEl || !spanEl) return;
     const availWidth = Math.max(300, window.innerWidth - 48);
-    wordEl.style.fontSize = '100px';
-    const textWidth = spanEl.offsetWidth || 1;
-    if (textWidth > 0) {
-      const scale = (availWidth * 0.90) / textWidth;
-      const targetPx = Math.floor(100 * scale);
-      const clampedPx = Math.max(18, Math.min(130, targetPx));
-      wordEl.style.fontSize = `${ clampedPx }px`;
-      wordEl.style.setProperty('--wf', `${ clampedPx }px`);
-    }
+    if (!offCanvas) offCanvas = document.createElement('canvas');
+    const ctx = offCanvas.getContext('2d');
+    ctx.font = '700 100px Onest, sans-serif';
+    const textWidth = ctx.measureText(spanEl.textContent || 'M KAUSHAL MARAN').width || 1;
+    const scale = (availWidth * 0.90) / textWidth;
+    const targetPx = Math.floor(100 * scale);
+    const clampedPx = Math.max(18, Math.min(130, targetPx));
+    wordEl.style.fontSize = `${clampedPx}px`;
+    wordEl.style.setProperty('--wf', `${clampedPx}px`);
   }
 
   window.addEventListener('resize', fitFooterWord, { passive: true });
   window.addEventListener('orientationchange', fitFooterWord, { passive: true });
-  document.addEventListener('DOMContentLoaded', fitFooterWord);
-  setTimeout(fitFooterWord, 100);
-  setTimeout(fitFooterWord, 500);
-  setTimeout(fitFooterWord, 1500);
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(fitFooterWord);
+  } else {
+    setTimeout(fitFooterWord, 300);
+  }
 })();
 
 // ─── INITIALIZATION & READY DISPATCH ───

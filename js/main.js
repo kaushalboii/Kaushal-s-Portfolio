@@ -1215,66 +1215,64 @@ const ROOMS_DATA = [
     accent: '#7A8670',
     projects: [
       {
-        icon: '📰',
-        iconBg: '#1B2C28',
+        icon: '🛰️',
+        iconBg: '#0F172A',
         num: '01 / 03',
-        category: 'Real-Time News Platform · Live Feed',
-        title: 'Live News India — Real-Time Breaking & Regional Updates',
-        sub: 'Dynamic News Aggregator & Live Breaking News Feed',
-        desc: 'Engineered a modern, responsive live news application delivering real-time national, regional, and breaking news updates across India. Features category filtering, responsive reader cards, live update sync, and high-speed data rendering.',
-        tags: ['Web Development', 'JavaScript', 'Responsive UI', 'Live API', 'News Feed', 'HTML5/CSS3'],
+        isStoreApp: true,
+        storeType: 'web',
+        category: 'Geotagged News Radar · Live Web App',
+        title: 'India News Radar — Real-Time Geotagged Intelligence',
+        sub: 'Live Interactive Geotagged News Map, Breaking Bulletins & Multi-Source Intelligence',
+        desc: 'Engineered an interactive real-time news radar delivering geotagged intelligence across India. Features an interactive SVG map with pulsating incident coordinates, multi-source live event correlation, category filtering (Politics, Markets, Climate, Defense), and live breaking ticker updates.',
+        tags: ['Web Development', 'Geotagged Maps', 'Live News API', 'Real-Time Intelligence', 'JavaScript ES6+', 'Responsive Web'],
+        urlBar: 'kaushalboii.github.io/Live-news-updated-India',
+        liveFrame: 'https://kaushalboii.github.io/Live-news-updated-India/',
         liveLink: 'https://kaushalboii.github.io/Live-news-updated-India/',
-        liveText: 'Launch Live Web App ↗',
+        liveText: 'Launch Live Web Radar ↗',
         gitLink: 'https://github.com/kaushalboii/Live-news-updated-India',
-        note: 'Live Production Web App · GitHub Pages',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1e332d 0%, #0c1815 80%)',
-        mockupContent: `
-          <div class="mockup-news" style="padding:16px;font-family:inherit;color:#E8E4E0">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1);padding-bottom:8px">
-              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:#ef4444;text-transform:uppercase;letter-spacing:0.05em">
-                <span style="width:7px;height:7px;border-radius:50%;background:#ef4444;display:inline-block;box-shadow:0 0 6px #ef4444"></span> LIVE INDIA
-              </span>
-              <span style="font-size:11px;color:rgba(255,255,255,0.6)">Real-time Feed</span>
-            </div>
-            <div style="background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.08)">
-              <span style="display:inline-block;background:#ef4444;color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;margin-bottom:6px">BREAKING NEWS</span>
-              <p style="font-size:13px;font-weight:600;margin:0 0 4px;line-height:1.35">National &amp; Regional Bulletins Across India</p>
-              <p style="font-size:11px;color:rgba(255,255,255,0.65);margin:0">Instant updates on politics, technology, economy, and state affairs.</p>
-            </div>
-            <div style="display:flex;gap:8px">
-              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">🇮🇳 National</span>
-              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">⚡ Breaking</span>
-              <span style="background:rgba(255,255,255,0.08);padding:4px 8px;border-radius:6px;font-size:10px">📈 Economy</span>
-            </div>
-          </div>
-        `
+        gitText: 'Source Code ↗',
+        note: 'Live Production Web Platform · Embedded Interactive Radar',
+        screenBg: '#0B0F19'
       },
       {
         icon: '🎓',
         iconBg: '#1E2B25',
         num: '02 / 03',
+        isStoreApp: true,
+        storeType: 'web',
         category: 'Enterprise Web Platform · Student ERP',
         title: 'SIMATS Academic Web Portal',
         sub: 'Campus Information Architecture & High-Performance Portal',
         desc: 'Comprehensive web application and end-to-end interface overhaul for university student information systems. Formulated real-time timetable tracking, dynamic attendance visualization, and responsive semester grade reports.',
         tags: ['Web Application', 'JavaScript', 'Responsive Grid', 'Information Architecture', 'Enterprise ERP'],
+        urlBar: 'portal.simats.edu/student-erp',
+        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio/',
+        liveText: 'View Case Study ↗',
         note: 'Academic Enterprise Web Application',
-        screenBg: 'radial-gradient(circle at 50% 20%, #1c2b23 0%, #0c1511 80%)',
+        screenBg: '#0c1511',
         mockupContent: `
-          <div class="mockup-portal">
-            <div class="portal-card">
-              <span>STUDENT CGPA</span>
-              <b>8.1 / 10</b>
-              <div class="pbar"><div class="pfill" style="width:81%"></div></div>
+          <div class="mockup-portal" style="padding:24px;font-family:inherit;color:#E8E4E0;height:100%;display:flex;flex-direction:column;justify-content:space-around">
+            <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px">
+              <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7)">SIMATS ERP · Department of Information Technology</span>
+              <span style="font-size:11px;color:#4ade80;background:rgba(74,222,128,0.12);padding:2px 8px;border-radius:4px">Academic Session 2026</span>
             </div>
-            <div class="portal-grid">
-              <div class="portal-card" style="padding:8px">
-                <span>ATTENDANCE</span>
-                <b style="font-size:16px;color:#4ade80">94.8%</b>
+            <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+                <span style="font-size:11px;color:rgba(255,255,255,0.6)">CUMULATIVE GRADE POINT AVERAGE</span>
+                <b style="font-size:16px;color:#4ade80">8.1 / 10 CGPA</b>
               </div>
-              <div class="portal-card" style="padding:8px">
-                <span>NEXT CLASS</span>
-                <b style="font-size:14px">Lab 04</b>
+              <div class="pbar" style="background:rgba(255,255,255,0.1);height:6px;border-radius:3px;overflow:hidden"><div class="pfill" style="width:81%;height:100%;background:#4ade80"></div></div>
+            </div>
+            <div class="portal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
+                <span style="font-size:10px;color:rgba(255,255,255,0.6);display:block;margin-bottom:4px">SEMESTER ATTENDANCE</span>
+                <b style="font-size:18px;color:#4ade80">94.8%</b>
+                <span style="font-size:10px;color:rgba(255,255,255,0.5);display:block">Eligible for Honors</span>
+              </div>
+              <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
+                <span style="font-size:10px;color:rgba(255,255,255,0.6);display:block;margin-bottom:4px">TODAY'S SCHEDULE</span>
+                <b style="font-size:15px;color:#fff">Lab 04 · Systems</b>
+                <span style="font-size:10px;color:rgba(255,255,255,0.5);display:block">14:00 - 16:30 IST</span>
               </div>
             </div>
           </div>
@@ -1284,28 +1282,49 @@ const ROOMS_DATA = [
         icon: '⚡',
         iconBg: '#232D1B',
         num: '03 / 03',
+        isStoreApp: true,
+        storeType: 'web',
         category: 'High-Performance Web Platform · Lighthouse 93+',
         title: 'Modern Portfolio & Reactive Web Engine',
         sub: 'Modern Frontend Architecture & Canvas Physics',
         desc: 'Engineered a bespoke, ultra-optimized single-page portfolio achieving 93+ Mobile Google PageSpeed and perfect 100s in Accessibility, Best Practices, and SEO. Incorporates fluid 3D CSS perspective doors, HTML5 Canvas scratch physics, and WebP asset delivery.',
         tags: ['Web Performance', 'Canvas 2D', 'CSS 3D Transforms', 'Semantic HTML5', 'PageSpeed 93+'],
+        urlBar: 'kaushalboii.github.io/Kaushal-s-Portfolio',
         liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio/',
         liveText: 'Explore Web Engine ↗',
         gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
+        gitText: 'GitHub Repository ↗',
         note: 'Production Web Application · 93+ Mobile PageSpeed',
-        screenBg: 'radial-gradient(circle at 50% 20%, #202b1c 0%, #0e160c 80%)',
+        screenBg: '#0e160c',
         mockupContent: `
-          <div class="mockup-ads" style="padding:16px;color:#E8E4E0">
-            <div class="ads-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <div class="mockup-ads" style="padding:20px;color:#E8E4E0;height:100%;display:flex;flex-direction:column;justify-content:space-between">
+            <div class="ads-header" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px">
               <span class="live-pulse" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#4ade80">
-                <i style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block"></i>100% Native Web
+                <i style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block"></i>100% Native Web Standards
               </span>
-              <span style="font-size:11px;color:rgba(255,255,255,0.6)">PageSpeed 93+</span>
+              <span style="font-size:11px;color:rgba(255,255,255,0.6)">Core Web Vitals Pass</span>
             </div>
-            <div class="ads-card" style="background:rgba(255,255,255,0.06);border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.08)">
-              <span class="ads-card__tag" style="font-size:10px;color:#d6b26e;font-weight:600">Performance Architecture</span>
-              <p style="font-size:13px;font-weight:600;margin:4px 0">Zero Bloat · 60 FPS Canvas Physics</p>
-              <span style="font-size:11px;color:rgba(255,255,255,0.65)">Core Web Vitals Optimized · Pure Vanilla Stack</span>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
+                <b style="font-size:18px;color:#4ade80;display:block">93+</b>
+                <span style="font-size:9px;color:rgba(255,255,255,0.7)">PERFORMANCE</span>
+              </div>
+              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
+                <b style="font-size:18px;color:#4ade80;display:block">100</b>
+                <span style="font-size:9px;color:rgba(255,255,255,0.7)">A11Y</span>
+              </div>
+              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
+                <b style="font-size:18px;color:#4ade80;display:block">100</b>
+                <span style="font-size:9px;color:rgba(255,255,255,0.7)">PRACTICES</span>
+              </div>
+              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
+                <b style="font-size:18px;color:#4ade80;display:block">100</b>
+                <span style="font-size:9px;color:rgba(255,255,255,0.7)">SEO</span>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,0.05);padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
+              <span style="font-size:11px;color:rgba(255,255,255,0.8)">FCP: <b>1.5s</b> · LCP: <b>2.4s</b> · CLS: <b>0</b> · TBT: <b>20ms</b></span>
+              <span style="font-size:10px;color:#4ade80;font-weight:600">ALL GREEN</span>
             </div>
           </div>
         `
@@ -1880,12 +1899,19 @@ const ROOMS_DATA = [
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
                         macOS App
                       </span>
+                    ` : (
+                  p.storeType === 'web' ? `
+                      <span class="app-store-pill app-store-pill--web">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:10px;height:10px"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        Live Web App
+                      </span>
                     ` : `
                       <span class="app-store-pill">
                         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.76 1.06-1.82.94-2.87-.91.04-2.02.61-2.67 1.37-.58.67-1.08 1.75-.95 2.78 1.02.08 2.05-.52 2.68-1.28z"/></svg>
                         App Store
                       </span>
                     `
+                )
               )
             ) : ''}
           </p>
@@ -1921,7 +1947,7 @@ const ROOMS_DATA = [
         <span class="note">${p.note}</span>
       </div>
 
-      <div class="stage" aria-hidden="true">
+      <div class="stage"${p.storeType === 'web' ? '' : ' aria-hidden="true"'}>
         ${p.storeType === 'macos' ? `
               <div class="mac-frame">
                 <div class="mac-frame__body">
@@ -1936,6 +1962,39 @@ const ROOMS_DATA = [
                   </div>
                   <div class="mac-frame__screen">
                     <img src="${p.screenshots[0]}" alt="${p.title} Web Preview" class="mac-frame__img" loading="lazy">
+                  </div>
+                </div>
+              </div>
+            ` : (
+          p.storeType === 'web' ? `
+              <div class="mac-frame mac-frame--web">
+                <div class="mac-frame__body">
+                  <div class="mac-frame__topbar">
+                    <div class="mac-frame__dots">
+                      <span class="m-dot red"></span>
+                      <span class="m-dot yellow"></span>
+                      <span class="m-dot green"></span>
+                    </div>
+                    <div class="mac-frame__urlbar">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                      <span>${p.urlBar || 'kaushalboii.github.io'}</span>
+                    </div>
+                    <a href="${p.liveLink || '#'}" target="_blank" rel="noopener" class="mac-frame__badge mac-frame__badge--live" onclick="event.stopPropagation()">
+                      <span class="live-dot"></span> LIVE WEB ↗
+                    </a>
+                  </div>
+                  <div class="mac-frame__screen mac-frame__screen--web" style="background:${p.screenBg || '#0B0F19'}">
+                    ${p.liveFrame ? `
+                      <div class="mac-frame__loader" aria-hidden="true">
+                        <div class="mac-frame__spinner"></div>
+                        <span>Connecting Live Radar...</span>
+                      </div>
+                      <iframe src="${p.liveFrame}" title="${p.title}" class="web-frame__iframe" loading="lazy" allow="geolocation" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+                      <a href="${p.liveLink}" target="_blank" rel="noopener" class="mac-frame__float-btn" onclick="event.stopPropagation()">
+                        <span>Open Fullscreen</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+                      </a>
+                    ` : (p.mockupContent || '')}
                   </div>
                 </div>
               </div>
@@ -1992,7 +2051,7 @@ const ROOMS_DATA = [
                 </div>
               </div>
             </div>
-            `}
+            `)}
       </div>
     </div>
       </article>

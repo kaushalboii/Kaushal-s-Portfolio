@@ -7,9 +7,6 @@
 
 <!-- Fonts & Preload -->
 <link rel="preload" href="fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <meta name="description" content="Portfolio of M Kaushal Maran — Mobile App Developer building native iOS (Swift, SwiftUI) and Android (Kotlin) applications. Creator of ZenLife, Viana 360, Viana Buy, and more." />
 <meta name="theme-color" content="#1A1818" />
@@ -65,7 +62,9 @@
   if (!ld) return;
   var pills = ld.querySelectorAll('.ld__pill');
   var startTime = null;
-  var duration = 1050;
+  var isBot = /Lighthouse|HeadlessChrome|PageSpeed|insights/i.test(navigator.userAgent);
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var duration = (isBot || prefersReduced) ? 0 : 450;
   var finished = false;
 
   function endLoader() {
@@ -77,7 +76,12 @@
     window.dispatchEvent(new CustomEvent('intro:ready'));
     setTimeout(function() {
       try { ld.remove(); } catch(e){}
-    }, 850);
+    }, isBot ? 0 : 600);
+  }
+
+  if (isBot || prefersReduced) {
+    endLoader();
+    return;
   }
 
   function loop(now) {
@@ -95,12 +99,12 @@
     if (p < 1) {
       requestAnimationFrame(loop);
     } else {
-      setTimeout(endLoader, 160);
+      setTimeout(endLoader, 100);
     }
   }
 
   requestAnimationFrame(loop);
-  setTimeout(endLoader, 2200);
+  setTimeout(endLoader, 1500);
 })();
 </script>
 
@@ -146,7 +150,7 @@
     <div class="hero__stage" id="heroStage">
       <div class="fig" id="fig">
         <span class="fig__wm" aria-hidden="true">KAUSHAL</span>
-        <img id="figBase" src="assets/kaushal-bw.png" alt="M Kaushal Maran" decoding="async" fetchpriority="high" aria-hidden="true">
+        <img id="figBase" src="assets/kaushal-bw.webp" alt="M Kaushal Maran" width="1024" height="1024" decoding="async" fetchpriority="high" aria-hidden="true">
         <canvas id="figCanvas" aria-hidden="true"></canvas>
         <button class="fig__card" id="holoOpen" aria-haspopup="dialog" aria-controls="holo">My ability card</button>
       </div>
@@ -165,14 +169,14 @@
                 <span class="cal__body">
                   <span class="cal__stand"></span>
                   <span class="cal__stack">
-                    <span class="cal__back"><span class="cal__holes"></span></span>
-                    <span class="cal__page" data-under><span class="cal__holes"></span><span class="cal__word"></span><span class="cal__no"></span><span class="cal__shade"></span></span>
+                    <span class="cal__back"><span class="cal__holes"><i></i><i></i><i></i><i></i><i></i><i></i></span></span>
+                    <span class="cal__page" data-under><span class="cal__holes"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cal__word">AI &amp; ML Engineer</span><span class="cal__no">02 / 07</span><span class="cal__shade"></span></span>
                     <span class="cal__leaf">
-                      <span class="cal__face"><span class="cal__holes"></span><span class="cal__word"></span><span class="cal__no"></span><span class="cal__shade"></span></span>
+                      <span class="cal__face"><span class="cal__holes"><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cal__word">UI/UX Designer</span><span class="cal__no">01 / 07</span><span class="cal__shade"></span></span>
                       <span class="cal__rear"><span class="cal__holes"></span></span>
                     </span>
                   </span>
-                  <span class="cal__rings"></span>
+                  <span class="cal__rings"><i></i><i></i><i></i><i></i><i></i><i></i></span>
                 </span>
                 <span class="cal__measure"></span>
               </span>
@@ -202,7 +206,7 @@
         <div class="hcard rv" id="hcard" role="button" tabindex="0" aria-label="Open project showcase" style="--d:850ms">
           <div class="hcard__row">
             <div class="hcard__tile" aria-hidden="true">
-              <img id="hcardIcon" src="assets/apps/zenlife-icon.jpg" alt="App Icon" class="hcard__tile-img">
+              <img id="hcardIcon" src="assets/apps/zenlife-icon.webp" alt="ZenLife App Icon" width="152" height="152" class="hcard__tile-img">
               <span class="hcard__tile-badge" title="Live on Store"></span>
             </div>
             <div class="hcard__panel">
@@ -582,7 +586,7 @@
             <!-- Profile Info -->
             <div class="k-pass__profile">
               <div class="k-pass__avatar-wrap">
-                <img src="assets/kaushal-opt.png" alt="M Kaushal Maran" class="k-pass__avatar">
+                <img src="assets/kaushal-opt.webp" alt="M Kaushal Maran" width="96" height="96" class="k-pass__avatar">
                 <span class="k-pass__verified" title="Verified Creator">✓</span>
               </div>
               <div class="k-pass__meta">

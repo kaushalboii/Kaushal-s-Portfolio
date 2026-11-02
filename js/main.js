@@ -50,6 +50,7 @@ function scrollToId(id) {
 
 // Initialize Lenis
 (() => {
+  if (COARSE) return;
   lenis = new Lenis({
     duration: 1.15,
     easing: x => Math.min(1, 1.001 - Math.pow(2, -10 * x)),
@@ -555,23 +556,23 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
   function fit() {
     cal.style.fontSize = '';
     const fs = parseFloat(getComputedStyle(cal).fontSize) || 16;
-    let max = 0;
-    for (const w of SKILLS) {
-      measure.textContent = w;
-      max = Math.max(max, measure.getBoundingClientRect().width);
+    if (measure) {
+      measure.innerHTML = SKILLS.map(w => `<span style="display:inline-block;white-space:nowrap">${w}</span>`).join('');
+      const widths = Array.from(measure.children).map(c => c.getBoundingClientRect().width);
+      const max = Math.max(0, ...widths);
+      const wEm = max / fs + 1.45; // generous padding so words never clip or overflow edge
+      body.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
+      cal.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
+      const avail = (cal.closest('.h1')?.getBoundingClientRect().width || window.innerWidth) - fs * 0.25;
+      const need = wEm * fs;
+      if (need > avail && avail > 0) {
+        cal.style.fontSize = (fs * avail / need).toFixed(2) + 'px';
+      }
+      // Spiral rings + punched holes spaced every ~0.62em
+      const count = Math.max(5, Math.round((wEm - 0.64) / 0.7) + 1);
+      rings.innerHTML = '<i></i>'.repeat(count);
+      cal.querySelectorAll('.cal__holes').forEach(h => h.innerHTML = '<i></i>'.repeat(count));
     }
-    const wEm = max / fs + 1.45; // generous padding so words never clip or overflow edge
-    body.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
-    cal.style.setProperty('--cal-w', wEm.toFixed(3) + 'em');
-    const avail = (cal.closest('.h1')?.getBoundingClientRect().width || window.innerWidth) - fs * 0.25;
-    const need = wEm * fs;
-    if (need > avail && avail > 0) {
-      cal.style.fontSize = (fs * avail / need).toFixed(2) + 'px';
-    }
-    // Spiral rings + punched holes spaced every ~0.62em
-    const count = Math.max(5, Math.round((wEm - 0.64) / 0.7) + 1);
-    rings.innerHTML = '<i></i>'.repeat(count);
-    cal.querySelectorAll('.cal__holes').forEach(h => h.innerHTML = '<i></i>'.repeat(count));
   }
   fit();
   document.fonts?.ready.then(fit);
@@ -683,17 +684,26 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     if (base.complete) drawAspect(bwX, base);
     if (afterImg.complete) drawAspect(colX, afterImg);
     dirty = true;
+    scheduleRender();
   }
 
   base.onload = resize;
   afterImg.onload = resize;
   window.addEventListener('resize', resize);
-  resize();
 
   let trail = [];
+  let rafId = null;
+
+  function scheduleRender() {
+    if (!rafId) {
+      rafId = requestAnimationFrame(render);
+    }
+  }
+
   function addPoint(x, y) {
     trail.push({ x: x * dpr, y: y * dpr, r: brushRadius * dpr, a: 1 });
     dirty = true;
+    scheduleRender();
   }
 
   stage.addEventListener('pointermove', e => {
@@ -702,6 +712,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
   });
 
   function render() {
+    rafId = null;
     if (dirty && w && h) {
       mX.clearRect(0, 0, w * dpr, h * dpr);
       for (let i = trail.length - 1; i >= 0; i--) {
@@ -727,11 +738,14 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
       ctx.drawImage(bwC, 0, 0, w, h);
       ctx.drawImage(tmp, 0, 0, w, h);
 
-      if (trail.length === 0) dirty = false;
+      if (trail.length === 0) {
+        dirty = false;
+      } else {
+        scheduleRender();
+      }
     }
-    requestAnimationFrame(render);
   }
-  requestAnimationFrame(render);
+  resize();
 }
 
 // ─── HOLOGRAPHIC CARD (#holo) ───
@@ -821,11 +835,11 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
   if (!N) return;
 
   const ICONS = [
-    'assets/apps/zenlife-icon.jpg',
-    'assets/apps/viana360-icon.jpg',
-    'assets/apps/vianabuy-icon.jpg',
-    'assets/apps/velloreads-icon.jpg',
-    'assets/apps/cleanmac-icon.png'
+    'assets/apps/zenlife-icon.webp',
+    'assets/apps/viana360-icon.webp',
+    'assets/apps/vianabuy-icon.webp',
+    'assets/apps/velloreads-icon.webp',
+    'assets/apps/cleanmac-icon.webp'
   ];
 
   let cur = 0;
@@ -914,7 +928,7 @@ const ROOMS_DATA = [
     projects: [
       {
         icon: '🧘',
-        iconImg: 'assets/apps/zenlife-icon.jpg',
+        iconImg: 'assets/apps/zenlife-icon.webp',
         isStoreApp: true,
         screenshots: [
           'assets/apps/zenlife-screen-1.jpg',
@@ -958,7 +972,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '📡',
-        iconImg: 'assets/apps/viana360-icon.jpg',
+        iconImg: 'assets/apps/viana360-icon.webp',
         isStoreApp: true,
         screenshots: [
           'assets/apps/viana360-screen-1.jpg',
@@ -1000,7 +1014,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '🛍️',
-        iconImg: 'assets/apps/vianabuy-icon.jpg',
+        iconImg: 'assets/apps/vianabuy-icon.webp',
         isStoreApp: true,
         screenshots: [
           'assets/apps/vianabuy-screen-1.jpg',
@@ -1045,7 +1059,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '⌨️',
-        iconImg: 'assets/apps/cleanmac-icon.png',
+        iconImg: 'assets/apps/cleanmac-icon.webp',
         isStoreApp: true,
         storeType: 'macos',
         screenshots: [
@@ -1077,7 +1091,7 @@ const ROOMS_DATA = [
     projects: [
       {
         icon: '📢',
-        iconImg: 'assets/apps/velloreads-icon.jpg',
+        iconImg: 'assets/apps/velloreads-icon.webp',
         isStoreApp: true,
         storeType: 'play',
         screenshots: [
@@ -1101,7 +1115,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '📜',
-        iconImg: 'assets/apps/constitution-icon.jpg',
+        iconImg: 'assets/apps/constitution-icon.webp',
         isStoreApp: true,
         storeType: 'play',
         screenshots: [
@@ -1125,7 +1139,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '⚖️',
-        iconImg: 'assets/apps/bns-icon.jpg',
+        iconImg: 'assets/apps/bns-icon.webp',
         isStoreApp: true,
         storeType: 'play',
         screenshots: [
@@ -1157,7 +1171,7 @@ const ROOMS_DATA = [
       },
       {
         icon: '⚖️',
-        iconImg: 'assets/apps/cpc-icon.jpg',
+        iconImg: 'assets/apps/cpc-icon.webp',
         isStoreApp: true,
         storeType: 'play',
         screenshots: [
@@ -2206,15 +2220,28 @@ const ROOMS_DATA = [
   document.fonts?.ready?.then(() => { measure(); q(); });
   window.addEventListener('load', () => { measure(); q(); });
 
-  let driftT = 0;
-  function drift(now) {
+  let driftT = 0, driftRaf = null;
+  function runDrift(now) {
+    if (innerWidth < 768 || reduced || root.classList.contains('lite')) {
+      driftRaf = null;
+      return;
+    }
     const dt = Math.min(64, now - (lastT || now));
     lastT = now;
     driftT += dt / 1000;
-    if (innerWidth >= 768 && !reduced && !root.classList.contains('lite')) tunnel(p, driftT);
-    requestAnimationFrame(drift);
+    tunnel(p, driftT);
+    driftRaf = requestAnimationFrame(runDrift);
   }
-  requestAnimationFrame(drift);
+  function checkDrift() {
+    if (innerWidth >= 768 && !reduced && !root.classList.contains('lite')) {
+      if (!driftRaf) driftRaf = requestAnimationFrame(runDrift);
+    } else if (driftRaf) {
+      cancelAnimationFrame(driftRaf);
+      driftRaf = null;
+    }
+  }
+  checkDrift();
+  window.addEventListener('resize', checkDrift, { passive: true });
 })();
 
 // ─── CONTACT MODAL (#modal) & START A PROJECT BUTTONS ───
@@ -2296,7 +2323,7 @@ function onReady(fn) {
 onReady(() => {
   const fig = $('#fig'), figCanvas = $('#figCanvas');
   if (fig && figCanvas) {
-    liquidReveal(fig, figCanvas, 'assets/kaushal-opt.png');
+    liquidReveal(fig, figCanvas, 'assets/kaushal-opt.webp');
   }
 
   // Fade out loader & signal intro ready

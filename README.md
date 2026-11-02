@@ -79,9 +79,7 @@ Full-screen modal room experience featuring smooth stacked elevation cards with 
 #### 🚪 Door 03 · Web Development (`Modern Web Apps, Reactive Architecture & APIs`)
 | Project | Platform | Architecture & Technologies | Distribution |
 | :--- | :--- | :--- | :--- |
-| **Live News India** | Web App | Modern JavaScript, Responsive News Reader, Live Breaking News Feed | [Live on GitHub Pages](https://kaushalboii.github.io/Live-news-updated-India/) |
-| **SIMATS Academic Portal** | Web ERP | Campus Information Architecture, Real-Time Timetable Tracking, Dynamic Attendance | [Academic Portal](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
-| **High-Performance Portfolio** | Web Platform | Core Web Vitals Optimized (93+ Mobile PageSpeed), HTML5 Canvas 2D Physics, WebP Assets | [Live Showcase](https://kaushalboii.github.io/Kaushal-s-Portfolio/) |
+| **India News Radar** | Live Web App | Real-Time Geotagged Intelligence, Interactive SVG Map, Multi-Source Correlation, REST APIs | [Live on GitHub Pages](https://kaushalboii.github.io/Live-news-updated-India/) |
 
 #### 🚪 Door 04 · AI & Neural Nets (`Deep Learning, Computer Vision & Audio DSP`)
 | Project | Domain | Model Architecture & Technologies | Source |

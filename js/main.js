@@ -1211,13 +1211,13 @@ const ROOMS_DATA = [
     doorName: 'Door 03 · Web Development & Modern Apps',
     title: 'Modern Web Applications & Responsive Systems',
     desc: 'High-performance web applications, responsive real-time portals, and reactive frontend architectures built with modern JavaScript, semantic HTML5, CSS3, and dynamic RESTful APIs.',
-    count: '03 Featured Web Projects',
+    count: '01 Featured Web Radar',
     accent: '#7A8670',
     projects: [
       {
         icon: '🛰️',
         iconBg: '#0F172A',
-        num: '01 / 03',
+        num: '01 / 01',
         isStoreApp: true,
         storeType: 'web',
         category: 'Geotagged News Radar · Live Web App',
@@ -1233,101 +1233,6 @@ const ROOMS_DATA = [
         gitText: 'Source Code ↗',
         note: 'Live Production Web Platform · Embedded Interactive Radar',
         screenBg: '#0B0F19'
-      },
-      {
-        icon: '🎓',
-        iconBg: '#1E2B25',
-        num: '02 / 03',
-        isStoreApp: true,
-        storeType: 'web',
-        category: 'Enterprise Web Platform · Student ERP',
-        title: 'SIMATS Academic Web Portal',
-        sub: 'Campus Information Architecture & High-Performance Portal',
-        desc: 'Comprehensive web application and end-to-end interface overhaul for university student information systems. Formulated real-time timetable tracking, dynamic attendance visualization, and responsive semester grade reports.',
-        tags: ['Web Application', 'JavaScript', 'Responsive Grid', 'Information Architecture', 'Enterprise ERP'],
-        urlBar: 'portal.simats.edu/student-erp',
-        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio/',
-        liveText: 'View Case Study ↗',
-        note: 'Academic Enterprise Web Application',
-        screenBg: '#0c1511',
-        mockupContent: `
-          <div class="mockup-portal" style="padding:24px;font-family:inherit;color:#E8E4E0;height:100%;display:flex;flex-direction:column;justify-content:space-around">
-            <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px">
-              <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7)">SIMATS ERP · Department of Information Technology</span>
-              <span style="font-size:11px;color:#4ade80;background:rgba(74,222,128,0.12);padding:2px 8px;border-radius:4px">Academic Session 2026</span>
-            </div>
-            <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-                <span style="font-size:11px;color:rgba(255,255,255,0.6)">CUMULATIVE GRADE POINT AVERAGE</span>
-                <b style="font-size:16px;color:#4ade80">8.1 / 10 CGPA</b>
-              </div>
-              <div class="pbar" style="background:rgba(255,255,255,0.1);height:6px;border-radius:3px;overflow:hidden"><div class="pfill" style="width:81%;height:100%;background:#4ade80"></div></div>
-            </div>
-            <div class="portal-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-              <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
-                <span style="font-size:10px;color:rgba(255,255,255,0.6);display:block;margin-bottom:4px">SEMESTER ATTENDANCE</span>
-                <b style="font-size:18px;color:#4ade80">94.8%</b>
-                <span style="font-size:10px;color:rgba(255,255,255,0.5);display:block">Eligible for Honors</span>
-              </div>
-              <div class="portal-card" style="background:rgba(255,255,255,0.05);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08)">
-                <span style="font-size:10px;color:rgba(255,255,255,0.6);display:block;margin-bottom:4px">TODAY'S SCHEDULE</span>
-                <b style="font-size:15px;color:#fff">Lab 04 · Systems</b>
-                <span style="font-size:10px;color:rgba(255,255,255,0.5);display:block">14:00 - 16:30 IST</span>
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        icon: '⚡',
-        iconBg: '#232D1B',
-        num: '03 / 03',
-        isStoreApp: true,
-        storeType: 'web',
-        category: 'High-Performance Web Platform · Lighthouse 93+',
-        title: 'Modern Portfolio & Reactive Web Engine',
-        sub: 'Modern Frontend Architecture & Canvas Physics',
-        desc: 'Engineered a bespoke, ultra-optimized single-page portfolio achieving 93+ Mobile Google PageSpeed and perfect 100s in Accessibility, Best Practices, and SEO. Incorporates fluid 3D CSS perspective doors, HTML5 Canvas scratch physics, and WebP asset delivery.',
-        tags: ['Web Performance', 'Canvas 2D', 'CSS 3D Transforms', 'Semantic HTML5', 'PageSpeed 93+'],
-        urlBar: 'kaushalboii.github.io/Kaushal-s-Portfolio',
-        liveLink: 'https://kaushalboii.github.io/Kaushal-s-Portfolio/',
-        liveText: 'Explore Web Engine ↗',
-        gitLink: 'https://github.com/kaushalboii/Kaushal-s-Portfolio',
-        gitText: 'GitHub Repository ↗',
-        note: 'Production Web Application · 93+ Mobile PageSpeed',
-        screenBg: '#0e160c',
-        mockupContent: `
-          <div class="mockup-ads" style="padding:20px;color:#E8E4E0;height:100%;display:flex;flex-direction:column;justify-content:space-between">
-            <div class="ads-header" style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:10px">
-              <span class="live-pulse" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#4ade80">
-                <i style="width:6px;height:6px;border-radius:50%;background:#4ade80;display:inline-block"></i>100% Native Web Standards
-              </span>
-              <span style="font-size:11px;color:rgba(255,255,255,0.6)">Core Web Vitals Pass</span>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
-                <b style="font-size:18px;color:#4ade80;display:block">93+</b>
-                <span style="font-size:9px;color:rgba(255,255,255,0.7)">PERFORMANCE</span>
-              </div>
-              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
-                <b style="font-size:18px;color:#4ade80;display:block">100</b>
-                <span style="font-size:9px;color:rgba(255,255,255,0.7)">A11Y</span>
-              </div>
-              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
-                <b style="font-size:18px;color:#4ade80;display:block">100</b>
-                <span style="font-size:9px;color:rgba(255,255,255,0.7)">PRACTICES</span>
-              </div>
-              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);padding:10px;border-radius:8px;text-align:center">
-                <b style="font-size:18px;color:#4ade80;display:block">100</b>
-                <span style="font-size:9px;color:rgba(255,255,255,0.7)">SEO</span>
-              </div>
-            </div>
-            <div style="background:rgba(255,255,255,0.05);padding:10px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center">
-              <span style="font-size:11px;color:rgba(255,255,255,0.8)">FCP: <b>1.5s</b> · LCP: <b>2.4s</b> · CLS: <b>0</b> · TBT: <b>20ms</b></span>
-              <span style="font-size:10px;color:#4ade80;font-weight:600">ALL GREEN</span>
-            </div>
-          </div>
-        `
       }
     ]
   },
@@ -1490,12 +1395,12 @@ const ROOMS_DATA = [
       'CPC Act 1908, POSH & Police Act Pocket References (Google Play)',
       'Coroutines, FTS5 Offline SQLite & Material 3'
     ]],
-    ['Web Development', 'Modern Web Apps, Reactive Architecture & APIs', [
-      'Live News India — Real-Time Breaking & Regional News Platform',
-      'SIMATS Academic Portal — Enterprise Student Web App',
-      'High-Performance Portfolio & Web Architecture (93+ PageSpeed)',
-      'Semantic HTML5, Modern CSS Grid/Flexbox & JavaScript ES6+',
-      'Fluid Canvas Shader Physics & WCAG 2.1 AAA Accessibility'
+    ['Web Development', 'Interactive Radar, Live Web Applications & APIs', [
+      'India News Radar — Real-Time Geotagged Intelligence Platform',
+      'Interactive Geotagged SVG Map with Coordinate Intelligence',
+      'Multi-Source Incident Correlation & Live Breaking Feed',
+      'Semantic HTML5, Modern Responsive CSS & JavaScript ES6+',
+      'Real-Time RESTful Data Ingestion & Live Update Engine'
     ]],
     ['AI & Neural Nets', 'Deep Learning, Computer Vision & Audio DSP', [
       'Automatic Comic Generator with DCGAN (PyTorch)',

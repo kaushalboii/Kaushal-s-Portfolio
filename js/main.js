@@ -492,7 +492,7 @@ const toggleMode = () => setMode(getMode() === 'dark' ? 'light' : 'dark');
 
 // ─── NAVIGATION & FULLSCREEN MENU ───
 (() => {
-  const hdr = $('.hdr'), navOpen = $('#navOpen'), navClose = $('#navClose'), navm = $('#navm');
+  const hdr = $('.hdr'), navOpen = $('#navOpen') || $('#menuBtn'), navClose = $('#navClose'), navm = $('#navm');
   if (!hdr) return;
 
   let lastY = 0;
@@ -1433,7 +1433,7 @@ const ROOMS_DATA = [
   let badgeOver = false;
   const placeBadge = e => {
     if (!badge) return;
-    badge.style.transform = `translate3d(${ e.clientX }px, ${ e.clientY }px, 0) translate(-50 %, -50 %)`;
+    badge.style.transform = `translate3d(${ e.clientX }px, ${ e.clientY }px, 0) translate(-50%, -50%)`;
   };
   const showBadge = on => {
     badgeOver = on;
@@ -1444,8 +1444,8 @@ const ROOMS_DATA = [
     window.addEventListener('pointermove', e => { if (badgeOver) placeBadge(e); }, { passive: true });
     units.forEach(u => {
       const w = $('.doorway', u);
-      w.addEventListener('pointerenter', e => { placeBadge(e); if (!busy) showBadge(true); });
-      w.addEventListener('pointerleave', () => showBadge(false));
+      w?.addEventListener('pointerenter', e => { placeBadge(e); if (!busy) showBadge(true); });
+      w?.addEventListener('pointerleave', () => showBadge(false));
     });
   }
 
@@ -1474,9 +1474,9 @@ const ROOMS_DATA = [
     dinfo?.classList.remove('on');
   };
 
-  if (canHover) {
-    doorsState.forEach((d, i) => {
-      d.way = $('.doorway', d.u);
+  doorsState.forEach((d, i) => {
+    d.way = $('.doorway', d.u);
+    if (canHover) {
       d.way.addEventListener('mouseenter', () => {
         if (!busy && !inRoom && !MOB.matches) {
           d.s.set(0.18);
@@ -1489,14 +1489,13 @@ const ROOMS_DATA = [
           hideDoorInfo();
         }
       });
-      d.way.addEventListener('click', () => enterRoom(i));
+    }
+    d.way.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      enterRoom(i);
     });
-  } else {
-    doorsState.forEach((d, i) => {
-      d.way = $('.doorway', d.u);
-      d.way.addEventListener('click', () => enterRoom(i));
-    });
-  }
+  });
 
   // ─── MOBILE PINNED WALL HORIZONTAL SCROLL & TOUCH SWIPE ───
   let mIdx = 0, mForce = -1, mShown = -1;
@@ -1645,64 +1644,83 @@ const ROOMS_DATA = [
     showBadge(false);
     hideDoorInfo();
 
+    // Safety fallback: ensure busy never gets permanently stuck
+    const safetyTimer = setTimeout(() => {
+      if (!inRoom) {
+        busy = false;
+        sec.style.transform = '';
+        sec.classList.remove('through');
+      }
+    }, 2500);
+
     const d = doorsState[i];
-    doorsState.forEach((o, k) => { if (k !== i) o.s.set(0); });
+    if (d && d.u) {
+      doorsState.forEach((o, k) => { if (k !== i && o.s) o.s.set(0); });
+      // 1. Lever presses down
+      d.u.classList.add('press');
+      setTimeout(() => d.u.classList.remove('press'), 240);
 
-    // 1. Lever presses down
-    d.u.classList.add('press');
-    setTimeout(() => d.u.classList.remove('press'), 360);
+      // 2. Door swings open wide into the room
+      setTimeout(() => d.s.set(1), reduced ? 0 : 80);
+    }
 
-    // 2. Door swings open wide into the room
-    setTimeout(() => d.s.set(1), reduced ? 0 : 160);
-
-    // 3. Zoom straight into the doorway gap
+    // 3. Snappy zoom straight into the doorway gap
     setTimeout(() => {
       const u = units[i];
-      const r = $('.opening', u).getBoundingClientRect();
-      const dr = $('.door', u).getBoundingClientRect();
+      if (!u) {
+        clearTimeout(safetyTimer);
+        renderRoomContent(i);
+        return;
+      }
+      const opening = $('.opening', u);
+      const doorEl = $('.door', u);
+      const r = opening ? opening.getBoundingClientRect() : u.getBoundingClientRect();
+      const dr = doorEl ? doorEl.getBoundingClientRect() : r;
       const gapL = Math.min(Math.max(dr.right, r.left), r.right - 6);
-      const gw = Math.max(r.right - gapL, 10), gh = r.height;
+      const gw = Math.max(r.right - gapL, 10), gh = Math.max(r.height, 10);
       const cx = (gapL + r.right) / 2, cy = r.top + gh * 0.5;
       const tx = window.innerWidth / 2 - cx, ty = window.innerHeight / 2 - cy;
-      const sEnd = Math.max(window.innerWidth / gw, window.innerHeight / gh) * 1.18;
+      const sEnd = Math.min(18, Math.max(window.innerWidth / gw, window.innerHeight / gh) * 1.15);
 
       stopScroll();
       $('#cord')?.classList.add('away');
       $('.hdr')?.classList.add('away');
 
       const sr = sec.getBoundingClientRect();
-      sec.style.transformOrigin = `${ cx - sr.left }px ${ cy - sr.top }px`;
+      sec.style.transformOrigin = `${ (cx - sr.left).toFixed(2) }px ${ (cy - sr.top).toFixed(2) }px`;
       sec.classList.add('through');
 
-      const t0 = performance.now(), D = reduced ? 1 : 1100;
+      const t0 = performance.now(), D = reduced ? 1 : 650;
       const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
       const zoomOf = e => Math.exp(Math.log(sEnd) * e);
 
       let handed = false;
       const step = now => {
         const p = Math.min(1, (now - t0) / D), e = ease(p), sc = zoomOf(e);
-        const f = Math.min(1, e * 1.6);
-        sec.style.transform = `translate(${ tx * f}px, ${ ty * f}px) scale(${ sc })`;
+        const f = Math.min(1, e * 1.5);
+        sec.style.transform = `translate(${ (tx * f).toFixed(2) }px, ${ (ty * f).toFixed(2) }px) scale(${ sc.toFixed(3) })`;
 
-        if (!handed && (sc >= sEnd / 1.15 || p >= 1)) {
+        if (!handed && (sc >= sEnd / 1.15 || p >= 0.85)) {
           handed = true;
+          clearTimeout(safetyTimer);
           renderRoomContent(i);
         }
         if (p < 1) walkRaf = requestAnimationFrame(step);
       };
       walkRaf = requestAnimationFrame(step);
-    }, reduced ? 0 : 500);
+    }, reduced ? 0 : 200);
   }
 
   function renderRoomContent(i) {
-    const data = ROOMS_DATA[i];
-    if (!data || !roomv) return;
-    inRoom = true;
+    try {
+      const data = ROOMS_DATA[i];
+      if (!data || !roomv) return;
+      inRoom = true;
 
-    roomvDoor.textContent = data.doorName;
-    roomvTitle.textContent = data.title;
-    roomvDesc.textContent = data.desc;
-    roomvCount.textContent = data.count;
+      roomvDoor.textContent = data.doorName;
+      roomvTitle.textContent = data.title;
+      roomvDesc.textContent = data.desc;
+      roomvCount.textContent = data.count;
 
 
     // ─── CONTINUOUS CINEMATIC VIDEO-LIKE APP REEL ENGINE ───
@@ -1980,33 +1998,53 @@ const ROOMS_DATA = [
     requestAnimationFrame(() => {
       roomv.classList.add('lit');
     });
+  } catch (err) {
+    console.error('Error rendering room:', err);
+    if (roomv) {
+      inRoom = true;
+      roomv.hidden = false;
+      roomv.classList.add('lit');
+    }
   }
+}
 
   function leaveRoom() {
     if (!inRoom) return;
     inRoom = false;
     roomv.classList.remove('lit');
 
+    const safetyLeave = setTimeout(() => {
+      busy = false;
+      sec.style.transform = '';
+      sec.classList.remove('through');
+      startScroll();
+    }, 1500);
+
     setTimeout(() => {
       roomv.hidden = true;
       cancelAnimationFrame(walkRaf);
 
-      const from = sec.style.transform;
-      const m = /translate\(([-\d.]+)px, ([-\d.]+)px\) scale\(([\d.]+)\)/.exec(from) || [0, 0, 0, 1];
-      const X = +m[1], Y = +m[2], S = +m[3];
-      const t0 = performance.now(), D = reduced ? 1 : 1000;
+      const from = sec.style.transform || '';
+      const m = /translate\(([-\d.]+)px,\s*([-\d.]+)px\)\s*scale\(([\d.]+)\)/.exec(from);
+      const X = m ? parseFloat(m[1]) : 0;
+      const Y = m ? parseFloat(m[2]) : 0;
+      const S = m ? Math.max(1, parseFloat(m[3])) : 1;
+      const t0 = performance.now(), D = reduced ? 1 : 650;
       const ease = x => 1 - Math.pow(1 - x, 3);
 
       const stepBack = now => {
         const p = Math.min(1, (now - t0) / D), e = ease(p);
         const sc = Math.exp(Math.log(S) * (1 - e));
-        sec.style.transform = `translate(${ X * (1 - e)}px, ${ Y * (1 - e) }px) scale(${ sc })`;
+        sec.style.transform = `translate(${ (X * (1 - e)).toFixed(2) }px, ${ (Y * (1 - e)).toFixed(2) }px) scale(${ sc.toFixed(3) })`;
 
         if (p < 1) requestAnimationFrame(stepBack);
         else {
+          clearTimeout(safetyLeave);
           sec.style.transform = '';
           sec.classList.remove('through');
-          doorsState[currentRoomIdx].s.set(0);
+          if (doorsState[currentRoomIdx]?.s) {
+            doorsState[currentRoomIdx].s.set(0);
+          }
           $('#cord')?.classList.remove('away');
           $('.hdr')?.classList.remove('away');
           busy = false;
@@ -2014,7 +2052,7 @@ const ROOMS_DATA = [
         }
       };
       requestAnimationFrame(stepBack);
-    }, reduced ? 0 : 250);
+    }, reduced ? 0 : 200);
   }
 
   roomvBack?.addEventListener('click', leaveRoom);
@@ -2023,15 +2061,30 @@ const ROOMS_DATA = [
 
   window.openDoor = i => {
     if (busy || inRoom) return;
-    if (i === SECRET) {
-      revealSecretDoor(true);
-      setTimeout(() => enterRoom(i), 700);
+    const secRect = sec.getBoundingClientRect();
+    const isVisible = secRect.top >= -120 && secRect.bottom <= window.innerHeight + 120;
+    if (!isVisible) {
+      const top = secRect.top + window.pageYOffset;
+      window.__snapTo ? window.__snapTo(top) : window.scrollTo({ top, behavior: 'smooth' });
+      setTimeout(() => {
+        if (i === SECRET) {
+          revealSecretDoor(true);
+          setTimeout(() => enterRoom(i), 500);
+        } else {
+          enterRoom(i);
+        }
+      }, 400);
     } else {
-      enterRoom(i);
+      if (i === SECRET) {
+        revealSecretDoor(true);
+        setTimeout(() => enterRoom(i), 500);
+      } else {
+        enterRoom(i);
+      }
     }
   };
 
-  $$('[data-door]').forEach(btn => {
+  $$('[data-door]:not(.doorway)').forEach(btn => {
     btn.addEventListener('click', e => {
       e.preventDefault();
       const d = parseInt(btn.dataset.door, 10);

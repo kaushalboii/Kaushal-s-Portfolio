@@ -916,8 +916,8 @@ html:not([data-mode="dark"]) .spill{mix-blend-mode:normal;background:linear-grad
   .paint{font-size:2.15rem;max-width:none;white-space:nowrap;align-self:flex-start;text-align:left;margin:.25rem 0 .5rem}
 }
 
-/* "Click to enter" badge that replaces the cursor over a door */
-@media (hover:hover) and (pointer:fine){ .doorway{cursor:none} }
+/* "Click to enter" badge that follows the cursor over a door */
+@media (hover:hover) and (pointer:fine){ .doorway{cursor:pointer} }
 .door-cursor{position:fixed;left:0;top:0;z-index:90;pointer-events:none;padding:.6rem 1rem;border-radius:9999px;
   background:var(--btn-bg);color:var(--btn-fg);font-size:.8125rem;font-weight:500;letter-spacing:.01em;white-space:nowrap;
   box-shadow:0 .5rem 1.5rem -.5rem rgba(0,0,0,.45);opacity:0;transition:opacity .18s ease}

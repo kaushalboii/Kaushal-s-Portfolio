@@ -696,6 +696,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
   base.onload = resize;
   afterImg.onload = resize;
   window.addEventListener('resize', resize);
+  window.addEventListener('intro:ready', resize, { once: true });
 
   let trail = [];
   let rafId = null;
@@ -716,6 +717,16 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     const r = stage.getBoundingClientRect();
     addPoint(e.clientX - r.left, e.clientY - r.top);
   });
+  stage.addEventListener('pointerdown', e => {
+    const r = stage.getBoundingClientRect();
+    addPoint(e.clientX - r.left, e.clientY - r.top);
+  });
+  stage.addEventListener('touchmove', e => {
+    if (e.touches && e.touches[0]) {
+      const r = stage.getBoundingClientRect();
+      addPoint(e.touches[0].clientX - r.left, e.touches[0].clientY - r.top);
+    }
+  }, { passive: true });
 
   function render() {
     rafId = null;

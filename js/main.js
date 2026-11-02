@@ -1783,7 +1783,7 @@ const ROOMS_DATA = [
     }
 
     roomvStack.innerHTML = data.projects.map((p, idx) => `
-  <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
+  <article class="card ${idx % 2 === 1 ? 'flip' : ''} ${p.storeType === 'web' ? 'card--web' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
     <div class="card__in">
       <div class="card__info">
         <div class="app">

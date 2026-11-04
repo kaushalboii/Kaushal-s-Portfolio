@@ -1841,7 +1841,9 @@ const ROOMS_DATA = [
             ${p.iconImg ? `<img src="${p.iconImg}" alt="${p.title}" class="app__icon-img">` : p.icon}
           </div>
           <div class="card__meta">
-            <span class="no">${p.num}</span><i></i><span class="card__cat">${p.category}</span>
+            <div class="card__tag-grp">
+              <span class="no">${p.num}</span><i></i><span class="card__cat">${p.category}</span>
+            </div>
             ${p.isStoreApp ? (
               p.storeType === 'play' ? `
                     <span class="play-store-pill">

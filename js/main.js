@@ -1238,14 +1238,13 @@ const ROOMS_DATA = [
         desc: 'Engineered an ultra-fast, open-source real-time collaborative code editor powered by Microsoft\'s Monaco engine. Features instant zero-login room sharing, client-side AES-GCM payload encryption with LZW compression, real-time peer cursor presence with live line highlighting, and dual-layer sync via Firebase Realtime Database and local BroadcastChannel.',
         tags: ['Real-Time Web', 'Monaco Editor', 'AES-GCM Encryption', 'Firebase Realtime DB', 'JavaScript ES6+', 'LZW Compression', 'Open Source'],
         urlBar: 'kaushalboii.github.io/codeshift',
-        liveFrame: 'https://kaushalboii.github.io/codeshift/',
+        previewImg: 'assets/apps/codeshift-preview.svg',
         liveLink: 'https://kaushalboii.github.io/codeshift/',
         liveText: 'Launch CodeShift Live ↗',
         gitLink: 'https://github.com/kaushalboii/codeshift',
         gitText: 'Source Code ↗',
         note: 'Live Production Web Platform · End-to-End Encrypted Collaboration',
-        screenBg: '#000000',
-        loaderText: 'Connecting CodeShift Live Editor...'
+        screenBg: '#000000'
       },
       {
         icon: '🛰️',
@@ -1259,14 +1258,13 @@ const ROOMS_DATA = [
         desc: 'Engineered an interactive real-time news radar delivering geotagged intelligence across India. Features an interactive SVG map with pulsating incident coordinates, multi-source live event correlation, category filtering (Politics, Markets, Climate, Defense), and live breaking ticker updates.',
         tags: ['Web Development', 'Geotagged Maps', 'Live News API', 'Real-Time Intelligence', 'JavaScript ES6+', 'Responsive Web'],
         urlBar: 'kaushalboii.github.io/Live-news-updated-India',
-        liveFrame: 'https://kaushalboii.github.io/Live-news-updated-India/',
+        previewImg: 'assets/apps/radar-preview.jpg',
         liveLink: 'https://kaushalboii.github.io/Live-news-updated-India/',
         liveText: 'Launch Live Web Radar ↗',
         gitLink: 'https://github.com/kaushalboii/Live-news-updated-India',
         gitText: 'Source Code ↗',
         note: 'Live Production Web Platform · Embedded Interactive Radar',
-        screenBg: '#0B0F19',
-        loaderText: 'Connecting Live Radar...'
+        screenBg: '#0B0F19'
       }
     ]
   },
@@ -1835,7 +1833,7 @@ const ROOMS_DATA = [
     }
 
     roomvStack.innerHTML = data.projects.map((p, idx) => `
-  <article class="card ${idx % 2 === 1 ? 'flip' : ''} ${p.storeType === 'web' ? 'card--web' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
+  <article class="card ${idx % 2 === 1 ? 'flip' : ''}" style="--i:${idx}" aria-labelledby="p${i}_${idx}">
     <div class="card__in">
       <div class="card__info">
         <div class="app">
@@ -1940,18 +1938,13 @@ const ROOMS_DATA = [
                       <span class="live-dot"></span> LIVE WEB ↗
                     </a>
                   </div>
-                  <div class="mac-frame__screen mac-frame__screen--web" style="background:${p.screenBg || '#0B0F19'}">
-                    ${p.liveFrame ? `
-                      <div class="mac-frame__loader" aria-hidden="true">
-                        <div class="mac-frame__spinner"></div>
-                        <span>${p.loaderText || 'Connecting Live Web App...'}</span>
-                      </div>
-                      <iframe src="${p.liveFrame}" title="${p.title}" class="web-frame__iframe" loading="lazy" allow="geolocation" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'"></iframe>
-                      <a href="${p.liveLink}" target="_blank" rel="noopener" class="mac-frame__float-btn" onclick="event.stopPropagation()">
-                        <span>Open Fullscreen</span>
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
-                      </a>
-                    ` : (p.mockupContent || '')}
+                  <div class="mac-frame__screen mac-frame__screen--web" style="background:${p.screenBg || '#000000'}">
+                    <a href="${p.liveLink || '#'}" target="_blank" rel="noopener" class="mac-frame__preview-link" onclick="event.stopPropagation()">
+                      <img src="${p.previewImg}" alt="${p.title} Preview" class="mac-frame__img mac-frame__img--web" loading="lazy">
+                      <span class="mac-frame__hover-pill">
+                        <span class="live-dot"></span> Launch Live App ↗
+                      </span>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -1583,36 +1583,55 @@ html[data-mode="dark"] .roomv__stack .card {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
+  width: 100%;
 }
 .roomv__stack .app__icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
   display: grid;
   place-items: center;
-  font-size: 26px;
+  font-size: 24px;
+  overflow: hidden;
   box-shadow: 0 8px 18px -10px rgba(0,0,0,.4), 0 0 0 1px rgba(var(--fg-rgb), .08);
 }
 .roomv__stack .card__meta {
   display: flex;
   align-items: center;
-  gap: 12px;
+  flex-wrap: wrap;
+  gap: 8px 12px;
   font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: .12em;
+  letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--accent-from, #C4B0B0);
+  line-height: 1.25;
 }
 .roomv__stack .card__meta .no {
-  color: rgba(var(--fg-rgb), .4);
+  white-space: nowrap !important;
+  flex-shrink: 0;
+  color: rgba(var(--fg-rgb), .45);
+  font-size: 11px;
 }
 .roomv__stack .card__meta i {
-  width: 22px;
+  display: inline-block;
+  width: 14px;
   height: 1px;
   background: currentColor;
-  opacity: .5;
+  opacity: .4;
+  flex-shrink: 0;
+}
+.roomv__stack .card__cat {
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .roomv__stack h2 {
   font-size: clamp(20px, 2.5vw, 32px);
@@ -3106,17 +3125,19 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
   gap: 4px;
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 7px;
+  padding: 2.5px 8px;
   border-radius: 999px;
   background: rgba(214,178,110,.18);
   color: #D6B26E;
   border: 1px solid rgba(214,178,110,.3);
-  margin-left: 6px;
   letter-spacing: .02em;
+  white-space: nowrap !important;
+  flex-shrink: 0;
 }
 .app-store-pill svg {
   width: 10px;
   height: 10px;
+  flex-shrink: 0;
 }
 .play-store-pill {
   display: inline-flex;
@@ -3124,17 +3145,19 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
   gap: 4px;
   font-size: 10px;
   font-weight: 600;
-  padding: 2px 7px;
+  padding: 2.5px 8px;
   border-radius: 999px;
   background: rgba(52, 168, 83, 0.16);
   color: #34A853;
   border: 1px solid rgba(52, 168, 83, 0.35);
-  margin-left: 6px;
   letter-spacing: .02em;
+  white-space: nowrap !important;
+  flex-shrink: 0;
 }
 .play-store-pill svg {
   width: 10px;
   height: 10px;
+  flex-shrink: 0;
 }
 .app-store-pill--macos {
   background: rgba(140, 160, 255, 0.16);

@@ -856,6 +856,7 @@ function liquidReveal(stage, canvas, afterSrc, { brushRadius = 140, decay = 0.01
     'assets/apps/viana360-icon.webp',
     'assets/apps/vianabuy-icon.webp',
     'assets/apps/velloreads-icon.webp',
+    'assets/apps/codeshift-icon.svg',
     'assets/apps/cleanmac-icon.webp'
   ];
 
@@ -1219,16 +1220,37 @@ const ROOMS_DATA = [
   },
   {
     id: 'web',
-    doorName: 'Door 03 · Web Development & Modern Apps',
-    title: 'Modern Web Applications & Responsive Systems',
-    desc: 'High-performance web applications, responsive real-time portals, and reactive frontend architectures built with modern JavaScript, semantic HTML5, CSS3, and dynamic RESTful APIs.',
-    count: '01 Featured Web Radar',
+    doorName: 'Door 03 · Web Development & Real-Time Apps',
+    title: 'Modern Web Applications & Real-Time Systems',
+    desc: 'High-performance real-time web applications, collaborative developer platforms, and reactive frontend architectures built with Microsoft Monaco Editor, WebSockets / Firebase Realtime DB, client-side AES encryption, and responsive interactive SVG maps.',
+    count: '02 Featured Web Platforms',
     accent: '#7A8670',
     projects: [
       {
+        iconImg: 'assets/apps/codeshift-icon.svg',
+        iconBg: '#000000',
+        num: '01 / 02',
+        isStoreApp: true,
+        storeType: 'web',
+        category: 'Real-Time Collaborative Code Editor',
+        title: 'CodeShift — Real-Time Collaborative Code Editor',
+        sub: 'Instant Encrypted Code Sharing, VS Code Monaco Engine & Peer Cursors',
+        desc: 'Engineered an ultra-fast, open-source real-time collaborative code editor powered by Microsoft\'s Monaco engine. Features instant zero-login room sharing, client-side AES-GCM payload encryption with LZW compression, real-time peer cursor presence with live line highlighting, and dual-layer sync via Firebase Realtime Database and local BroadcastChannel.',
+        tags: ['Real-Time Web', 'Monaco Editor', 'AES-GCM Encryption', 'Firebase Realtime DB', 'JavaScript ES6+', 'LZW Compression', 'Open Source'],
+        urlBar: 'kaushalboii.github.io/codeshift',
+        liveFrame: 'https://kaushalboii.github.io/codeshift/',
+        liveLink: 'https://kaushalboii.github.io/codeshift/',
+        liveText: 'Launch CodeShift Live ↗',
+        gitLink: 'https://github.com/kaushalboii/codeshift',
+        gitText: 'Source Code ↗',
+        note: 'Live Production Web Platform · End-to-End Encrypted Collaboration',
+        screenBg: '#000000',
+        loaderText: 'Connecting CodeShift Live Editor...'
+      },
+      {
         icon: '🛰️',
         iconBg: '#0F172A',
-        num: '01 / 01',
+        num: '02 / 02',
         isStoreApp: true,
         storeType: 'web',
         category: 'Geotagged News Radar',
@@ -1243,7 +1265,8 @@ const ROOMS_DATA = [
         gitLink: 'https://github.com/kaushalboii/Live-news-updated-India',
         gitText: 'Source Code ↗',
         note: 'Live Production Web Platform · Embedded Interactive Radar',
-        screenBg: '#0B0F19'
+        screenBg: '#0B0F19',
+        loaderText: 'Connecting Live Radar...'
       }
     ]
   },
@@ -1406,12 +1429,12 @@ const ROOMS_DATA = [
       'CPC Act 1908, POSH & Police Act Pocket References (Google Play)',
       'Coroutines, FTS5 Offline SQLite & Material 3'
     ]],
-    ['Web Development', 'Interactive Radar, Live Web Applications & APIs', [
+    ['Web Development', 'Real-Time Apps, Monaco Code Editor & Live Radar', [
+      'CodeShift — Real-Time Collaborative Code Editor (Monaco)',
+      'Client-Side AES-GCM Encryption & Live Peer Cursor Presence',
       'India News Radar — Real-Time Geotagged Intelligence Platform',
       'Interactive Geotagged SVG Map with Coordinate Intelligence',
-      'Multi-Source Incident Correlation & Live Breaking Feed',
-      'Semantic HTML5, Modern Responsive CSS & JavaScript ES6+',
-      'Real-Time RESTful Data Ingestion & Live Update Engine'
+      'Semantic HTML5, Modern Responsive CSS & JavaScript ES6+'
     ]],
     ['AI & Neural Nets', 'Deep Learning, Computer Vision & Audio DSP', [
       'Automatic Comic Generator with DCGAN (PyTorch)',
@@ -1921,9 +1944,9 @@ const ROOMS_DATA = [
                     ${p.liveFrame ? `
                       <div class="mac-frame__loader" aria-hidden="true">
                         <div class="mac-frame__spinner"></div>
-                        <span>Connecting Live Radar...</span>
+                        <span>${p.loaderText || 'Connecting Live Web App...'}</span>
                       </div>
-                      <iframe src="${p.liveFrame}" title="${p.title}" class="web-frame__iframe" loading="lazy" allow="geolocation" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+                      <iframe src="${p.liveFrame}" title="${p.title}" class="web-frame__iframe" loading="lazy" allow="geolocation" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" onload="if(this.previousElementSibling)this.previousElementSibling.style.display='none'"></iframe>
                       <a href="${p.liveLink}" target="_blank" rel="noopener" class="mac-frame__float-btn" onclick="event.stopPropagation()">
                         <span>Open Fullscreen</span>
                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>

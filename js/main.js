@@ -2075,6 +2075,33 @@ const ROOMS_DATA = [
   roomvBackBottom?.addEventListener('click', leaveRoom);
   window.addEventListener('keydown', e => { if (e.key === 'Escape' && inRoom) leaveRoom(); });
 
+  // ─── STACKING CARD SCROLL DEPTH ANIMATION ───
+  let roomScrollRaf = 0;
+  roomv?.addEventListener('scroll', () => {
+    if (roomScrollRaf || !inRoom) return;
+    roomScrollRaf = requestAnimationFrame(() => {
+      roomScrollRaf = 0;
+      const cards = roomvStack?.querySelectorAll('.card');
+      if (!cards || cards.length <= 1) return;
+      cards.forEach((card, idx) => {
+        const next = cards[idx + 1];
+        if (next) {
+          const nextRect = next.getBoundingClientRect();
+          const cardRect = card.getBoundingClientRect();
+          const overlap = Math.max(0, cardRect.bottom - nextRect.top);
+          const progress = Math.min(1, Math.max(0, overlap / (cardRect.height * 0.75)));
+          const scale = 1 - progress * 0.035;
+          const brightness = 1 - progress * 0.14;
+          card.style.transform = `scale(${scale.toFixed(4)})`;
+          card.style.filter = `brightness(${brightness.toFixed(3)})`;
+        } else {
+          card.style.transform = '';
+          card.style.filter = '';
+        }
+      });
+    });
+  }, { passive: true });
+
   window.openDoor = i => {
     if (busy || inRoom) return;
     const secRect = sec.getBoundingClientRect();

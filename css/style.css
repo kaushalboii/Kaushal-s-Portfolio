@@ -1479,7 +1479,7 @@ html[data-mode="dark"] .stage::after {
 /* ---------- STACKED CARDS ---------- */
 .roomv__stack {
   position: relative;
-  padding-bottom: 14vh;
+  padding-bottom: clamp(260px, 45vh, 420px);
 }
 .roomv__stack .card {
   position: sticky;
@@ -1493,6 +1493,9 @@ html[data-mode="dark"] .stage::after {
   will-change: transform;
   overflow: hidden;
   transition: transform 0.25s cubic-bezier(.16,1,.3,1), filter 0.25s ease;
+  min-height: clamp(480px, 56vh, 540px);
+  display: flex;
+  flex-direction: column;
 }
 html[data-mode="dark"] .roomv__stack .card {
   background: var(--surface, #232020);
@@ -1500,10 +1503,11 @@ html[data-mode="dark"] .roomv__stack .card {
   border-color: rgba(232,228,224,.08);
 }
 .roomv__stack .card__in {
+  flex: 1;
   display: grid;
   gap: 24px;
   padding: 24px;
-  min-height: auto;
+  min-height: clamp(480px, 56vh, 540px);
   align-items: center;
 }
 @media (min-width: 720px) {
@@ -1512,7 +1516,7 @@ html[data-mode="dark"] .roomv__stack .card {
     gap: 32px;
     padding: 28px 34px;
     align-items: center;
-    min-height: auto;
+    min-height: clamp(480px, 56vh, 540px);
   }
   .roomv__stack .card:not(.flip) .card__info {
     order: 1;
@@ -1535,6 +1539,7 @@ html[data-mode="dark"] .roomv__stack .card {
     grid-template-columns: minmax(0, 6.2fr) minmax(0, 5.8fr);
     gap: 36px;
     padding: 30px 38px;
+    min-height: clamp(480px, 56vh, 540px);
   }
   .roomv__stack .card.flip .card__in {
     grid-template-columns: minmax(0, 5.8fr) minmax(0, 6.2fr);
@@ -1582,6 +1587,8 @@ html[data-mode="dark"] .roomv__stack .card {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
+  min-height: 100%;
 }
 .roomv__stack .app {
   display: flex;
@@ -1752,6 +1759,8 @@ html[data-mode="dark"] .roomv__stack .card {
   perspective-origin: 50% 45%;
   display: grid;
   place-items: center;
+  align-content: center;
+  min-height: 420px;
   padding: 6px 0 16px;
 }
 .roomv__stack .phone {
@@ -3192,7 +3201,7 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
    ══════════════════════════════════════════════════════════════ */
 .mac-frame {
   position: relative;
-  width: clamp(280px, 38vw, 440px);
+  width: clamp(320px, 40vw, 480px);
   max-width: 100%;
   transform-style: preserve-3d;
   transform: rotateY(-14deg) rotateX(4deg) rotateZ(0.8deg);

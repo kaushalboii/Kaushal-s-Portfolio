@@ -2086,14 +2086,19 @@ const ROOMS_DATA = [
       const cards = roomvStack?.querySelectorAll('.card');
       if (!cards || cards.length <= 1) return;
       cards.forEach((card, idx) => {
-        const next = cards[idx + 1];
-        if (next) {
-          const nextRect = next.getBoundingClientRect();
-          const cardRect = card.getBoundingClientRect();
-          const overlap = Math.max(0, cardRect.bottom - nextRect.top);
-          const progress = Math.min(1, Math.max(0, overlap / (cardRect.height * 0.75)));
-          const scale = 1 - progress * 0.035;
-          const brightness = 1 - progress * 0.14;
+        let totalProgress = 0;
+        const cardRect = card.getBoundingClientRect();
+        for (let k = idx + 1; k < cards.length; k++) {
+          const kRect = cards[k].getBoundingClientRect();
+          const overlap = Math.max(0, cardRect.bottom - kRect.top);
+          if (overlap > 0) {
+            const p = Math.min(1, overlap / (cardRect.height * 0.7));
+            totalProgress += p;
+          }
+        }
+        if (totalProgress > 0) {
+          const scale = Math.max(0.88, 1 - totalProgress * 0.03);
+          const brightness = Math.max(0.68, 1 - totalProgress * 0.10);
           card.style.transform = `scale(${scale.toFixed(4)})`;
           card.style.filter = `brightness(${brightness.toFixed(3)})`;
         } else {

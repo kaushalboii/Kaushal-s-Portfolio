@@ -1505,17 +1505,33 @@ html[data-mode="dark"] .roomv__stack .card {
   min-height: min(calc(100vh - 160px), 680px);
   align-items: center;
 }
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .roomv__stack .card__in {
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    gap: 40px;
-    padding: 44px 52px;
+    gap: 36px;
+    padding: 38px 44px;
+    align-items: center;
+  }
+  .roomv__stack .card:not(.flip) .card__info {
+    order: 1;
+  }
+  .roomv__stack .card:not(.flip) .stage {
+    order: 2;
   }
   .roomv__stack .card.flip .card__in {
     grid-template-columns: minmax(0, 6.2fr) minmax(0, 5.8fr);
   }
+  .roomv__stack .card.flip .stage {
+    order: 1;
+  }
   .roomv__stack .card.flip .card__info {
     order: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .roomv__stack .card__in {
+    gap: 40px;
+    padding: 44px 52px;
   }
 }
 @media (max-width: 639.98px) {
@@ -3235,7 +3251,7 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
 .roomv__stack .card.flip:hover .mac-frame--web {
   transform: rotateY(4deg) rotateX(1deg) rotateZ(-0.2deg);
 }
-@media (max-width: 899.98px) {
+@media (max-width: 719.98px) {
   .mac-frame--web {
     width: min(440px, 100%);
     transform: none !important;
@@ -3321,7 +3337,6 @@ html[data-mode=dark] .sf__ascii-bg{opacity:.35}
 .mac-frame__img--web {
   width: 100%;
   height: auto;
-  aspect-ratio: 1200 / 630;
   display: block;
   object-fit: cover;
   transition: transform 0.4s ease;
